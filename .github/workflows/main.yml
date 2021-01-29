@@ -25,10 +25,10 @@ jobs:
       uses: anantaramdas/ipfs-pinata-deploy-action@v1.6.4
       pin-name: 'My personal site'
       path: './build/site'
-       pinata-api-key: ${{ secrets.api_key }}
-       pinata-secret-api-key: ${{ secrets.api_secret }} 
-       verbose: true
-       remove-old: true
+      pinata-api-key: ${{ secrets.api_key }}
+      pinata-secret-api-key: ${{ secrets.api_secret }} 
+      verbose: true
+      remove-old: true
 
   always-run:
     runs-on: ubuntu-latest
