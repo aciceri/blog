@@ -24,6 +24,6 @@ jobs:
       with:
         pin-name: 'My personal site'
         path: './posts/'
-        pinata-api-key: ${{ secrets.API_KY }}
+        pinata-api-key: ${{ secrets.API_KEY }}
         pinata-secret-api-key: ${{ secrets.API_SECRET }} 
 
