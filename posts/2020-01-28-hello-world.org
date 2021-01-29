@@ -1,0 +1,12 @@
+---
+title: Some Latin Text
+author: Some Roman Person
+---
+
+* Title
+Hello
+
+** Subtitle
+World
+
+$\not \exists a^n + b^n = c^n \forall n \gt 2$
