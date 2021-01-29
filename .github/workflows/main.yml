@@ -18,8 +18,6 @@ jobs:
           experimental-features = nix-command flakes
     - name: Compile Document
       run: nix run ./#compile
-    - name: Disable Jekyll rendering
-      run: touch build/site/.nojekyll
     - name: Deploy
       if: success()
       uses: anantaramdas/ipfs-pinata-deploy-action@v1.6.4
