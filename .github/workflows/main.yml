@@ -20,7 +20,7 @@ jobs:
     #  run: nix run ./#compile
     - name: Deploy
       if: success()
-      uses: aquiladev/ipfs-action@v1
+      uses: aquiladev/ipfs-action@v0.1.5
       with:
         path: ./posts
         service: pinata
