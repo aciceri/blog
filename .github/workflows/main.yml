@@ -9,21 +9,21 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Install Nix
-      uses: cachix/install-nix-action@v12
-      with:
-        install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20201221_9fab14a/install
-        extra_nix_config: |
-          experimental-features = nix-command flakes
-    - name: Build
-      run: nix run ./#compile
+    #- uses: actions/checkout@v1
+    #- name: Install Nix
+    #  uses: cachix/install-nix-action@v12
+    #  with:
+    #    install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20201221_9fab14a/install
+    #   extra_nix_config: |
+    #      experimental-features = nix-command flakes
+    #- name: Build
+    #  run: nix run ./#compile
     - name: Deploy
       if: success()
       uses: anantaramdas/ipfs-pinata-deploy-action@39bbda1ce1fe24c69c6f57861b8038278d53688d
       with:
         pin-name: 'My personal site'
-        path: './out'
+        path: './generator'
         pinata-api-key: ${{ secrets.API_KEY }}
         pinata-secret-api-key: ${{ secrets.API_SECRET }} 
 
