@@ -23,7 +23,7 @@ jobs:
       uses: anantaramdas/ipfs-pinata-deploy-action@v1.6.4
       with:
         pin-name: 'My personal site'
-        path: './build/site'
+        path: './out'
         pinata-api-key: ${{ secrets.api_key }}
         pinata-secret-api-key: ${{ secrets.api_secret }} 
         verbose: true
