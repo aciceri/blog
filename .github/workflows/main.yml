@@ -24,7 +24,7 @@ jobs:
       if: success()
       uses: anantaramdas/ipfs-pinata-deploy-action@v1.6.4
       with:
-	pin-name: 'My personal site'
+        pin-name: 'My personal site'
       	path: './build/site'
       	pinata-api-key: ${{ secrets.api_key }}
       	pinata-secret-api-key: ${{ secrets.api_secret }} 
