@@ -19,7 +19,7 @@ jobs:
     #- name: Build
     #  run: nix run ./#compile
     - name: Test
-      run: chmod -R 777 ./posts
+      run: ls
     - name: Deploy
       if: success()
       uses: aquiladev/ipfs-action@v0.1.5
