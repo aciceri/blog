@@ -19,6 +19,7 @@ jobs:
     - name: Build
       run: nix run ./#compile
     - name: Deploy
+      id: ipfs
       if: success()
       uses: aquiladev/ipfs-action@v0.1.5
       with:
@@ -26,4 +27,7 @@ jobs:
         service: pinata
         pinataKey: ${{ secrets.API_KEY }}
         pinataSecret: ${{ secrets.API_SECRET }}
+    - name: Update dns
+       if: success()
+       run: curl --basic -u "${{ secrets.YDNS_USER }}:${{ secrets.YDNS_PASSWORD }}" https://ydns.io/api/v1/update/?host=pippo.dyn.ydns.io
 
