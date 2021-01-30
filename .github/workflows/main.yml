@@ -28,6 +28,6 @@ jobs:
         pinataKey: ${{ secrets.API_KEY }}
         pinataSecret: ${{ secrets.API_SECRET }}
     - name: Update dns
-       if: success()
-       run: curl --basic -u "${{ secrets.YDNS_USER }}:${{ secrets.YDNS_PASSWORD }}" https://ydns.io/api/v1/update/?host=pippo.dyn.ydns.io&record_id=166019&ip=${{ steps.ipfs.hash }}
+        if: success()
+        run: curl --basic -u "${{ secrets.YDNS_USER }}:${{ secrets.YDNS_PASSWORD }}" https://ydns.io/api/v1/update/?host=pippo.dyn.ydns.io&record_id=166019&ip=${{ steps.ipfs.hash }}
 
