@@ -18,11 +18,13 @@ jobs:
     #      experimental-features = nix-command flakes
     #- name: Build
     #  run: nix run ./#compile
+    - name: Test
+      run: ls && touch test && echo 'ciao' > test
     - name: Deploy
-      #if: success()
+      if: success()
       uses: aquiladev/ipfs-action@v0.1.5
       with:
-        path: ./posts
+        path: ./test
         service: pinata
         pinataKey: ${{ secrets.API_KEY }}
         pinataSecret: ${{ secrets.API_SECRET }}
