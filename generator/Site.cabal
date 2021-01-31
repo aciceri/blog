@@ -9,7 +9,7 @@ name:               Site
 --                   | | | +--- code changes with no API change
 -- version:          0.1.1.0
 
-version:            0.1.1.1
+version:            0.1.0.0
 license:            MIT
 license-file:       LICENSE
 maintainer:         andrea.ciceri@autistici.org
@@ -37,4 +37,6 @@ executable generator
         pandoc ^>=2.11,
         pandoc-types ^>=1.22,
         blaze-html ^>=0.9,
-        blaze-markup ^>=0.8
+        blaze-markup ^>=0.8,
+        megaparsec ^>=8.0.0,
+        replace-megaparsec ^>=1.4.2.0

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>My Hakyll Blog - Demo post</title>
+        <link rel="stylesheet" href="/css/default.css" />
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="/">My Hakyll Blog</a>
+            </div>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/about.html">About</a>
+                <a href="/contact.html">Contact</a>
+                <a href="/archive.html">Archive</a>
+            </nav>
+        </header>
+
+        <main role="main">
+            <h1>Demo post</h1>
+            <article>
+    <section class="header">
+        Posted on 2020-02-01
+        
+    </section>
+    <section>
+        <h1 id="testo">Testo</h1>
+<p>Si può inserire il testo in <strong>grassetto</strong>, <em>italico</em> e <strong><em>grassetto e italico</em></strong>, inoltre il testo può essere testo <code>inline</code> o <code>verbatim</code>, <u>sottolineato</u>, <del>barrato</del> e a ped<sub>ice</sub> o api<sup>ice</sup>.</p>
+<h2 id="le-liste-sono-testo">Le liste sono testo</h2>
+<p>Questa è una lista non ordinata…</p>
+<ul>
+<li>Un elemento</li>
+<li>Un altro elemento</li>
+<li>Un altro ancora</li>
+</ul>
+<p>…mentre questa qui è ordinata (e anche innestata).</p>
+<ol>
+<li>Primo</li>
+<li>Secondo
+<ul>
+<li>Prima parte</li>
+<li>Seconda parte</li>
+</ul></li>
+<li>Terzo</li>
+<li>Quarto</li>
+</ol>
+<h3 id="ciao"><span class="todo TODO">TODO</span> ciao</h3>
+<h3 id="mondo"><span class="done DONE">DONE</span> mondo</h3>
+<h3 id="finito"><span class="done DONE">DONE</span> finito</h3>
+<p>Inserire <a href="https://google.it">link</a> è facile, si può anche omettere il nome: <a href="https://google.it">https://google.it</a>.</p>
+<p>Anche cambiare paragrafo è semplice, passiamo ora alle note e agli avvertimenti.</p>
+<div class="note">
+<p>Questa è una nota, che bella…</p>
+</div>
+<div class="warning">
+<p>Stai attento, questo è <del>non</del> è un avvertimento!</p>
+</div>
+<p>Ed ecco una citazione.</p>
+<blockquote>
+<p>Considerate la vostra semenza: fatti non foste a viver come bruti, ma per seguir virtute e canoscenza</p>
+</blockquote>
+<p>È possibile mantere la formattazione in questo modo.</p>
+<div class="line-block">Considerate la vostra semenza:<br />
+fatti non foste a viver come bruti,<br />
+ma per seguir virtute e canoscenza</div>
+<h1 id="sorgenti">Sorgenti</h1>
+<p>Si possono includere sorgenti senza evidenziazione della sintassi.</p>
+<pre class="example"><code>+------+.      +------+       +------+       +------+      .+------+
+|`.    | `.    |\     |\      |      |      /|     /|    .&#39; |    .&#39;|
+|  `+--+---+   | +----+-+     +------+     +-+----+ |   +---+--+&#39;  |
+|   |  |   |   | |    | |     |      |     | |    | |   |   |  |   |
++---+--+.  |   +-+----+ |     +------+     | +----+-+   |  .+--+---+
+ `. |    `.|    \|     \|     |      |     |/     |/    |.&#39;    | .&#39;
+   `+------+     +------+     +------+     +------+     +------+&#39;
+</code></pre>
+<p>Altrimenti anche codice specifico di linguaggi di programmazione, con l’opzione per visualizzare il numero di riga.</p>
+<div class="sourceCode" id="cb2" data-startFrom=""><pre class="sourceCode numberSource scheme numberLines"><code class="sourceCode scheme"><span id="cb2-1"><a href="#cb2-1"></a>(<span class="ex">define</span><span class="fu"> fail </span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>  (<span class="kw">lambda</span> () </span>
+<span id="cb2-3"><a href="#cb2-3"></a>    (<span class="kw">error</span> <span class="st">&quot;Amb tree exhausted&quot;</span>))) </span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a>(<span class="ex">define-syntax</span><span class="fu"> amb </span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>  (<span class="kw">syntax-rules</span> () </span>
+<span id="cb2-7"><a href="#cb2-7"></a>    ((AMB) (FAIL))                      <span class="co">; Two shortcuts. </span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>    ((AMB expression) expression) </span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a>    ((AMB expression <span class="op">...</span>) </span>
+<span id="cb2-11"><a href="#cb2-11"></a>     (LET ((FAIL-SAVE FAIL)) </span>
+<span id="cb2-12"><a href="#cb2-12"></a>       ((CALL-WITH-CURRENT-CONTINUATION <span class="co">; Capture a continuation to </span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>   (LAMBDA (K-SUCCESS)           <span class="co">;   which we return possibles. </span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>     (CALL-WITH-CURRENT-CONTINUATION </span>
+<span id="cb2-15"><a href="#cb2-15"></a>       (LAMBDA (K-FAILURE)       <span class="co">; K-FAILURE will try the next </span></span>
+<span id="cb2-16"><a href="#cb2-16"></a>  (SET! FAIL K-FAILURE)   <span class="co">;   possible expression. </span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>  (K-SUCCESS              <span class="co">; Note that the expression is </span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>   (LAMBDA ()             <span class="co">;   evaluated in tail position </span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>     expression))))       <span class="co">;   with respect to AMB. </span></span>
+<span id="cb2-20"><a href="#cb2-20"></a>     <span class="op">...</span> </span>
+<span id="cb2-21"><a href="#cb2-21"></a>     (SET! FAIL FAIL-SAVE)       <span class="co">; Finally, if this is reached, </span></span>
+<span id="cb2-22"><a href="#cb2-22"></a>     FAIL-SAVE)))))))            <span class="co">;   we restore the saved FAIL. </span></span></code></pre></div>
+<h1 id="tabelle">Tabelle</h1>
+<p>Si possono inserire tabelle, con allineamenti differenti colonna per colonna e una meravigliosa didascalia.</p>
+<table>
+<caption>Ma che bella questa tabella</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Questa</th>
+<th style="text-align: center;">è la</th>
+<th style="text-align: right;">intestazione</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Del</td>
+<td style="text-align: center;">Contenuto</td>
+<td style="text-align: right;">a caso</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Non so</td>
+<td style="text-align: center;">cosa</td>
+<td style="text-align: right;">scrivere</td>
+</tr>
+</tbody>
+</table>
+<h1 id="immagini">Immagini</h1>
+<p>Includere immagini è semplice (didascalia opzionale):</p>
+<figure>
+<img src="../../images/lojban-flag.gif" alt="Una bandiera importante" /><figcaption aria-hidden="true">Una bandiera importante</figcaption>
+</figure>
+<h1 id="video">Video</h1>
+<p>Ecco l’eversione della sfera, ovvero come risvoltarla.</p>
+<p>{{{video(test)}}}</p>
+<h1 id="audio">Audio</h1>
+<p>And then I noticed that She was a Gargoyle dei Nanowar:</p>
+<p>{{{audio(nanowar-and-then-i-noticed-that-she-was-a-gargoyle)}}}</p>
+<h1 id="matematica">Matematica</h1>
+<p>Si può scrivere matematica inline, per esempio lo sapevi che <span class="math inline">\(\not \exists a,b,c \in \mathbb{N}\)</span> tali che</p>
+<p><span class="math display">\[a^n+^n=c^n \forall n\]</span></p>
+<p>dove <span class="math inline">\(n \in \mathbb{N}\)</span>.</p>
+<div class="definition">
+<p>Ciao</p>
+</div>
+<div class="theorem">
+<p>If an integer <span class="math inline">\(n\)</span> is greater than 2, then the equation <span class="math inline">\(a^n + b^n = c^n\)</span> has no solutions in non-zero integers <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, and <span class="math inline">\(c\)</span>.</p>
+</div>
+<div class="proposition">
+<p>Proposizione</p>
+</div>
+<div class="lemma">
+<p>Lemma</p>
+</div>
+<div class="proof">
+<p>I have a truly <em>marvelous</em> proof of this proposition that this margin is too narrow to contain.</p>
+</div>
+<h1 id="youtube">Youtube</h1>
+<p>Nonostante preferirei evitare di appoggiarmi troppo a servizi esterni di cui non approvo le politiche ho predisposto una macro per includere video a <a href="https://youtube.com">Youtube</a>.</p>
+<p><div class='youtube-wrapper'><iframe allowfullscreen='true' src='https://www.youtube.com/embed/7yh9i0PAjck'></iframe></div></p>
+<h1 id="aciinema">Aciinema</h1>
+<p>Personalmente mi piace molto <a href="https://asciinema.org">Asciinema</a> e in generale l’idea di non dover usare gif animate per raggiungere scopi analoghi. Mi piace meno l’idea di dovermi affidare anche a loro per l’hosting dei miei cast, pertanto ho presisposto una macro per includere i cast hostandoli direttamente in questo spazio.</p>
+<p>{{{asciinema(demo)}}}</p>
+    </section>
+</article>
+
+        </main>
+
+        <footer>
+            Site proudly generated by
+            <a href="http://jaspervdj.be/hakyll">Hakyll</a>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,14 @@
+** Usage
+- Build the Nix flake:
+  ~~~
+  $ nix build 
+  ~~~
+- Execute the Hakyll generator:
+  ~~~
+  $ nix run #./generator
+  ~~~
+- Build the Nix flake and the website running the generator:
+  ~~~
+  $ nix run #./compile
+  ~~~
+  This is what is used in the CI/CD pipeline.

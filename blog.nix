@@ -39,7 +39,6 @@
       name = "blog-env";
       buildInputs = [
         haskell-env
-        ipfs
       ];
 
       shellHook = ''
@@ -49,10 +48,6 @@
         export NIX_GHCPKG="${haskell-env}/bin/ghc-pkg"
         export NIX_GHC_DOCDIR="${haskell-env}/share/doc/ghc/html"
         export NIX_GHC_LIBDIR=$( $NIX_GHC --print-libdir )
-        alias watch="cabal run site watch"
-        
-        export IPFS_PATH=/tmp/ipfs       
-        ${ipfs}/bin/ipfs init
       '';
 
     };
