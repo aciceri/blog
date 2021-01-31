@@ -9,20 +9,20 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    #- uses: actions/checkout@v1
-    #- name: Install Nix
-    #  uses: cachix/install-nix-action@v12
-    #  with:
-    #    install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20201221_9fab14a/install
-    #    extra_nix_config: |
-    #      experimental-features = nix-command flakes
-    #- name: Build
-    #  run: nix run ./#compile
+    - uses: actions/checkout@v1
+    - name: Install Nix
+      uses: cachix/install-nix-action@v12
+      with:
+        install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20201221_9fab14a/install
+        extra_nix_config: |
+          experimental-features = nix-command flakes
+    - name: Build
+      run: nix run ./#compile
     - name: Create file
       run: echo "<h1>sator arepo</h1>" > file  
     - name: Push on Pinata
       id: ipfs
-    #  if: success()
+      if: success()
       uses: aquiladev/ipfs-action@v0.1.5
       with:
         path: ./file
@@ -30,9 +30,8 @@ jobs:
         pinataKey: ${{ secrets.API_KEY }}
         pinataSecret: ${{ secrets.API_SECRET }}
     - name: Pin on personal IPFS node
-      #if: success()
+      if: success()
       run: curl --user ${{ secrets.ipfs_user }}:${{ secrets.ipfs_password }} -X POST https://api.ipfs.ccr.ydns.eu/api/v0/pin/add\?arg\=${{ steps.ipfs.outputs.hash }}\&key\=blog
     - name: Update IPNS
-      #if: success()
+      if: success()
       run: curl --user ${{ secrets.ipfs_user }}:${{ secrets.ipfs_password }} -X POST https://api.ipfs.ccr.ydns.eu/api/v0/name/publish\?arg\=${{ steps.ipfs.outputs.hash }}\&key\=blog
-
