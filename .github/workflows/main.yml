@@ -19,7 +19,7 @@ jobs:
     #- name: Build
     #  run: nix run ./#compile
     - name: Create file
-      run: echo "sator arepo" > file  
+      run: echo "<h1>sator arepo</h1>" > file  
     - name: Push on Pinata
       id: ipfs
     #  if: success()
