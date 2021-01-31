@@ -31,5 +31,5 @@ jobs:
         pinataSecret: ${{ secrets.API_SECRET }}
     - name: Update IPNS
       #if: success()
-      run: curl -X POST https://api.ipfs.ccr.ydns.eu/api/v0/name/publish\?arg\=${{ ipfs.hash }}\&key\=blog
+      run: curl -X POST https://api.ipfs.ccr.ydns.eu/api/v0/name/publish\?arg\=${{ step.ipfs.outputs.hash }}\&key\=blog
 
