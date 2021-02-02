@@ -1,8 +1,13 @@
 {-# LANGUAGE OverloadedStrings, GADTs #-}
 
 module Main (main) where
+import System.Environment ( lookupEnv )
 import Hakyll
 import Hakyll.Web.Sass
+import Text.Sass.Options ( SassOptions(..)
+                         , defaultSassOptions
+                         , SassOutputStyle(..)
+                         )
 import Text.Pandoc.Options
 
 import Data.Void
@@ -18,22 +23,33 @@ config = defaultConfiguration
       providerDirectory = "./"
     }
 
-main :: IO ()
-main = hakyllWith config $ do
-  match "generator/templates/*" $
-    compile templateBodyCompiler
-  match "posts/**.org" $ do
-    route $ setExtension "html"
-    compile $ customCompiler
-      >>= applyFilter embedYoutube
-      >>= loadAndApplyTemplate "generator/templates/post.html" postCtx
-      >>= loadAndApplyTemplate "generator/templates/default.html" postCtx
+sassOptions :: Maybe FilePath -> SassOptions
+sassOptions distPath = defaultSassOptions
+    { sassSourceMapEmbed = True
+    , sassOutputStyle    = SassStyleCompressed
+    , sassIncludePaths   = fmap (: []) distPath
+    }
 
-    depends <- makePatternDependency "generator/css/**.scss"
-    rulesExtraDependencies [depends] $ do
-      match (fromRegex "^generator/css/[^_].*.scss") $ do
-        route $ setExtension "css"
-        compile sassCompiler
+main :: IO ()
+main = do
+  sassCompiler <- fmap (sassCompilerWith . sassOptions) (lookupEnv "THIRDPARTY")
+  compilerEnv <- lookupEnv "HAKYLL_ENV"
+
+  hakyllWith config $ do
+    match "generator/templates/*" $
+      compile templateBodyCompiler
+    match "posts/**.org" $ do
+      route $ setExtension "html"
+      compile $ customCompiler
+        >>= applyFilter embedYoutube
+        >>= loadAndApplyTemplate "generator/templates/post.html" postCtx
+        >>= loadAndApplyTemplate "generator/templates/default.html" postCtx
+
+      depends <- makePatternDependency "generator/css/**.scss"
+      rulesExtraDependencies [depends] $ do
+        match (fromRegex "^generator/css/[^_].*.scss") $ do
+          route $ cssRoute
+          compile sassCompiler
 
 domain :: String
 domain = "blog.ccr.ydns.eu"
@@ -46,6 +62,11 @@ postCtx =
     constField "root" root      <>
     dateField "date" "%Y-%m-%d" <>
     defaultContext
+    
+cssRoute :: Routes
+cssRoute =
+    gsubRoute "generator/" (const "") `composeRoutes`
+    setExtension "css"
 
 customCompiler :: Compiler (Item String)
 customCompiler =
