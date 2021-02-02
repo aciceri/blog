@@ -49,7 +49,24 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
-        "nur": "nur"
+        "nur": "nur",
+        "skeleton-src": "skeleton-src"
+      }
+    },
+    "skeleton-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1583726109,
+        "narHash": "sha256-azA0M8QB47J4XtzwLxER9ksQgqhozs1iBGJV5i8LNjk=",
+        "owner": "atomicpages",
+        "repo": "skeleton-sass",
+        "rev": "ad712b8f6479c874421bbc18ee096369571b6db2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "atomicpages",
+        "repo": "skeleton-sass",
+        "type": "github"
       }
     }
   },

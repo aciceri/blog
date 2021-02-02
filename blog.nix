@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, thirdparty }:
   with pkgs;
   let
 
@@ -12,6 +12,8 @@
       }
     );
 
+    thirdpartyFarm = linkFarm "thirdparty" thirdparty;
+    
     generator = (haskellPackagesFixed.callCabal2nix "Site" (./generator) {}).overrideAttrs (
       old: {
         nativeBuildInputs = old.nativeBuildInputs or [] ++ [ makeWrapper ];
@@ -21,9 +23,16 @@
       }
     );
 
+    generator-with-thirdparty = generator.overrideAttrs (old: {
+      nativeBuildInputs = old.nativeBuildInputs or [] ++ [ makeWrapper ];
+      installPhase = old.installPhase + "\n" + ''
+        wrapProgram $out/bin/generator --set THIRDPARTY ${thirdpartyFarm}
+      '';
+    });
+
     generate-website = script {
       name = "generate-website";
-      paths = [ generator git ];
+      paths = [ generator-with-thirdparty git ];
 
       script = ''
         generator rebuild
@@ -42,6 +51,7 @@
       ];
 
       shellHook = ''
+        export THIRDPARTY="${thirdpartyFarm}"
         export HAKYLL_ENV="development"
         export HIE_HOOGLE_DATABASE="${haskell-env}/share/doc/hoogle/default.hoo"
         export NIX_GHC="${haskell-env}/bin/ghc"
@@ -54,7 +64,7 @@
 
   in {
 
-    inherit shell generator generate-website;
+    inherit shell generator generator-with-thirdparty generate-website;
 
     ci = {
       compile = generate-website;

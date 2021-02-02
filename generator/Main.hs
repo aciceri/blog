@@ -2,6 +2,7 @@
 
 module Main (main) where
 import Hakyll
+import Hakyll.Web.Sass
 import Text.Pandoc.Options
 
 import Data.Void
@@ -19,14 +20,20 @@ config = defaultConfiguration
 
 main :: IO ()
 main = hakyllWith config $ do
-  match "templates/*" $
+  match "generator/templates/*" $
     compile templateBodyCompiler
   match "posts/**.org" $ do
     route $ setExtension "html"
     compile $ customCompiler
       >>= applyFilter embedYoutube
-      >>= loadAndApplyTemplate "templates/post.html" postCtx
-      >>= loadAndApplyTemplate "templates/default.html" postCtx
+      >>= loadAndApplyTemplate "generator/templates/post.html" postCtx
+      >>= loadAndApplyTemplate "generator/templates/default.html" postCtx
+
+    depends <- makePatternDependency "generator/css/**.scss"
+    rulesExtraDependencies [depends] $ do
+      match (fromRegex "^generator/css/[^_].*.scss") $ do
+        route $ setExtension "css"
+        compile sassCompiler
 
 domain :: String
 domain = "blog.ccr.ydns.eu"
