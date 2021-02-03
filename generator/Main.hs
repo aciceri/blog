@@ -16,6 +16,8 @@ import Text.Megaparsec hiding (match)
 import Text.Megaparsec.Char
 import Text.Megaparsec.Char.Lexer
 
+import Data.Maybe
+  
 config :: Configuration
 config = defaultConfiguration
     { destinationDirectory = "./out",
@@ -39,7 +41,7 @@ main = do
     match "generator/templates/*" $
       compile templateBodyCompiler
     match "posts/**.org" $ do
-      route $ setExtension "html"
+      route $ postRoute
       compile $ customCompiler
         >>= applyFilter embedYoutube
         >>= loadAndApplyTemplate "generator/templates/post.html" postCtx
@@ -48,9 +50,14 @@ main = do
       depends <- makePatternDependency "generator/css/**.scss"
       rulesExtraDependencies [depends] $ do
         match (fromRegex "^generator/css/[^_].*.scss") $ do
-          route $ cssRoute
+          route $ stripGeneratorRoute `composeRoutes` setExtension "css"
           compile sassCompiler
 
+    match "generator/katex/**" $ do
+      route $ stripGeneratorRoute
+      compile $ copyFileCompiler
+
+  
 domain :: String
 domain = "blog.ccr.ydns.eu"
 
@@ -63,10 +70,11 @@ postCtx =
     dateField "date" "%Y-%m-%d" <>
     defaultContext
     
-cssRoute :: Routes
-cssRoute =
-    gsubRoute "generator/" (const "") `composeRoutes`
-    setExtension "css"
+stripGeneratorRoute :: Routes
+stripGeneratorRoute = gsubRoute "generator/" (const "")
+
+postRoute :: Routes
+postRoute = gsubRoute ".org" (const "/index.html")
 
 customCompiler :: Compiler (Item String)
 customCompiler =

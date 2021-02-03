@@ -15,6 +15,18 @@
         "type": "github"
       }
     },
+    "katex-src": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-rIwcW1+UmBzBCkn9+uSPabugYXCvMtr963TaSEbpZxo=",
+        "type": "tarball",
+        "url": "https://github.com/KaTeX/KaTeX/releases/download/v0.12.0/katex.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/KaTeX/KaTeX/releases/download/v0.12.0/katex.tar.gz"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1603664546,
@@ -48,6 +60,7 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
+        "katex-src": "katex-src",
         "nixpkgs": "nixpkgs",
         "nur": "nur",
         "skeleton-src": "skeleton-src"

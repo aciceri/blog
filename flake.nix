@@ -9,9 +9,13 @@
       url = github:atomicpages/skeleton-sass;
       flake = false;
     };
+    katex-src = {
+      url = "https://github.com/KaTeX/KaTeX/releases/download/v0.12.0/katex.tar.gz";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, nur, skeleton-src }:
+  outputs = { self, nixpkgs, flake-utils, nur, skeleton-src, katex-src }:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
@@ -22,6 +26,10 @@
             {
               name = "skeleton";
               path = "${skeleton-src}/src";
+            }
+            {
+              name = "katex";
+              path = "${katex-src}";
             }
           ];
         };

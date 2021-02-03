@@ -1,6 +1,7 @@
 ---
 title: Demo post
 tags: demo, org, org-mode, carousel
+date: 2021-02-02
 ---
  
 * Testo

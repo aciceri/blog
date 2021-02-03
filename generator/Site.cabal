@@ -39,4 +39,4 @@ executable generator
         blaze-html ^>=0.9,
         blaze-markup ^>=0.8,
         megaparsec ^>=8.0.0,
-        replace-megaparsec ^>=1.4.2.0
+        replace-megaparsec ^>=1.4.2.0,
