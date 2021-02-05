@@ -20,7 +20,7 @@ jobs:
       env:
         CACHE_NAME: aciceri-blog
       run:
-        cachix auth ${{ CACHIX_AUTH_TOKEN }}
+        cachix auth ${{ secrets.CACHIX_AUTH_TOKEN }}
         nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)' | cachix push aciceri-blog
     - name: Build
       run: nix run ./#compile
