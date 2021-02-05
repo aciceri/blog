@@ -17,9 +17,9 @@ jobs:
         extra_nix_config: |
           experimental-features = nix-command flakes
     - uses: cachix/cachix-action@v8
-      name: Push Flake inputs to Cachix
+      name: Cachix
       with:
-        name: blog-aciceri
+        name: aciceri-blog
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
     - name: Build
       run: nix run ./#compile
