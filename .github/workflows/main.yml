@@ -21,7 +21,6 @@ jobs:
       with:
         name: blog-aciceri
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-    - run: cachix use iohk
     - name: Build
       run: nix run ./#compile
     - name: Push on Pinata
