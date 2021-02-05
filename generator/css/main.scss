@@ -1,6 +1,23 @@
 @charset "utf-8";
 
-@import "skeleton/core/_config.scss";
+//@import "skeleton/core/_config.scss";
+@import "fonts.scss";
+@import "code.scss";
 
 body {
+    font-family: 'Libre Baskerville';
+    width: 500px;
+}
+
+::selection {
+    color: white;
+    background: black;
+}
+
+.sourceCode {
+    font-family: 'Fira Code';
+}
+
+h1 {
+    font-size: 2em;
 }

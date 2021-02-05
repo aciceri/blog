@@ -3,6 +3,7 @@
 module Main (main) where
 import System.Environment ( lookupEnv )
 import Hakyll
+import Hakyll
 import Hakyll.Web.Sass
 import Text.Sass.Options ( SassOptions(..)
                          , defaultSassOptions
@@ -44,16 +45,24 @@ main = do
       route $ postRoute
       compile $ customCompiler
         >>= applyFilter embedYoutube
-        >>= loadAndApplyTemplate "generator/templates/post.html" postCtx
-        >>= loadAndApplyTemplate "generator/templates/default.html" postCtx
+        >>= loadAndApplyTemplate "generator/templates/post.html" postContext
+        >>= loadAndApplyTemplate "generator/templates/default.html" postContext
 
       depends <- makePatternDependency "generator/css/**.scss"
       rulesExtraDependencies [depends] $ do
-        match (fromRegex "^generator/css/[^_].*.scss") $ do
+        match (fromRegex "^generator/css/main.scss") $ do
           route $ stripGeneratorRoute `composeRoutes` setExtension "css"
           compile sassCompiler
 
     match "generator/katex/**" $ do
+      route $ stripGeneratorRoute
+      compile $ copyFileCompiler
+
+    match "generator/firacode/**.woff2" $ do
+      route $ stripGeneratorRoute
+      compile $ copyFileCompiler
+
+    match "generator/baskerville/**.ttf" $ do
       route $ stripGeneratorRoute
       compile $ copyFileCompiler
 
@@ -64,11 +73,15 @@ domain = "blog.ccr.ydns.eu"
 root :: String
 root = "https://" ++ domain
 
-postCtx :: Context String
-postCtx =
-    constField "root" root      <>
+postContext :: Context String
+postContext =
     dateField "date" "%Y-%m-%d" <>
-    defaultContext
+    baseContext
+  
+baseContext :: Context String
+baseContext = constField "item-type" "default"
+  <> constField "root" root
+  <> defaultContext
     
 stripGeneratorRoute :: Routes
 stripGeneratorRoute = gsubRoute "generator/" (const "")

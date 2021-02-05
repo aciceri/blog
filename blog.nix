@@ -35,7 +35,7 @@
       paths = [ generator-with-thirdparty git ];
 
       script = ''
-        ln -s ${thirdpartyFarm}/katex generator/katex
+        ln -sfn ${thirdpartyFarm}/* generator/
         generator rebuild
       '';
     };
@@ -60,7 +60,7 @@
         export NIX_GHC_DOCDIR="${haskell-env}/share/doc/ghc/html"
         export NIX_GHC_LIBDIR=$( $NIX_GHC --print-libdir )
 
-        ln -s ${thirdpartyFarm}/katex generator/katex
+        ln -sfn ${thirdpartyFarm}/* generator/
       '';
 
     };

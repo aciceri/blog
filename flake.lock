@@ -1,5 +1,33 @@
 {
   "nodes": {
+    "baskerville-src": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-1EXi1hxFpc7pFsLbEj1xs9LqjeIf3XBol/8HdKNROUU=",
+        "type": "tarball",
+        "url": "https://github.com/impallari/Libre-Baskerville/archive/master.zip"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/impallari/Libre-Baskerville/archive/master.zip"
+      }
+    },
+    "firacode-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1610810953,
+        "narHash": "sha256-IJpFEKMbjGXOARWpThqIvBua+bfhU28iE5ZnoAyfIn8=",
+        "owner": "tonsky",
+        "repo": "FiraCode",
+        "rev": "af5c3a45fac604d46a3f7915f2601b003bd3780c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tonsky",
+        "repo": "FiraCode",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1610051610,
@@ -59,6 +87,8 @@
     },
     "root": {
       "inputs": {
+        "baskerville-src": "baskerville-src",
+        "firacode-src": "firacode-src",
         "flake-utils": "flake-utils",
         "katex-src": "katex-src",
         "nixpkgs": "nixpkgs",

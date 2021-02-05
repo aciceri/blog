@@ -13,9 +13,17 @@
       url = "https://github.com/KaTeX/KaTeX/releases/download/v0.12.0/katex.tar.gz";
       flake = false;
     };
+    baskerville-src = {
+      url = "https://github.com/impallari/Libre-Baskerville/archive/master.zip";
+      flake = false;
+    };
+    firacode-src = {
+      url = github:tonsky/FiraCode;
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, nur, skeleton-src, katex-src }:
+  outputs = { self, nixpkgs, flake-utils, nur, skeleton-src, katex-src, baskerville-src, firacode-src }:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
@@ -30,6 +38,14 @@
             {
               name = "katex";
               path = "${katex-src}";
+            }
+            {
+              name = "baskerville";
+              path = "${baskerville-src}";
+            }
+            {
+              name = "firacode";
+              path = "${firacode-src}/distr/woff2";
             }
           ];
         };

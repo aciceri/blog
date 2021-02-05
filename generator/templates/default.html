@@ -1,18 +1,22 @@
 <!doctype html>
-<html lang="en">
+<html lang='$language$'>
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>My Hakyll Blog - $title$</title>
+
+        <title>My Hakyll Blog - $title$</title> 
 
 	<!-- KaTeX -->
-	<link rel="stylesheet" href="/katex/katex.min.css">
-	<script defer src="/katex/katex.min.js"></script>
-	<script defer src="/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+        <link rel="stylesheet" href="/katex/katex.min.css">
+        <script defer src="/katex/katex.min.js"></script>
+        <script defer src="/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 
-	<!-- Custom -->
-	<link rel="stylesheet" href="/css/main.css" />
+        <!-- Custom -->
+        <link rel="stylesheet" href="/css/main.css" />
+
+        <!-- Temporary -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">  
     </head>
     <body>
         <header>
@@ -27,7 +31,7 @@
             </nav>
         </header>
 
-        <main role="main">
+        <main>
             <h1>$title$</h1>
             $body$
         </main>

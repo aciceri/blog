@@ -1,0 +1,31 @@
+// Baskerville
+
+@font-face {
+  font-family: 'Libre Baskerville';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/baskerville/LibreBaskerville-Regular.ttf) format('ttf');
+}
+
+@font-face {
+  font-family: 'Libre Baskerville';
+  font-style: italic;
+  font-weight: 400;
+  src: url(/baskerville/LibreBaskerville-Italic.ttf) format('ttf');
+}
+
+@font-face {
+  font-family: 'Libre Baskerville';
+  font-style: bold;
+  font-weight: 700;
+  src: url(/baskerville/LibreBaskerville-Bold.ttf) format('ttf');
+}
+
+// Fira Code
+
+@font-face {
+  font-family: 'Fira Code';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/firacode/FiraCode-Regular.woff2) format('woff2');
+}

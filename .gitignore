@@ -2,3 +2,7 @@ _cache/
 result/
 result-doc/
 out/
+generator/skeleton
+generator/katex
+generator/baskerville
+generator/firacode
