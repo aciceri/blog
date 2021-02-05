@@ -1,6 +1,12 @@
 {-# LANGUAGE OverloadedStrings, GADTs #-}
 
 module Main (main) where
+import System.FilePath.Posix ( takeFileName
+                             , takeDirectory
+                             , takeBaseName
+                             , takeExtension
+                             , (</>)
+                             )
 import System.Environment ( lookupEnv )
 import Hakyll
 import Hakyll
@@ -9,8 +15,11 @@ import Text.Sass.Options ( SassOptions(..)
                          , defaultSassOptions
                          , SassOutputStyle(..)
                          )
+import Hakyll.Images ( loadImage
+                     , compressJpgCompiler
+                     , ensureFitCompiler
+                     )
 import Text.Pandoc.Options
-
 import Data.Void
 import Replace.Megaparsec
 import Text.Megaparsec hiding (match)
@@ -51,19 +60,34 @@ main = do
       depends <- makePatternDependency "generator/css/**.scss"
       rulesExtraDependencies [depends] $ do
         match (fromRegex "^generator/css/main.scss") $ do
-          route $ stripGeneratorRoute `composeRoutes` setExtension "css"
+          route $ stripRoute "generator/" `composeRoutes` setExtension "css"
           compile sassCompiler
 
     match "generator/katex/**" $ do
-      route $ stripGeneratorRoute
+      route $ stripRoute "generator/"
       compile $ copyFileCompiler
 
     match "generator/firacode/**.woff2" $ do
-      route $ stripGeneratorRoute
+      route $ stripRoute "generator/"
       compile $ copyFileCompiler
 
     match "generator/baskerville/**.ttf" $ do
-      route $ stripGeneratorRoute
+      route $ stripRoute "generator/"
+      compile $ copyFileCompiler
+
+    match "assets/images/**.jpg" $ version "large" $ do
+      route $ stripRoute "assets/"
+      compile $ loadImage
+        >>= compressJpgCompiler 50
+  
+    match "assets/images/**.jpg" $ version "small" $ do
+      route $ suffixRoute "small" `composeRoutes` stripRoute "assets/"
+      compile $ loadImage
+        >>= ensureFitCompiler 1200 600
+        >>= compressJpgCompiler 90
+
+    match ("assets/images/**" .&&. complement "**.jpg") $ do
+      route $ stripRoute "assets/"
       compile $ copyFileCompiler
 
   
@@ -82,9 +106,20 @@ baseContext :: Context String
 baseContext = constField "item-type" "default"
   <> constField "root" root
   <> defaultContext
-    
-stripGeneratorRoute :: Routes
-stripGeneratorRoute = gsubRoute "generator/" (const "")
+
+
+suffixRoute :: String -> Routes
+suffixRoute suffix = customRoute makeSuffixRoute
+  where
+    makeSuffixRoute ident = parentDir </> suffixed  where
+        p = toFilePath ident
+        parentDir = takeDirectory p
+        baseName = takeBaseName p
+        ext = takeExtension p
+        suffixed = baseName ++ "-" ++ suffix ++ ext
+
+stripRoute :: String -> Routes
+stripRoute txt = gsubRoute txt (const "")
 
 postRoute :: Routes
 postRoute = gsubRoute ".org" (const "/index.html")

@@ -118,8 +118,8 @@ idascalia.
 
 Includere immagini è semplice (didascalia opzionale): 
 
-#+caption: Una bandiera importante
-[[file:../../images/lojban-flag.gif]]
+#+caption: Grand Canyon
+[[file:/images/grandcanyon.jpg]]
 
 * Video
 
