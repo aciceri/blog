@@ -4,22 +4,23 @@
   font-family: 'Libre Baskerville';
   font-style: normal;
   font-weight: 400;
-  src: url(/baskerville/LibreBaskerville-Regular.ttf) format('ttf');
+  src: url('/baskerville/TypoPRO-LibreBaskerville-Regular.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Libre Baskerville';
   font-style: italic;
   font-weight: 400;
-  src: url(/baskerville/LibreBaskerville-Italic.ttf) format('ttf');
+  src: url('/baskerville/TypoPRO-LibreBaskerville-Italic.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Libre Baskerville';
-  font-style: bold;
+  font-style: normal;
   font-weight: 700;
-  src: url(/baskerville/LibreBaskerville-Bold.ttf) format('ttf');
+  src: url('/baskerville/TypoPRO-LibreBaskerville-Bold.woff') format('woff');
 }
+
 
 // Fira Code
 

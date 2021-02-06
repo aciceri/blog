@@ -5,25 +5,25 @@
     nixpkgs.url = github:NixOS/nixpkgs;
     flake-utils.url = github:numtide/flake-utils;
     nur.url = github:nix-community/NUR;
-    skeleton-src = {
-      url = github:atomicpages/skeleton-sass;
-      flake = false;
-    };
     katex-src = {
       url = "https://github.com/KaTeX/KaTeX/releases/download/v0.12.0/katex.tar.gz";
       flake = false;
     };
-    baskerville-src = {
-      url = "https://github.com/impallari/Libre-Baskerville/archive/master.zip";
+    typoproweb-src = {
+      url = "https://github.com/rse/typopro-web/archive/4.2.5.tar.gz";
       flake = false;
     };
     firacode-src = {
       url = github:tonsky/FiraCode;
       flake = false;
     };
+    hyphenopoly-src = {
+      url = "https://github.com/mnater/Hyphenopoly/archive/v4.10.0.tar.gz";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, nur, skeleton-src, katex-src, baskerville-src, firacode-src }:
+  outputs = { self, nixpkgs, flake-utils, nur, katex-src, typoproweb-src, firacode-src, hyphenopoly-src }:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
@@ -32,20 +32,20 @@
           inherit pkgs;
           thirdparty = [
             {
-              name = "skeleton";
-              path = "${skeleton-src}/src";
-            }
-            {
               name = "katex";
               path = "${katex-src}";
             }
             {
               name = "baskerville";
-              path = "${baskerville-src}";
+              path = "${typoproweb-src}/web/TypoPRO-LibreBaskerville";
             }
             {
               name = "firacode";
               path = "${firacode-src}/distr/woff2";
+            }
+            {
+              name = "hyphenopoly";
+              path = "${hyphenopoly-src}";
             }
           ];
         };

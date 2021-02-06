@@ -1,17 +1,5 @@
 {
   "nodes": {
-    "baskerville-src": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-1EXi1hxFpc7pFsLbEj1xs9LqjeIf3XBol/8HdKNROUU=",
-        "type": "tarball",
-        "url": "https://github.com/impallari/Libre-Baskerville/archive/master.zip"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://github.com/impallari/Libre-Baskerville/archive/master.zip"
-      }
-    },
     "firacode-src": {
       "flake": false,
       "locked": {
@@ -41,6 +29,18 @@
         "owner": "numtide",
         "repo": "flake-utils",
         "type": "github"
+      }
+    },
+    "hyphenopoly-src": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-aHlyDavrS4pk/BlnlEwU6y4OS7AZbXTVvuq3ZfUOp3c=",
+        "type": "tarball",
+        "url": "https://github.com/mnater/Hyphenopoly/archive/v4.10.0.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/mnater/Hyphenopoly/archive/v4.10.0.tar.gz"
       }
     },
     "katex-src": {
@@ -87,29 +87,25 @@
     },
     "root": {
       "inputs": {
-        "baskerville-src": "baskerville-src",
         "firacode-src": "firacode-src",
         "flake-utils": "flake-utils",
+        "hyphenopoly-src": "hyphenopoly-src",
         "katex-src": "katex-src",
         "nixpkgs": "nixpkgs",
         "nur": "nur",
-        "skeleton-src": "skeleton-src"
+        "typoproweb-src": "typoproweb-src"
       }
     },
-    "skeleton-src": {
+    "typoproweb-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1583726109,
-        "narHash": "sha256-azA0M8QB47J4XtzwLxER9ksQgqhozs1iBGJV5i8LNjk=",
-        "owner": "atomicpages",
-        "repo": "skeleton-sass",
-        "rev": "ad712b8f6479c874421bbc18ee096369571b6db2",
-        "type": "github"
+        "narHash": "sha256-HejfC/1Bqov9QhOE661oc+pTuwPaFzTN/LhQ5BOOZhE=",
+        "type": "tarball",
+        "url": "https://github.com/rse/typopro-web/archive/4.2.5.tar.gz"
       },
       "original": {
-        "owner": "atomicpages",
-        "repo": "skeleton-sass",
-        "type": "github"
+        "type": "tarball",
+        "url": "https://github.com/rse/typopro-web/archive/4.2.5.tar.gz"
       }
     }
   },

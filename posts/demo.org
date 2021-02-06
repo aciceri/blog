@@ -5,13 +5,11 @@ date: 2021-02-02
 language: it
 ---
  
-* Testo
-
-Si può inserire il testo in *grassetto*, /italico/ e */grassetto e italico/*, inoltre il testo può
+Si può inserire il testo in *grassetto*, /corsivo/ e */grassetto e corsivo/*, inoltre il testo può
 essere testo ~inline~ o =verbatim=, _sottolineato_, +barrato+ e a ped_{ice} o api^{ice}. 
 
 ** Le liste sono testo
-
+   
 Questa è una lista non ordinata...
 
 + Un elemento
@@ -134,7 +132,7 @@ And then I noticed that She was a Gargoyle dei Nanowar:
 
 * Matematica
 
-Si può scrivere matematica inline, per esempio lo sapevi che $\not \exists a,b,c \in \mathbb{N}$
+Si può scrivere matematica inline, per esempio lo sapevi che $\nexists a,b,c \in \mathbb{N}$
 tali che
 
 $$a^n+^n=c^n \forall n$$

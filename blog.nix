@@ -9,6 +9,7 @@
         hakyll = appendPatch (dontCheck (super.callHackage "hakyll" "4.13.4.1" {})) ./generator/hakyll.patch;
         hakyll-images = unmarkBroken super.hakyll-images;
         hakyll-sass = unmarkBroken super.hakyll-sass;
+        sfnt2woff = unmarkBroken super.sfnt2woff;
       }
     );
 

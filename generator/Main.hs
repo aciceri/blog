@@ -38,7 +38,7 @@ config = defaultConfiguration
 sassOptions :: Maybe FilePath -> SassOptions
 sassOptions distPath = defaultSassOptions
     { sassSourceMapEmbed = True
-    , sassOutputStyle    = SassStyleCompressed
+    --, sassOutputStyle    = SassStyleCompressed
     , sassIncludePaths   = fmap (: []) distPath
     }
 
@@ -67,11 +67,15 @@ main = do
       route $ stripRoute "generator/"
       compile $ copyFileCompiler
 
+    match "generator/hyphenopoly/**" $ do
+      route $ stripRoute "generator/"
+      compile $ copyFileCompiler
+
     match "generator/firacode/**.woff2" $ do
       route $ stripRoute "generator/"
       compile $ copyFileCompiler
 
-    match "generator/baskerville/**.ttf" $ do
+    match "generator/baskerville/**.woff" $ do
       route $ stripRoute "generator/"
       compile $ copyFileCompiler
 

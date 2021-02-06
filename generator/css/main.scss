@@ -1,22 +1,107 @@
-@charset "utf-8";
+$site-width: 720px;
 
-//@import "skeleton/core/_config.scss";
-@import "fonts.scss";
-@import "code.scss";
+$themes: (
+    light: (
+        color-background: #fff,
+        color-text: #000
+    ),
+    dark: (
+        color-background: #000,
+        color-text: #fff
+    )
+);
+
+@mixin theme-aware($key, $color) {
+    @each $theme-name, $theme-color in $themes {
+        .theme-#{$theme-name} & {
+            #{$key}: map-get(map-get($themes, $theme-name), $color)
+        }
+    }
+}
+
+
+@import "typography.scss";
+@import "syntax-highlighting.scss";
+
+html, body {
+  height: 100%;
+  font-family: 'Libre Baskerville';
+}
 
 body {
-    font-family: 'Libre Baskerville';
+  margin: 0;
+}
+
+#main-wrapper {
+  @include theme-aware('background', 'color-background');
+  @include theme-aware('color', 'color-text');
+  width: 100%;
+}
+
+header, main, footer {
+    max-width: $site-width;
+    margin: auto;
+}
+
+header {
+    border-bottom: 0.2em solid;
+    @include theme-aware('border-color', 'color-text');
 }
 
 ::selection {
-    color: white;
-    background: black;
+  @include theme-aware('background', 'color-text');
+  @include theme-aware('color', 'color-background');
 }
 
-.sourceCode {
-    font-family: 'Fira Code';
-}
 
-h1 {
-    font-size: 2em;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+article {
+
+    p {
+	@include themify($themes) {
+	    
+	    color: themed('textColor');
+	
+	width: 400px;
+	hyphens: auto;
+	-ms-hyphens: auto;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	}
+	}
+}    
+*/
