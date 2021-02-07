@@ -48,60 +48,17 @@ header {
     @include theme-aware('border-color', 'color-text');
 }
 
+main {
+    text-align: justify;
+}
+
+footer {
+    border-top: 0.2em solid;
+    @include theme-aware('border-color', 'color-text');
+}
+
 ::selection {
   @include theme-aware('background', 'color-text');
   @include theme-aware('color', 'color-background');
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-article {
-
-    p {
-	@include themify($themes) {
-	    
-	    color: themed('textColor');
-	
-	width: 400px;
-	hyphens: auto;
-	-ms-hyphens: auto;
-	-moz-hyphens: auto;
-	-webkit-hyphens: auto;
-	}
-	}
-}    
-*/
