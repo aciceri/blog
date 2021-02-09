@@ -1,0 +1,43 @@
+
+footref::after {
+    content: "]";
+}
+
+.footref::before {
+    content: "[";
+}
+
+div.theorem > p::before {
+    content: "Theorem: ";
+    font-weight: bold;
+}
+
+div.lemma > p::before {
+    content: "Lemma: ";
+    font-weight: bold;
+}
+
+div.proposition > p::before {
+    content: "Proposition: ";
+    font-weight: bold;
+}
+
+div.definition > p::before {
+    content: "Definition: ";
+    font-weight: bold;
+}
+
+div.proof > p::before {
+    content: "Proof: ";
+    font-weight: bold;
+}
+
+div.proof::after {
+    font-weight: bold;
+    content: "□";
+    position: relative;
+    font-size: 1.5rem;
+    left: calc(#{$site-width} - 1rem);
+    top: -1rem;
+}
+

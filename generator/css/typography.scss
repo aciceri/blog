@@ -105,17 +105,3 @@ span.todo {
     background-color: red;
 }
 
-// Math
-
-div.proof > p::before {
-    content: "Proof: ";
-    font-weight: bold;
-}
-
-div.proof > p::after {
-    font-weight: bold;
-    content: "□";
-    position: absolute;
-    right: calc((100% - #{$site-width}) / 2);
-    
-}

@@ -1,0 +1,308 @@
+---
+title: Il teorema di Sard
+tags: math
+date: 2020-05-21
+language: it
+---
+
+$$
+   \def\R{{\mathbb{R}}}
+   \def\N{{\mathbb{R}}}
+   \def\epsilon{{\varepsilon}}
+   \def\ceil#1{\lceil #1 \rceil}
+   \def\floor#1{\lfloor #1 \rfloor}
+$$
+
+#+begin_note
+Questo post nasce pochi giorni dopo un seminario che ho dovuto tenere in
+Universitá, infatti, dopo aver approfondito l’argomento che sto per esporre, mi
+spiaceva lasciare tali concetti "al vento" e mi sembrava sensato trascriverli
+nero su bianco da qualche parte. 
+L’idea iniziale era di scrivere un bel documento in $\LaTeX$ di cui farne un pdf
+da perdere in qualche remota cartella del pc, ma alla fine mi sono detto: perché
+non qui sul blog?
+#+end_note
+
+L’obiettivo di queste note é di fornire una semplice e concisa esposizione del
+teorema di Sard, noto risultato di geometria differenziale.
+La trattazione é carica di osservazioni e frequenti definizioni, in modo da
+essere digeribile anche ai non addetti ai lavori.
+
+#+begin_definition
+Siano $(a_1, \dots, a_n), (b_1, \dots, b_n) \in \R^n$ tali che $a_i < b_i$,
+chiamiamo /rettangolo solido n-dimensionale/ l'insieme
+$$
+S(a, b)=\{(x_1, \dots, x_n) \in \mathbb{R}^n : a_i \lt x_i \lt b_i\}
+$$
+#+end_definition
+
+#+begin_definition
+Chiamiamo /volume n-dimensionale/ di un rettangolo solido n-dimensionale $S(a,
+b)$ la quantitá reale positiva
+$$
+Vol(S(a, b)) = \prod_{i=1}^n (b_i - a_i)
+$$
+#+end_definition
+
+#+begin_definition
+Diciamo che $A \subset \R^n$ ha /misura nulla/ se $\forall \epsilon \gt 0$
+esiste un ricoprimento $\{S_i\}_{i \in \N}$ di $A$ (ovvero $\bigcup_{i \in \N}
+S_i \supset A$) formato da rettangoli solidi $S_i$ tale che
+$$
+\sum_{i \in \mathbb{N}} Vol(S_i) \lt \epsilon
+$$
+#+end_definition
+
+Osserviamo innanzitutto che, nella definizione di insieme a misura nulla,
+considerare cubi n-dimensionali (cioé rettangoli dove $b_i - a_i = b_j - a_j
+\forall i, j$) invece che rettangoli é del tutto equivalente.
+D'altronde é del tutto equivalente anche considerare le palle euclidee o in
+generale le altre bolle indotte da norme equivalenti (nel senso che generano la
+stessa topologia).
+
+Inoltre, si segnala come tale nozione sia equivalente all'avere misura di
+Lebesgue nulla, ovvero $A$ ha misura nulla se e solo se $m_n(A) = 0$ dove $m_n$
+é la misura di Lebesgue n-dimensionale.
+La dimostrazione di tale equivalenza, nonostante non di difficile
+raggiungimento, non é necessaria per i nostri obiettivi e pertanto verrá omessa.
+
+Iniziamo con le due seguenti banali osservazioni:
+
+#+begin_observation
+Se $m \lt n$ allora $\R^m$ ha misura nulla in $\R^n$
+#+end_observation
+
+#+begin_proof
+Basta ricoprire $\R^m$ con una famiglia numerabile di cubi, tali cubi giacciono
+su un iano di $\R^n$ e quindi ognuno di essi puó essere schiacciato in una
+direzione ortogonale a questo pano.
+In questo modo l'unione dei rettangoli continua a contenere tutto $\R^m$ e il
+volume di ogni rettangolo é piccolo a piacere, questo implica che anche la
+somma di tutti i volumi é piccola a piacere.
+#+end_proof
+
+#+begin_observation
+$\bigcup_{i \in \N} A_i$ ha misura nulla se ogni $A_i$ ha misura nulla.
+#+end_observation
+
+#+begin_proof
+Unioni di famiglie numerabili sono ancora numerabili per l'assioma della scelta.
+#+end_proof
+
+Vediamo ora una prorietá fondamentale che ci permettá in seguito di estendere la
+definizione di insiemi a misura nulla.
+
+#+begin_proposition
+Sia $F: U \to \R^n$ una mappa liscia, con $U \subset \R^n$ aperto. Se $A \subset
+U$ ha misura nulla allora anche l'immagine $F(A)$ ha misura nulla.
+#+end_proposition
+
+#+begin_proof
+Iniziamo osservando che $U$ é ricopribile da una famiglia numerabile di palle
+chiuse per cui la restrizione di $F$ ad ognuna di queste palle é ancora liscia,
+ricordiamo che una mappa é liscia su un insieme generico (non aperto) se essa é
+estendibile ad una mappa liscia definita su un aperto contenente tale insieme.
+Sia $\bar{B}$ una di queste palle, siccome $\bar{B}$ é compatto e $F \in
+\mathscr{C}^1(\bar{B})$ allora $\exists c \gt 0$ tale che $\forall x, y \in
+\bar{B}$
+
+$$
+\Vert F(x) - F(y) \Vert \le c \Vert x-y \Vert
+$$
+
+Fissiamo $\delta \gt 0$, visto che $A \cap \bar{B}$ ha misura nulla possiamo
+considerare un suo ricoprimento numerabile $\{ B_k \}_{k \in \N}$ di palle tale
+che
+
+$$
+\sum_{k \in \N} Vol({B_k}) \lt \delta
+$$
+
+Per la diseguaglianza di prima sappiamo che $F(B_k \cap \bar{B})$ é contenuto in
+una palla di raggio al piú $c$ volte il raggio di $B_k$. Dunque $F(A \cap B_k)$
+é ricoperto da una famiglia numerabile $\{ \tilde{B_k} \}_{k \in \N}$ di palle
+di volume complessivo inferiore a
+
+$$
+\sum_{k \in \N} Vol({\tilde{B_k}}) \lt c^n \delta
+$$
+
+Per arbitrarietá di $\delta$ segue che $F(A \cap \bar{B})$ ha misura nulla, e
+dunque per quanto osservato all'inizio che anche $F(A)$ ha misura nulla, cioé la
+tesi.
+#+end_proof
+
+Ció implica che l'avere dimensione nulla é invariante per diffeomorfismi, siamo
+quindi ora pronti ad estendere la definizione di insiemi a misura nulla alle
+varietá differenziabili, prima di fare ció enunciamo e dimostriamo una versione
+piú debole del teorema di Sard.
+Per capire in che modo questo teorema é implicato dalla versione generale
+occorrerá attendere ancora un poco.
+
+#+begin_theorem
+Sia $F: U \subset \R^m \to \R^n$ una mappa liscia, con $U$ aperto e $m < n$.
+Allora l'immagine $F(\R^m)$ ha misura nulla in $\R^n$.
+#+end_theorem
+
+#+begin_proof
+Sia $\pi: \R^n \to \R^m$ la proiezione sulle prime $m$ componenti, tale mappa é
+liscia.
+Consideriamo ora l'aperto $\tilde{U} = \pi^{-1}(U) \subset \R^n$ e $\tilde{F} = F
+\circ \pi: \R^n \to \R^n$, che é ancora liscia.
+A questo punto é sufficiente osservare che $F(U)$ non é nient'altro che
+l'immagine di $\tilde{U} \cap \R^m$ attraverso $\tilde{F}$, che, per la
+proposizione precedente, ha misura nulla siccome é l'immagine di un insieme a
+misura nulla (é tutto contenuto in un iperpiano!) attraverso una funzione
+liscia.
+#+end_proof
+
+Come preannunciato, estendiamo la definizione di insieme a misura nulla sulle
+varietá differenziali.
+
+#+begin_definition
+Sia $M$ una varietá differenziale, diciamo che $A \subset M$ ha misura nulla se
+$\varphi(A_i \cap U_i)$ ha misura nulla in $\R^{dim(M)}$ per ogni carta $(U,
+\varphi)$ dell'atlante di $M$.
+#+end_definition
+
+Si osserva che, a causa della $\mathscr{C}^\infty$-compatibilitá delle carte
+dell'atlante, per affermare che un sottoinsieme della varietá ha misura nulla é
+sufficiente trovare una collezione numerabile di carte che ricoprano l'insieme
+candidato e che soddisfino l'enunciato della definizione.
+In particolare se l'insieme é tutto contenuto in una carta, per mostrare che ha
+misura nulla basta verificare che l'immagine attraverso la carta ha misura
+nulla.
+
+Passiamo ora a definire un altro concetto che sará fondamentale per enunciare il
+Teorema di Sard.
+
+#+begin_definition
+Sia $F: M \to N$ una mappa liscia tra varietá differenziali, diciamo che $p \in
+M$ é un /punto critico/ se la mappa differenziale indotta $dF_p: T_P \to
+T_{F(p)}N$ non é suriettiva. 
+In tal caso $F(p)$ si dice /valore critico/.
+
+Denotiamo con $Crit(F)$ l'insieme dei punti critici di $F$.
+#+end_definition
+
+#+begin_definition
+Sia $F: M \to N$ una mappa liscia tra varietá differenziali, diciamo che $p \in
+M$ é un /punto regolare/ se non é critico, ovvero se $dF_p: T_p \to T_{F(p)}N$ é
+suriettiva (ovvero locamente $F$ é una sommersione). 
+Se $p'$ é un punto regolare per ogni punto sulla fibra $F^{-1}(F(p))$ allora
+$F(p)$ si dice /valore regolare/.
+#+end_definition
+
+Osserviamo come affinché un valore sia critico é sufficiente che esso sia
+l'immagine di un solo punto critico, mentre affinché sia regolare occorre che
+tutti i punti della sua controimmagine siano regolari.
+
+La seguente osservazione ci sará utile durante la dimostrazione del teorema di
+Sard.
+
+#+begin_observation
+$Crit(F)$ é un chiuso di $M$
+#+end_observation
+
+#+begin_proof
+$Crit(F)=h^{-1}(0)$ dove $h: M \to \R$ é la mappa liscia tale che
+
+$$
+h(p)=det(J(F)\bigr|_p \cdot (J(F)\bigr|_p)^t)
+$$
+
+cioé la mappa che manda i punti della varietá nel determinante del prodotto
+della Jacobiana con la sua trasposta.
+#+end_proof
+
+Prima di presentare il teorema di Sard occorre ancora dare una definizione ed
+enunciare il teorema di Fubini, di cui peró ometteremo la dimostrazione
+[#fubini]_. 
+Tale risultato sará fondamentale nella dimostrazione del teorema di Sard.
+
+#+begin_definition
+Sia $\R^n = \R^k \times \R^l$ e $a \in \R^k$, chiamiamo /sezione verticale/
+l'insieme $V_a = \{ a \} \times \R^l$.
+#+end_definition
+
+Sempre adottando le notazioni della definizione, diremo che un insieme $A \subset
+\R^n$ ha sezione verticale nulla se la proiezione (sulle ultime $l$ componenti)
+di $V_a \cap A$ in $\R^l$ ha misura nulla.
+
+#+begin_theorem
+Sia $A \subset \R^n = \R^k \times \R^l$, se tutte le sezioni verticali $V_a$ hanno
+misura nulla (quindi $\forall a \in \R^k$) allora $A$ ha misura nulla in $\R^n$.
+#+end_theorem
+
+Enunciamo finalmente il teorema di Sard:
+
+#+begin_theorem
+Sia $F: M \to N$ una mappa liscia tra varietá differenziabili, allora l'insieme
+dei valori critici $F(Crit(F))$ ha misura nulla in $N$.
+#+end_theorem
+
+Siccome per le varietá differenziabili vale il secondo assioma di numerabilitá
+ogni insieme é ricopribile con una collezione numerabile di carte, pertanto
+nell'enunciato del teorema é sufficiente chiedere che il dominio di $F$ sia un
+singolo aperto $U \subset \R^m$, dove $m = dim(M)$.
+Inoltre, per lo stesso motivo, anche l'immagine $F(U)$ é ricopribile con una
+collezione numerabile di carte, pertanto anche qui si puó supporre senza perdita
+di generalitá che la carta sia una sola, ovvero che l'immagine $F(U)$ stia in
+$\R^n$, dove $n = dim(N)$.
+
+Quanto appena scritto é sufficiente a giustificare la seguente formulazione
+equivalente del teorema di Sard.
+
+#+begin_theorem
+Sia $F: U \subset \R^m \to \R^n$ una mappa liscia, con $U$ aperto. Allora l'insieme
+dei valori critici $F(Crit(F))$ ha misura nulla in $\R^n$.
+#+end_theorem
+
+#+begin_theorem
+Se $m \lt n$ l'enunciato diventa una semplice conseguenza del Teorema Mini-Sard,
+supponiamo dunque $m \geq n$ e procediamo per induzione su $m$.
+
+Se $m = 0$ allora l'immagine dei punti critici deve essere contenuta in un
+punto, e pertanto non puó che avere misura nulla. Supponiamo quindi ora il
+teorema valido per $m-1$ e dimostriamolo per $m$.
+
+Chiamiamo ora per brevitá $C = Crit(F)$ e $C_i = \{ p \in U : \frac{\partial^k
+F}{\partial \dots} \bigr|_p = 0, \forall k \leq i \}$, ovvero l'insieme dei
+punti di $U$ in cui tutte le derivate di ordine inferiore a $i$ si annullano.
+
+Osserviamo subsetito come $C$ e i $C_i$ sono chiusi (dimostrazione simile
+all'osservazione iniziale sulla chiusura di $C$), inoltre ha luogo la seguente
+catena di inclusioni:
+
+$$
+C \supset C_1 \supset C_2 \supset \dots
+$$
+
+Assumiamo ora i tre seguenti lemmi, rimandandone temporaneamente la
+dimostrazione, che ricordiamo avverrá per induzione su $m$.
+
+#begin_lemma
+$F(C \setminus C_1)$ ha misura nulla in $\R^n$
+#+end_lemma
+
+#begin_lemma
+$F(C_i \setminus C_{i+1})$ ha misura nulla in $\R^n$
+#+end_lemma
+
+#begin_lemma
+$F(C_k)$ ha misura nulla in $\R^n$ se $k \gt \frac{m}{n} - 1$
+#+end_lemma
+
+Per concludere il teorema ora é sufficiente osservare che
+
+$$
+F(C) = F(C \setminus C_1) \cup \bigcup_{i=1}^{\floor{\frac{m}{n}-1}} F(C_i) \setminus
+F(C_{i+1}) \cup F(C_{\ceil{\frac{m}{n}-1}})
+$$
+      
+Ovvero che l'insieme dei valori critici é unione finita di insiemi che sono a
+misura nulla per i tre lemmi, e pertanto anch'esso ha misura nulla.
+#+end_theorem
+
+Seguono le dimostrazioni dei tre lemmi, ricordiamo che ci troviamo sotto ipotesi induttive, pertanto
+potremo assumere il teorema di Sard valido per $m-1$.

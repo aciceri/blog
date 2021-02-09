@@ -1,0 +1,15 @@
+@media only screen and (max-width: 768px) {
+    #main-wrapper {
+	max-width: calc(100% - 2rem);
+    }
+
+    div.proof::after {
+	right: 1rem;
+	display: none;
+    }
+    .verse, .note, .warning {
+	margin: 1rem 0;
+	padding: 0 0 0 1rem;
+	color: inherit;
+    }
+}

@@ -1,4 +1,4 @@
-$site-width: 720px;
+$site-width: 768px;
 
 $themes: (
     light: (
@@ -20,8 +20,12 @@ $themes: (
 }
 
 
+@import "navigation.scss";
 @import "typography.scss";
+@import "mobile.scss";
 @import "syntax-highlighting.scss";
+@import "math.scss";
+@import "youtube.scss";
 
 html, body {
   height: 100%;
