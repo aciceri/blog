@@ -56,6 +56,7 @@ main = do
         >>= applyFilter embedYoutube
         >>= loadAndApplyTemplate "generator/templates/post.html" postContext
         >>= loadAndApplyTemplate "generator/templates/default.html" postContext
+        >>= relativizeUrls
 
       depends <- makePatternDependency "generator/css/**.scss"
       rulesExtraDependencies [depends] $ do
