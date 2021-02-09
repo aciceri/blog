@@ -117,7 +117,7 @@ idascalia.
 Includere immagini è semplice (didascalia opzionale): 
 
 #+caption: Grand Canyon
-[[file:/images/grandcanyon.jpg]]
+[[file:/images/wallpaper.jpg]]
 
 * Video
 

@@ -4,21 +4,21 @@
   font-family: 'Libre Baskerville';
   font-style: normal;
   font-weight: 400;
-  src: url('/baskerville/TypoPRO-LibreBaskerville-Regular.woff') format('woff');
+  src: url('../baskerville/TypoPRO-LibreBaskerville-Regular.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Libre Baskerville';
   font-style: italic;
   font-weight: 400;
-  src: url('/baskerville/TypoPRO-LibreBaskerville-Italic.woff') format('woff');
+  src: url('../baskerville/TypoPRO-LibreBaskerville-Italic.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Libre Baskerville';
   font-style: normal;
   font-weight: 700;
-  src: url('/baskerville/TypoPRO-LibreBaskerville-Bold.woff') format('woff');
+  src: url('../baskerville/TypoPRO-LibreBaskerville-Bold.woff') format('woff');
 }
 
 
@@ -28,5 +28,5 @@
   font-family: 'Fira Code';
   font-style: normal;
   font-weight: 400;
-  src: url(/firacode/FiraCode-Regular.woff2) format('woff2');
+  src: url(../firacode/FiraCode-Regular.woff2) format('woff2');
 }

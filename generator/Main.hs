@@ -53,6 +53,7 @@ main = do
     match "posts/**.org" $ do
       route $ postRoute
       compile $ customCompiler
+        >>= saveSnapshot "posts-content"
         >>= applyFilter embedYoutube
         >>= loadAndApplyTemplate "generator/templates/post.html" postContext
         >>= loadAndApplyTemplate "generator/templates/default.html" postContext
@@ -60,9 +61,13 @@ main = do
 
       depends <- makePatternDependency "generator/css/**.scss"
       rulesExtraDependencies [depends] $ do
-        match (fromRegex "^generator/css/main.scss") $ do
+        match (fromRegex "^generator/css/custom.scss") $ do
           route $ stripRoute "generator/" `composeRoutes` setExtension "css"
           compile sassCompiler
+
+    match "generator/js/custom.js" $ do
+      route $ stripRoute "generator/"
+      compile $ copyFileCompiler
 
     match "generator/katex/**" $ do
       route $ stripRoute "generator/"
@@ -81,20 +86,26 @@ main = do
       compile $ copyFileCompiler
 
     match "assets/images/**.jpg" $ version "large" $ do
-      route $ stripRoute "assets/"
-      compile $ loadImage
-        >>= compressJpgCompiler 50
+      route $ suffixRoute "original" `composeRoutes` stripRoute "assets/"
+      compile $ copyFileCompiler
   
     match "assets/images/**.jpg" $ version "small" $ do
-      route $ suffixRoute "small" `composeRoutes` stripRoute "assets/"
+      route $ stripRoute "assets/"
       compile $ loadImage
-        >>= ensureFitCompiler 1200 600
+        >>= ensureFitCompiler 768 600
         >>= compressJpgCompiler 90
 
     match ("assets/images/**" .&&. complement "**.jpg") $ do
       route $ stripRoute "assets/"
       compile $ copyFileCompiler
 
+    create ["rss.xml"] $ do
+      route idRoute
+      compile (feedCompiler renderRss)
+
+    create ["atom.xml"] $ do
+      route idRoute
+      compile (feedCompiler renderAtom)
   
 domain :: String
 domain = "blog.ccr.ydns.eu"
@@ -158,3 +169,30 @@ embedYoutube text =
       return id :: Parsec Void String String
     embed id = "<div class='youtube-wrapper'><iframe allowfullscreen='true' src='https://www.youtube.com/embed/" ++ id ++ "'></iframe></div>"
   in streamEdit macro embed text
+
+
+feedConfiguration :: FeedConfiguration
+feedConfiguration = FeedConfiguration
+    { feedTitle       = "My blog"
+    , feedDescription = "Cool description"
+    , feedAuthorName  = "Andrea Ciceri"
+    , feedAuthorEmail = "andrea.ciceri@autistici.org"
+    , feedRoot        = "https://blog.ccr.ydns.eu"
+    }
+
+feedContext :: Context String
+feedContext = bodyField "description"
+        <> dateField "date" "%Y-%m-%d"
+        <> postContext
+
+type FeedRenderer =
+    FeedConfiguration
+    -> Context String
+    -> [Item String]
+    -> Compiler (Item String)
+
+feedCompiler :: FeedRenderer -> Compiler (Item String)
+feedCompiler renderer =
+  renderer feedConfiguration feedContext
+  =<< fmap (take 10 ) . recentFirst
+  =<< loadAllSnapshots "posts/**.org" "posts-content"
