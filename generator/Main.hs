@@ -1,6 +1,7 @@
 {-# LANGUAGE OverloadedStrings, GADTs #-}
 
 module Main (main) where
+import Fields
 import System.FilePath.Posix ( takeFileName
                              , takeDirectory
                              , takeBaseName
@@ -25,7 +26,9 @@ import Replace.Megaparsec
 import Text.Megaparsec hiding (match)
 import Text.Megaparsec.Char
 import Text.Megaparsec.Char.Lexer
-
+import           Data.List                      ( isPrefixOf
+                                                , isSuffixOf
+                                                )
 import Data.Maybe
   
 config :: Configuration
@@ -48,15 +51,40 @@ main = do
   compilerEnv <- lookupEnv "HAKYLL_ENV"
 
   hakyllWith config $ do
+    tags <- buildTags "posts/**.org" (fromCapture "tags/*.html")
+
+    tagsRules tags $ \tag pattern -> do
+            let title = "Posts tagged \"" ++ tag ++ "\""
+            let ctx   = postContext tags
+
+            route idRoute
+            compile $ do
+                posts <- recentFirst =<< loadAll pattern
+
+                let tagsCtx =
+                        constField "title" title
+                            <> listField "posts" ctx (return posts)
+                            <> constField "tag" tag
+                            <> constField "language" "en"
+                            <> baseContext
+
+                makeItem ""
+                    >>= loadAndApplyTemplate "generator/templates/tag.html"     tagsCtx
+                    >>= loadAndApplyTemplate "generator/templates/default.html" tagsCtx
+                    >>= relativizeUrls
+                    >>= cleanIndexUrls
+
+    
     match "generator/templates/*" $
       compile templateBodyCompiler
+  
     match "posts/**.org" $ do
       route $ postRoute
       compile $ customCompiler
         >>= saveSnapshot "posts-content"
         >>= applyFilter embedYoutube
-        >>= loadAndApplyTemplate "generator/templates/post.html" postContext
-        >>= loadAndApplyTemplate "generator/templates/default.html" postContext
+        >>= loadAndApplyTemplate "generator/templates/post.html" (postContext tags)
+        >>= loadAndApplyTemplate "generator/templates/default.html" (postContext tags)
         >>= relativizeUrls
 
       depends <- makePatternDependency "generator/css/**.scss"
@@ -64,6 +92,23 @@ main = do
         match (fromRegex "^generator/css/custom.scss") $ do
           route $ stripRoute "generator/" `composeRoutes` setExtension "css"
           compile sassCompiler
+
+      create ["archive/index.html"] $ do
+        route idRoute
+        compile $ do
+            posts <- recentFirst =<< loadAll "posts/**.org"
+            let ctx = postContext tags
+            let archiveCtx = listField "posts" ctx (return posts)
+                        <> publishedGroupField "years" posts ctx
+                        <> constField "language" "en"
+                        <> constField "title" "Archive"
+                        <> baseContext
+
+            makeItem ""
+                >>= loadAndApplyTemplate "generator/templates/archive.html" archiveCtx
+                >>= loadAndApplyTemplate "generator/templates/default.html" archiveCtx
+                >>= relativizeUrls
+                >>= cleanIndexUrls
 
     match "generator/js/custom.js" $ do
       route $ stripRoute "generator/"
@@ -113,16 +158,26 @@ domain = "blog.ccr.ydns.eu"
 root :: String
 root = "https://" ++ domain
 
-postContext :: Context String
-postContext =
-    dateField "date" "%Y-%m-%d" <>
-    baseContext
-  
-baseContext :: Context String
-baseContext = constField "item-type" "default"
-  <> constField "root" root
-  <> defaultContext
+postContext :: Tags -> Context String
+postContext tags =  dateField "date" "%Y-%m-%d"
+        <> allTagsField "tags" tags
+        <> constField "item-type" "post"
+        <> teaserField "teaser" "posts-content"
+        <> peekField 50 "peek" "posts-content"
+        <> readTimeField "read-time" "posts-content"
+        <> pathField "sourcefile"
+        <> versionField "git-commit" Commit
+        <> versionField "git-commit-hash" Hash
+        <> baseContext
 
+baseContext :: Context String
+baseContext = headVersionField "git-head-commit" Commit
+                 <> headVersionField "git-head-commit-hash" Hash
+                 <> headVersionField "git-head-commit-full" Full
+                 <> constField "item-type" "default"
+                 <> concatField "concat"
+                 <> constField "root" root
+                 <> defaultContext
 
 suffixRoute :: String -> Routes
 suffixRoute suffix = customRoute makeSuffixRoute
@@ -132,7 +187,7 @@ suffixRoute suffix = customRoute makeSuffixRoute
         parentDir = takeDirectory p
         baseName = takeBaseName p
         ext = takeExtension p
-        suffixed = baseName ++ "-" ++ suffix ++ ext
+        suffixed = baseName ++ "~" ++ suffix ++ ext
 
 stripRoute :: String -> Routes
 stripRoute txt = gsubRoute txt (const "")
@@ -183,7 +238,7 @@ feedConfiguration = FeedConfiguration
 feedContext :: Context String
 feedContext = bodyField "description"
         <> dateField "date" "%Y-%m-%d"
-        <> postContext
+        <> baseContext
 
 type FeedRenderer =
     FeedConfiguration
@@ -196,3 +251,12 @@ feedCompiler renderer =
   renderer feedConfiguration feedContext
   =<< fmap (take 10 ) . recentFirst
   =<< loadAllSnapshots "posts/**.org" "posts-content"
+
+cleanIndexUrls :: Item String -> Compiler (Item String)
+cleanIndexUrls = let
+    cleanIndex :: String -> String
+    cleanIndex url
+        | isSuffixOf idx url = take (length url - length idx) url
+        | otherwise            = url
+        where idx = "index.html"
+    in return . fmap (withUrls cleanIndex)

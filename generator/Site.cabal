@@ -17,8 +17,8 @@ author:             Andrea Ciceri
 
 executable generator
     main-is: Main.hs
-    --other-modules:
-    --    Fields
+    other-modules:
+        Fields
 
     default-language: Haskell2010
     other-extensions: OverloadedStrings
