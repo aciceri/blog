@@ -57,7 +57,7 @@ main = do
             let title = "Posts tagged \"" ++ tag ++ "\""
             let ctx   = postContext tags
 
-            route idRoute
+            route tagRoute
             compile $ do
                 posts <- recentFirst =<< loadAll pattern
 
@@ -93,7 +93,7 @@ main = do
           route $ stripRoute "generator/" `composeRoutes` setExtension "css"
           compile sassCompiler
 
-      create ["archive/index.html"] $ do
+    create ["archive/index.html"] $ do
         route idRoute
         compile $ do
             posts <- recentFirst =<< loadAll "posts/**.org"
@@ -109,7 +109,37 @@ main = do
                 >>= loadAndApplyTemplate "generator/templates/default.html" archiveCtx
                 >>= relativizeUrls
                 >>= cleanIndexUrls
+                
+    match "pages/home.org" $ do
+            route $ constRoute "index.html"
+            compile $ do
+                posts <- recentFirst =<< loadAll "posts/**.org"
+                let ctx = postContext tags
+                let indexCtx =
+                        listField "posts" ctx (return $ take 2 posts)
+                            <> constField "title" "Home"
+                            <> constField "language" "en"
+                            <> baseContext
 
+                customCompiler
+                    >>= applyAsTemplate indexCtx
+                    >>= loadAndApplyTemplate "generator/templates/home.html" indexCtx
+                    >>= loadAndApplyTemplate "generator/templates/default.html" indexCtx
+                    >>= relativizeUrls
+                    >>= cleanIndexUrls
+
+    match "pages/contacts.org" $ do
+            route $ constRoute "contacts/index.html"
+            compile $ do
+              let ctx = constField "title" "Home"
+                        <> constField "language" "en"
+                        <> baseContext
+              customCompiler
+                >>= applyAsTemplate ctx
+                >>= loadAndApplyTemplate "generator/templates/default.html" ctx
+                >>= relativizeUrls
+                >>= cleanIndexUrls
+ 
     match "generator/js/custom.js" $ do
       route $ stripRoute "generator/"
       compile $ copyFileCompiler
@@ -144,11 +174,11 @@ main = do
       route $ stripRoute "assets/"
       compile $ copyFileCompiler
 
-    create ["rss.xml"] $ do
+    create ["rss/rss.xml"] $ do
       route idRoute
       compile (feedCompiler renderRss)
 
-    create ["atom.xml"] $ do
+    create ["atom/atom.xml"] $ do
       route idRoute
       compile (feedCompiler renderAtom)
   
@@ -194,6 +224,9 @@ stripRoute txt = gsubRoute txt (const "")
 
 postRoute :: Routes
 postRoute = gsubRoute ".org" (const "/index.html")
+
+tagRoute :: Routes
+tagRoute = gsubRoute ".html" (const "/index.html")
 
 customCompiler :: Compiler (Item String)
 customCompiler =
