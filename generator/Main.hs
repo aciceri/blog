@@ -131,7 +131,7 @@ main = do
     match "pages/contacts.org" $ do
             route $ constRoute "contacts/index.html"
             compile $ do
-              let ctx = constField "title" "Home"
+              let ctx = constField "title" "Contacts"
                         <> constField "language" "en"
                         <> baseContext
               customCompiler
@@ -139,7 +139,7 @@ main = do
                 >>= loadAndApplyTemplate "generator/templates/default.html" ctx
                 >>= relativizeUrls
                 >>= cleanIndexUrls
- 
+
     match "generator/js/custom.js" $ do
       route $ stripRoute "generator/"
       compile $ copyFileCompiler
@@ -158,6 +158,10 @@ main = do
 
     match "generator/baskerville/**.woff" $ do
       route $ stripRoute "generator/"
+      compile $ copyFileCompiler
+
+    match "assets/custom/**" $ do
+      route $ idRoute
       compile $ copyFileCompiler
 
     match "assets/images/**.jpg" $ version "large" $ do

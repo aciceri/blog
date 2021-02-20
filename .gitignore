@@ -2,6 +2,7 @@ _cache/
 result/
 result-doc/
 out/
+generator/dist-newstyle
 generator/skeleton
 generator/katex
 generator/baskerville

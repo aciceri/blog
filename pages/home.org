@@ -1,1 +1,67 @@
-Welcome to my site
+
+Welcome to my blog, let $\Sigma$ be the set of the Unicode symbols, then this
+site is a finite subset $\mathbb{B} \subset \Sigma$. 
+Assuming that your browser can parse and interpret $\mathbb{B}$, and hoping that
+you find it more interesting than a generic subset, I wish you a pleasant
+navigation.
+
+The content of this blog is heterogeneous and I think that a better introduction
+than this would be difficult, so let’s move on.
+
+#+ATTR_HTML: :width 60% :height
+#+caption: Me, in all my glory
+[[file:/images/me.jpg]]
+
+It's also possible to reach this site in the [[https://www.torproject.org/][Tor network]] at this easy to
+remember [[http://ty7du6aabrwttfuh6hgvt4aowvmrqxscdshsrcjc2dzftewjs6qvsxad.onion][onion link]], and in any case a snapshot with all the contents of the
+last commit is always downloadable [[https://blog-backup.tar.gz][here]].
+Since the website is meant to be self contained as much as possible the
+experience you would have viewing this site on your local web server should be
+almost the same.  
+
+
+** Who am I
+   
+I’m a math student who likes programming problems, I think this is a good and
+concise definition compared to what this blog looks like.
+However I’m more than this, I also appreciate a variety of different things like
+cooking, [[https://www.nethack.org][really nerd videogames]], free software, music (light or classical, as a
+listener or [[../posts/midi-to-bach/][as a player]]), sci-fi books, old and boring movies, etc...
+
+Moreover, I’m not an english native speaker, so I ask you to be clement if you
+find some errors, this site is also an opportunity to improve my language
+skills.
+
+
+** Under the hood
+
+These pages are written in [[https://www.gnu.org/software/emacs/][GNU Emacs]] using the versatile [[https://orgmode.org/][org-mode]], which also
+allows the exporting to HTML.
+I don't use any additional module (although there exist nice ones) because I
+want the maximum customization, all the generation settings are inside a single
+Emacs Lisp script.
+The website generated is meant to be lightweight and HTML5/CSS3 compliant,
+however it should be perfecly readable also by older browser or even TUI browser
+like [[https://lynx.browser.org/][Lynx]].
+Some additional features, like the dark mode or the dynamically added hyphens,
+may require the use of Javascript or cookies, but they are implemented in a
+unobtrusive way, so the website is viewable even without javascript or cookies.
+
+The design is minimal and completely realized by me, the fonts used
+are [[https://en.wikipedia.org/wiki/Computer_Modern#Latin_Modern][Latin Modern]], [[https://dejavu-fonts.github.io/][Dejavu]] and [[https://github.com/tonsky/FiraCode][Fira code]]. Furthermore, all the resources
+like images, javascripts, stylesheets and fonts are hosted in the this
+space, without using a cdn.
+
+All the sources, both for the posts and the code, are inside the same [[https://github.com/andrea96/blog][Github
+repository]].
+The building, testing and deploying are managed by [[https://nixos.org/nix/][Nix]], locally on my machine
+when I'm writing new posts and automatically by [[https://travis-ci.org/][Travis]] when I push the commit to
+the repository.
+This elegant approach provides solid and replicable builds and a revision
+control system.
+
+Also, all of this is hosted on a [[https://www.nginx.com/][Nginx]] server in my house, on my server running
+[[https://nixos.org/][Nixos]].
+So, since the old hardware and because my provider bandwidth is limited for a
+domestic use I fear there could be slowdowns.
+In case this happens I ask you to be patient and to not abuse my system.
