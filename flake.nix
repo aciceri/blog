@@ -57,7 +57,6 @@
             flake-utils.lib.mkApp { drv = blog.ci.compile; exePath = ""; };
           apps.generator =
             flake-utils.lib.mkApp { drv = blog.generator-with-thirdparty; exePath = "/bin/generator"; };
-
           defaultApp = apps.compile;
           devShell = blog.shell;
         }
