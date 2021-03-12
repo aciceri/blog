@@ -2,22 +2,22 @@
 ** Usage
    
    Build the Nix flake:
-   #begin_src shell
+   #+begin_src shell
    nix build
-   #end_src
+   #+end_src
    
    Execute the Hakyll generator:
-   #begin_src shell
+   #+begin_src shell
    nix run .#/generator
-   #end_src
+   #+end_src
 
    Start the preview server, automatically rebuilding on changes.
-   #begin_src shell
+   #+begin_src shell
    nix run .#/generator -- watch
-   #end_src
+   #+end_src
 
    Build the Nix flake and the website running the generator:
-   #begin_src
+   #+begin_src shell
    nix run .#/compile
-   #end_src
+   #+end_src
    This is what is used in the CI/CD pipeline.
