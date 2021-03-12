@@ -1,6 +1,6 @@
 _cache/
-result/
-result-doc/
+result
+result-doc
 out/
 generator/dist-newstyle
 generator/skeleton
