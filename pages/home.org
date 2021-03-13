@@ -20,7 +20,7 @@ experience you would have viewing this site on your local web server should be
 almost the same.  
 
 
-** Who am I
+** Who I am
    
 I’m a math student who likes programming problems, I think this is a good and
 concise definition compared to what this blog looks like.

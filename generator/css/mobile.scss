@@ -1,6 +1,8 @@
 @media only screen and (max-width: 768px) {
-    #main-wrapper {
-	max-width: calc(100% - 2rem);
+
+    header, main, footer {
+	margin: 0 1rem !important;
+	
     }
 
     div.proof::after {

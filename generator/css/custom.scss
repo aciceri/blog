@@ -3,12 +3,16 @@ $site-width: 768px;
 $themes: (
     light: (
         color-background: #fff,
-        color-text: #000
+        color-text: #333
     ),
     dark: (
         color-background: #000,
-        color-text: #fff
-    )
+        color-text: #ddd
+    ),
+    yellow: (
+	color-background: #ffffe0,
+	color-text: #333
+    )	    
 );
 
 @mixin theme-aware($key, $color) {
@@ -28,24 +32,28 @@ $themes: (
 @import "math.scss";
 @import "youtube.scss";
 
-html, body {
-  height: 100%;
-  font-family: 'Libre Baskerville';
+html {
+    height: 100%;
 }
 
 body {
-  margin: 0;
+    margin: 0;
+    min-height: 100%;
+    min-width: 100%;
+    font-family: 'Libre Baskerville';
 }
 
 #main-wrapper {
-  @include theme-aware('background', 'color-background');
+    
+  @include theme-aware('background-color', 'color-background');
   @include theme-aware('color', 'color-text');
   width: 100%;
+  min-height: 100vh;
 }
 
 header, main, footer {
-    max-width: $site-width;
-    margin: auto;
+  max-width: $site-width;
+  margin: 0 auto;
 }
 
 header {

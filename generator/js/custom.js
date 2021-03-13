@@ -17,6 +17,27 @@ document.addEventListener('DOMContentLoaded', (event) => {
 })
 
 function manageDarkMode() {
+    let styles = ['theme-light', 'theme-dark', 'theme-yellow'];
+    let switcher = document.getElementById('theme-switcher');
+    let body = document.body;
+    let active;
+    if ((active = window.localStorage.getItem('active-theme')) === null)
+	active = 0; //default theme
+    
+    function update() {
+	for (let styleName of styles)
+	    body.classList.remove(styleName);
+	body.classList.add(styles[active]);
+	switcher.innerText = styles[(active + styles.length + 1) % styles.length];
+    }
+
+    update();
+    
+    switcher.onclick = function () {
+        active = (active + 1) % styles.length;
+	window.localStorage.setItem('active-theme', active);
+        update();
+    }
 }
 
 function manageLightBox() {

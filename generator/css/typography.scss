@@ -13,7 +13,7 @@ p {
 }
 
 a, a:visited {
-    color: black;
+    @include theme-aware('color', 'color-text');
     text-decoration-line: underline;
     text-decoration-style: dotted;
 }
