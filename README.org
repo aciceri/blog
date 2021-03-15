@@ -1,4 +1,7 @@
 * My blog
+My blog is reachable at [[blog.aciceri.dev]], the contents are
+automatically generated from this sources at every tagged commit.
+
 ** Usage
    
    Build the Nix flake:
