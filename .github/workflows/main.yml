@@ -38,11 +38,11 @@ jobs:
     #  if: success()
     #  run: curl --silent --user ${{ secrets.ipfs_user }}:${{ secrets.ipfs_password }} -X POST https://api.ipfs.ccr.ydns.eu/api/v0/pin/add\?arg\=${{ steps.ipfs.outputs.hash }}\&key\=blog
     - name: Update DNS with new IPFS hash
-        env:
-          CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
-          RECORD_DOMAIN: 'aciceri.dev'
-          RECORD_NAME: '_dnslink.blog'
-          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
-        uses: textileio/cloudflare-update-dnslink@0fe7b7a1ffc865db3a4da9773f0f987447ad5848
-        with:
-          cid: ${{ steps.ipfs.outputs.hash }} 
+      env:
+        CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
+        RECORD_DOMAIN: 'aciceri.dev'
+        RECORD_NAME: '_dnslink.blog'
+        CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+      uses: textileio/cloudflare-update-dnslink@0fe7b7a1ffc865db3a4da9773f0f987447ad5848
+      with:
+        cid: ${{ steps.ipfs.outputs.hash }} 
