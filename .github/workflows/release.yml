@@ -30,7 +30,7 @@ jobs:
     - uses: actions/checkout@v1
     
     - name: Install Nix
-    
+      if: success()
       uses: cachix/install-nix-action@v12
       with:
         install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20201221_9fab14a/install
@@ -38,16 +38,19 @@ jobs:
           experimental-features = nix-command flakes
           
     - uses: cachix/cachix-action@v8
+      if: success()
       name: Cachix
       with:
         name: aciceri-blog
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
         
     - name: Push Flakes inputs on Cachix
+      if: success()
       run: nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)' | cachix push aciceri-blog
       
     - name: Build
-      run: nix run ./#compile
+      if: success()
+      run: nix run .#compile
       
     - name: Push on Pinata
       id: ipfs
@@ -64,6 +67,7 @@ jobs:
     #  run: curl --silent --user ${{ secrets.ipfs_user }}:${{ secrets.ipfs_password }} -X POST https://api.ipfs.ccr.ydns.eu/api/v0/pin/add\?arg\=${{ steps.ipfs.outputs.hash }}\&key\=blog
     
     - name: Update DNS with new IPFS hash
+      if: success()
       env:
         CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
         RECORD_DOMAIN: 'aciceri.dev'
@@ -74,6 +78,7 @@ jobs:
         cid: ${{ steps.ipfs.outputs.hash }}
         
     - name: Convert CIDv0 to CIDv1
+      if: success()
       id: convert_cidv0
       uses: uniswap/convert-cidv0-cidv1@v1.0.0
       with:
@@ -88,12 +93,13 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
-    - name: Create a Release
-      uses: elgohr/Github-Release-Action@master
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: success()
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        args: |
+        body: |
           IPFS hash of the deployment:
           - CIDv0: `${{ steps.upload.outputs.hash }}`
           - CIDv1: `${{ steps.convert_cidv0.outputs.cidv1 }}`
