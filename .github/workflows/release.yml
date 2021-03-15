@@ -79,14 +79,14 @@ jobs:
       with:
         cidv0: ${{ steps.ipfs.outputs.hash }}
         
-    - name: Deploy
+    - name: Deploy on Github Pages
       if: success()
       uses: crazy-max/ghaction-github-pages@v2
       with:
         target_branch: gh-pages
         build_dir: out/
       env:
-        GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Create GitHub Release
       id: create_release
