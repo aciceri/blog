@@ -24,6 +24,7 @@ jobs:
           release_branches: 'release'
 
   build_and_release:
+    name: Build and release
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
