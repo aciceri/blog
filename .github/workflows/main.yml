@@ -2,8 +2,8 @@ name: "Build Site and Deploy"
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - '*'
 
 jobs:
   build-and-deploy:
