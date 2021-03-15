@@ -1,6 +1,7 @@
 * My blog
-My blog is reachable at [[blog.aciceri.dev]], the contents are
-automatically generated from this sources at every tagged commit.
+  
+My blog is reachable at [[https://blog.aciceri.dev][blog.aciceri.dev]], the contents are
+automatically generated from the [[https://github.com/aciceri/test/tree/release][release branch]].
 
 ** Usage
    
