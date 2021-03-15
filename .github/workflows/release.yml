@@ -6,8 +6,8 @@ on:
       - 'release'
 
 jobs:
-  build_and_release:
-    name: Build and release
+  build_and_deploy:
+    name: Build and deploy
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -60,13 +60,6 @@ jobs:
       with:
         cid: ${{ steps.ipfs.outputs.hash }}
         
-    - name: Convert CIDv0 to CIDv1
-      if: success()
-      id: convert_cidv0
-      uses: uniswap/convert-cidv0-cidv1@v1.0.0
-      with:
-        cidv0: ${{ steps.ipfs.outputs.hash }}
-        
     - name: Deploy on Github Pages
       if: success()
       uses: crazy-max/ghaction-github-pages@v2
@@ -76,24 +69,3 @@ jobs:
         fqdn: blog.aciceri.dev
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  
-    - name: Release
-      uses: softprops/action-gh-release@v1
-      if: success()
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        body: |
-          IPFS hash of the deployment:
-          - CIDv0: `${{ steps.upload.outputs.hash }}`
-          - CIDv1: `${{ steps.convert_cidv0.outputs.cidv1 }}`
-          The latest release is always accessible to the Cloudflare IPFS gateway at [blog.aciceri.dev](https://blog.aciceri.dev).
-          You can also access it directly from an IPFS gateway.
-          Alternative URLs:
-          - https://${{ steps.convert_cidv0.outputs.cidv1 }}.ipfs.dweb.link/
-          - https://${{ steps.convert_cidv0.outputs.cidv1 }}.ipfs.cf-ipfs.com/
-          - [ipfs://${{ steps.upload.outputs.hash }}/](ipfs://${{ steps.upload.outputs.hash }}/)
-          - https://cloudflare-ipfs.com/ipfs/${{ steps.upload.outputs.hash }}/
-          - https://ipfs.infura.io/ipfs/${{ steps.upload.outputs.hash }}/
-          - https://ipfs.io/ipfs/${{ steps.upload.outputs.hash }}/
-          ${{ needs.bump_version.outputs.changelog }}
