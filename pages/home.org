@@ -14,7 +14,7 @@ than this would be difficult, so let’s move on.
 
 It's also possible to reach this site in the [[https://www.torproject.org/][Tor network]] at this easy to
 remember [[http://ty7du6aabrwttfuh6hgvt4aowvmrqxscdshsrcjc2dzftewjs6qvsxad.onion][onion link]], and in any case a snapshot with all the contents of the
-last commit is always downloadable [[https://blog-backup.tar.gz][here]].
+latest commit is always downloadable [[https://blog-backup.tar.gz][here]].
 Since the website is meant to be self contained as much as possible the
 experience you would have viewing this site on your local web server should be
 almost the same.  
