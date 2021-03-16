@@ -83,7 +83,7 @@ getGitVersion content path = do
         "-1",
         "--format=" ++ (show content),
         "--",
-        "src/"++path] ""
+        path] ""
 
     return $ case status  of
         ExitSuccess -> trim stdout

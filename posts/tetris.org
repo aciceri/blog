@@ -15,7 +15,7 @@ example.
 
 
 #+caption: Xkcd comic n. 224 from [[https://xkcd.com/224/][here]]
-[[file:../../images/xkcd-224.jpg]]
+[[file:/images/xkcd-224.jpg]]
 
 So, I realized the first working version in only one night but then I added a
 lot of features, e.g.
