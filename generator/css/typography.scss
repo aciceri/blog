@@ -2,7 +2,7 @@
 
 // Simple text
 
-p {
+p, li {
     font-size: 1.1rem;
     text-align: justify;
     -ms-hyphens: auto;
@@ -72,6 +72,14 @@ caption.t-bottom {
 
 // Boxes
 
+div.line-block {
+    font-size: 1.1rem;
+}
+
+pre.example {
+    overflow-x: scroll;
+}
+
 .verse, .note, .warning {
     margin: 1rem 0 1rem 1rem;
     padding: 0 1rem;
@@ -90,6 +98,7 @@ caption.t-bottom {
 // Org-mode specifics
 
 span.done, span.todo {
+    font-size: 1.1rem;
     color: white;
     padding: .1em 0.3em;
     border-radius: 3px;
