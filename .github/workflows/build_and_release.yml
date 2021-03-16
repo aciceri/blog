@@ -45,9 +45,10 @@ jobs:
         pinataKey: ${{ secrets.API_KEY }}
         pinataSecret: ${{ secrets.API_SECRET }}
     
-    #- name: Pin on personal IPFS node
-    #  if: success()
-    #  run: curl --silent --user ${{ secrets.ipfs_user }}:${{ secrets.ipfs_password }} -X POST https://api.ipfs.ccr.ydns.eu/api/v0/pin/add\?arg\=${{ steps.ipfs.outputs.hash }}\&key\=blog
+    - name: Pin on personal IPFS node
+      if: success()
+      continue-on-error: true
+      run: curl --silent --user ${{ secrets.ipfs_user }}:${{ secrets.ipfs_password }} -X POST https://api.ipfs.ccr.ydns.eu/api/v0/pin/add\?arg\=${{ steps.ipfs.outputs.hash }}\&key\=blog
     
     - name: Update DNS with new IPFS hash
       if: success()
