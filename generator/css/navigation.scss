@@ -1,0 +1,8 @@
+header nav {
+    max-width: $site-width;
+    margin: 0 auto;
+}
+
+header nav a {
+    @include theme-aware('color', 'color-header');
+}

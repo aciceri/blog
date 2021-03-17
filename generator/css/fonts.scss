@@ -5,7 +5,7 @@
   font-style: normal;
   font-weight: 400;
   //src: url('../baskerville/TypoPRO-LibreBaskerville-Regular.woff') format('woff');
-  src: url('../katex/fonts/KaTeX_Main-Regular.woff') format('woff');
+  src: url('../katex-fonts/fonts/KaTeX_AMS-Regular.woff2') format('woff2');
 }
 
 @font-face {
@@ -13,7 +13,7 @@
   font-style: italic;
   font-weight: 400;
   //src: url('../baskerville/TypoPRO-LibreBaskerville-Italic.woff') format('woff');
-  src: url('../katex/fonts/KaTeX_Main-Italic.woff') format('woff');
+  src: url('../katex-fonts/fonts/KaTeX_Main-Italic.woff') format('woff');
 }
 
 @font-face {
@@ -21,7 +21,7 @@
   font-style: normal;
   font-weight: 700;
   //src: url('../baskerville/TypoPRO-LibreBaskerville-Bold.woff') format('woff');
-  src: url('../katex/fonts/KaTeX_Main-Bold.woff') format('woff');
+  src: url('../katex-fonts/fonts/KaTeX_Main-Bold.woff') format('woff');
 }
 
 

@@ -43,6 +43,23 @@
         "url": "https://github.com/mnater/Hyphenopoly/archive/v4.10.0.tar.gz"
       }
     },
+    "katex-fonts-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1575673007,
+        "narHash": "sha256-+CIhdedtP7YXX0FbLdcWG1xse49fhpVA2jUm+F3JgGU=",
+        "owner": "KaTeX",
+        "repo": "katex-fonts",
+        "rev": "7deb3fd307e04b36002dd75833585e040abcb1ac",
+        "type": "github"
+      },
+      "original": {
+        "owner": "KaTeX",
+        "repo": "katex-fonts",
+        "rev": "7deb3fd307e04b36002dd75833585e040abcb1ac",
+        "type": "github"
+      }
+    },
     "katex-src": {
       "flake": false,
       "locked": {
@@ -90,22 +107,10 @@
         "firacode-src": "firacode-src",
         "flake-utils": "flake-utils",
         "hyphenopoly-src": "hyphenopoly-src",
+        "katex-fonts-src": "katex-fonts-src",
         "katex-src": "katex-src",
         "nixpkgs": "nixpkgs",
-        "nur": "nur",
-        "typoproweb-src": "typoproweb-src"
-      }
-    },
-    "typoproweb-src": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-HejfC/1Bqov9QhOE661oc+pTuwPaFzTN/LhQ5BOOZhE=",
-        "type": "tarball",
-        "url": "https://github.com/rse/typopro-web/archive/4.2.5.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://github.com/rse/typopro-web/archive/4.2.5.tar.gz"
+        "nur": "nur"
       }
     }
   },

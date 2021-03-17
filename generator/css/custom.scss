@@ -47,9 +47,7 @@ body {
 }
 
 #main-wrapper {
-    
   @include theme-aware('background-color', 'color-background');
-  @include theme-aware('color', 'color-text');
   width: 100%;
   min-height: 100vh;
 }
@@ -57,17 +55,12 @@ body {
 main {
   max-width: $site-width;
   margin: 0 auto;
+  @include theme-aware('color', 'color-text');
 }
 
 header {
     @include theme-aware('border-color', 'color-text');
     @include theme-aware('background-color', 'color-header');
-}
-
-header nav {
-    max-width: $site-width;
-    margin: 0 auto;
-    color: #fff !important;
 }
 
 main {

@@ -9,8 +9,8 @@
       url = "https://github.com/KaTeX/KaTeX/releases/download/v0.12.0/katex.tar.gz";
       flake = false;
     };
-    typoproweb-src = {
-      url = "https://github.com/rse/typopro-web/archive/4.2.5.tar.gz";
+    katex-fonts-src = {
+      url = github:KaTeX/katex-fonts/7deb3fd307e04b36002dd75833585e040abcb1ac;
       flake = false;
     };
     firacode-src = {
@@ -23,7 +23,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, nur, katex-src, typoproweb-src, firacode-src, hyphenopoly-src }:
+  outputs = { self, nixpkgs, flake-utils, nur, katex-src, firacode-src, hyphenopoly-src, katex-fonts-src }:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
@@ -36,8 +36,8 @@
               path = "${katex-src}";
             }
             {
-              name = "baskerville";
-              path = "${typoproweb-src}/web/TypoPRO-LibreBaskerville";
+              name = "katex-fonts";
+              path = "${katex-fonts-src}";
             }
             {
               name = "firacode";
