@@ -9,8 +9,8 @@
       url = "https://github.com/KaTeX/KaTeX/releases/download/v0.12.0/katex.tar.gz";
       flake = false;
     };
-    katex-fonts-src = {
-      url = github:KaTeX/katex-fonts/7deb3fd307e04b36002dd75833585e040abcb1ac;
+    latin-modern-src = {
+      url = github:aaaakshat/cm-web-fonts;
       flake = false;
     };
     firacode-src = {
@@ -23,7 +23,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, nur, katex-src, firacode-src, hyphenopoly-src, katex-fonts-src }:
+  outputs = { self, nixpkgs, flake-utils, nur, katex-src, firacode-src, hyphenopoly-src, latin-modern-src }:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
@@ -36,8 +36,8 @@
               path = "${katex-src}";
             }
             {
-              name = "katex-fonts";
-              path = "${katex-fonts-src}";
+              name = "latin-modern";
+              path = "${latin-modern-src}/font";
             }
             {
               name = "firacode";

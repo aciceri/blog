@@ -28,7 +28,7 @@ function manageDarkMode() {
 	for (let styleName of styles)
 	    body.classList.remove(styleName);
 	body.classList.add(styles[active]);
-	switcher.innerText = styles[(active + styles.length + 1) % styles.length];
+	//switcher.innerText = styles[(active + styles.length + 1) % styles.length];
     }
 
     update();

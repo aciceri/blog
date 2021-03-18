@@ -1,5 +1,4 @@
 [[https://builtwithnix.org/badge.svg]]
-[[https://www.haskell.org/img/haskell-logo.svg]]
 
 * My blog
   

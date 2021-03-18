@@ -3,8 +3,7 @@ result
 result-doc
 out/
 generator/dist-newstyle
-generator/skeleton
+generator/latin-modern
 generator/katex
-generator/baskerville
 generator/firacode
-generator/katex-fonts
+generator/hyphenopoly

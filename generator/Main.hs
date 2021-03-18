@@ -100,6 +100,7 @@ main = do
             let ctx = postContext tags
             let archiveCtx = listField "posts" ctx (return posts)
                         <> publishedGroupField "years" posts ctx
+                        <> constField "archive" "true"
                         <> constField "language" "en"
                         <> constField "title" "Archive"
                         <> baseContext
@@ -117,6 +118,7 @@ main = do
                 let ctx = postContext tags
                 let indexCtx =
                         listField "posts" ctx (return $ take 2 posts)
+                            <> constField "home" "true"
                             <> constField "title" "Home"
                             <> constField "language" "en"
                             <> baseContext
@@ -132,6 +134,7 @@ main = do
             route $ constRoute "contacts/index.html"
             compile $ do
               let ctx = constField "title" "Contacts"
+                        <> constField "contacts" "true"
                         <> constField "language" "en"
                         <> baseContext
               customCompiler
@@ -144,7 +147,7 @@ main = do
       route $ stripRoute "generator/"
       compile $ copyFileCompiler
 
-    match "generator/katex/**" $ do
+    match ("generator/katex/**" .&&. complement "**.md") $ do
       route $ stripRoute "generator/"
       compile $ copyFileCompiler
 
@@ -156,7 +159,7 @@ main = do
       route $ stripRoute "generator/"
       compile $ copyFileCompiler
 
-    match "generator/baskerville/**.woff" $ do
+    match "generator/mathjax-fonts/**.woff" $ do
       route $ stripRoute "generator/"
       compile $ copyFileCompiler
 

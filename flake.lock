@@ -43,23 +43,6 @@
         "url": "https://github.com/mnater/Hyphenopoly/archive/v4.10.0.tar.gz"
       }
     },
-    "katex-fonts-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1575673007,
-        "narHash": "sha256-+CIhdedtP7YXX0FbLdcWG1xse49fhpVA2jUm+F3JgGU=",
-        "owner": "KaTeX",
-        "repo": "katex-fonts",
-        "rev": "7deb3fd307e04b36002dd75833585e040abcb1ac",
-        "type": "github"
-      },
-      "original": {
-        "owner": "KaTeX",
-        "repo": "katex-fonts",
-        "rev": "7deb3fd307e04b36002dd75833585e040abcb1ac",
-        "type": "github"
-      }
-    },
     "katex-src": {
       "flake": false,
       "locked": {
@@ -70,6 +53,22 @@
       "original": {
         "type": "tarball",
         "url": "https://github.com/KaTeX/KaTeX/releases/download/v0.12.0/katex.tar.gz"
+      }
+    },
+    "latin-modern-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1602934487,
+        "narHash": "sha256-gSScWVOVEpXgfNqhS3WhbvkaaYpyfnB7cQqq3ZmTU+c=",
+        "owner": "aaaakshat",
+        "repo": "cm-web-fonts",
+        "rev": "fa103f6a8b06101de5819cf5274d18a65e9a947e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aaaakshat",
+        "repo": "cm-web-fonts",
+        "type": "github"
       }
     },
     "nixpkgs": {
@@ -107,8 +106,8 @@
         "firacode-src": "firacode-src",
         "flake-utils": "flake-utils",
         "hyphenopoly-src": "hyphenopoly-src",
-        "katex-fonts-src": "katex-fonts-src",
         "katex-src": "katex-src",
+        "latin-modern-src": "latin-modern-src",
         "nixpkgs": "nixpkgs",
         "nur": "nur"
       }

@@ -4,24 +4,23 @@
   font-family: 'Libre Baskerville';
   font-style: normal;
   font-weight: 400;
-  //src: url('../baskerville/TypoPRO-LibreBaskerville-Regular.woff') format('woff');
-  src: url('../katex-fonts/fonts/KaTeX_AMS-Regular.woff2') format('woff2');
+ // src: url('../baskerville/TypoPRO-LibreBaskerville-Regular.woff') format('woff');
+  src: url('../latin-modern/Serif/cmunrm.woff') format('woff');
+  
 }
 
 @font-face {
   font-family: 'Libre Baskerville';
   font-style: italic;
   font-weight: 400;
-  //src: url('../baskerville/TypoPRO-LibreBaskerville-Italic.woff') format('woff');
-  src: url('../katex-fonts/fonts/KaTeX_Main-Italic.woff') format('woff');
+  src: url('../latin-modern/Serif/cmunti.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Libre Baskerville';
   font-style: normal;
   font-weight: 700;
-  //src: url('../baskerville/TypoPRO-LibreBaskerville-Bold.woff') format('woff');
-  src: url('../katex-fonts/fonts/KaTeX_Main-Bold.woff') format('woff');
+  src: url('../latin-modern/Serif/cmunbx.woff') format('woff');
 }
 
 

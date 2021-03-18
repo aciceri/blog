@@ -3,18 +3,21 @@ $site-width: 768px;
 $themes: (
     light: (
         color-background: #fff,
-        color-text: #333,
-	color-header: #333
+        color-text: #000,
+	color-header: #333,
+	color-header-text: #fff
     ),
     dark: (
         color-background: #000,
-        color-text: #ddd,
-	color-header: #333
+        color-text: #fff,
+	color-header: #333,
+	color-header-text: #fff
     ),
     yellow: (
 	color-background: #ffffe0,
-	color-text: #333,
-	color-header: #333
+	color-text: #000,
+	color-header: #ffe0e0,
+	color-header-text: #000
     )	    
 );
 
@@ -59,7 +62,7 @@ main {
 }
 
 header {
-    @include theme-aware('border-color', 'color-text');
+    @include theme-aware('color', 'color-header-text');
     @include theme-aware('background-color', 'color-header');
 }
 
@@ -68,8 +71,8 @@ main {
 }
 
 footer {
-    @include theme-aware('border-color', 'color-text');
-    background-color: blue;
+    @include theme-aware('color', 'color-header-text');
+    @include theme-aware('background-color', 'color-header');
 }
 
 ::selection {

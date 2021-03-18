@@ -10,6 +10,7 @@ p, li {
     -webkit-hyphens: auto;
 
     @include theme-aware('color', 'color-text');
+    line-height: 1.5rem;
 }
 
 a, a:visited {
@@ -77,7 +78,7 @@ div.line-block {
     font-size: 1.1rem;
 }
 
-pre.example {
+pre {
     overflow-x: scroll;
 }
 
