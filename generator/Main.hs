@@ -159,7 +159,7 @@ main = do
       route $ stripRoute "generator/"
       compile $ copyFileCompiler
 
-    match "generator/mathjax-fonts/**.woff" $ do
+    match "generator/latin-modern/**.woff" $ do
       route $ stripRoute "generator/"
       compile $ copyFileCompiler
 

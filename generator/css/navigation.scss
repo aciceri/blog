@@ -9,6 +9,7 @@ header nav a {
     margin: 0.4rem 1rem 0.4rem 0;
     text-decoration: none;
     font-weight: bold;
+    @include theme-aware('color', 'color-header-text');
 }
 
 header nav a:hover {
