@@ -1,3 +1,6 @@
+[[https://builtwithnix.org/badge.svg]]
+[[https://www.haskell.org/img/haskell-logo.svg]]
+
 * My blog
   
 My blog is reachable at [[https://blog.aciceri.dev][blog.aciceri.dev]], the contents are
@@ -25,6 +28,3 @@ automatically generated from the [[https://github.com/aciceri/test/tree/release]
    nix run .#compile
    #+end_src
    This is what is used in the CI/CD pipeline.
-
-
-[[https://builtwithnix.org/badge.svg]]
