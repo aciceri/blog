@@ -1,6 +1,6 @@
 @media only screen and (max-width: 768px) {
 
-    header, main, footer {
+    header, main {
 	padding: 0 1rem;
     }
 
@@ -9,6 +9,21 @@
 	margin-right: 0.5rem;
     }
 
+    footer {
+	display: block;
+	
+	.left {
+	    float: none;
+	    margin-left: 0;
+	    padding: 0 1rem;
+	}
+	.right {
+	    margin-right: 0;
+	    float: none;
+	    padding: 0 1rem;
+	}
+    }
+    
     div.proof::after {
 	right: 1rem;
 	display: none;

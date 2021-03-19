@@ -66,10 +66,6 @@ header {
     @include theme-aware('background-color', 'color-header');
 }
 
-main {
-    text-align: justify;
-}
-
 footer {
     @include theme-aware('color', 'color-header-text');
     @include theme-aware('background-color', 'color-header');

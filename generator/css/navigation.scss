@@ -22,16 +22,26 @@ header nav a.current {
 
 footer {
     font-size: 1.3rem;
-}
-
-footer div {
-    max-width: $site-width;
-    margin: 3rem auto 0;
+    display: inline-block;
+    width: 100%;
+    margin: 3rem 0 -6px; //why are these 6 pixels necessary?
     padding: 1rem 0;
+
+    .left {
+	float:left;
+	margin-left: calc((100% - #{$site-width}) / 2);
+    }
+
+    .right {
+	float: right;
+	margin-right: calc((100% - #{$site-width}) / 2);
+    }
 }
 
 footer a {
     @include theme-aware('color', 'color-header-text');
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
 }
 
 #theme-switcher {
