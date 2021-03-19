@@ -3,118 +3,119 @@
 // Simple text
 
 main {
-p, li {
-    font-size: 1.3rem;
-    text-align: justify;
-    -ms-hyphens: auto;
-    -moz-hyphens: auto;
-    -webkit-hyphens: auto;
+    p, li {
+	font-size: 1.3rem;
+	text-align: justify;
+	-ms-hyphens: auto;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
 
-    @include theme-aware('color', 'color-text');
-    line-height: 1.5rem;
-}
+	@include theme-aware('color', 'color-text');
+	line-height: 1.5rem;
+    }
 
-a, a:visited {
-    @include theme-aware('color', 'color-text');
-    text-decoration-line: underline;
-    text-decoration-style: dotted;
-}
+    a, a:visited {
+	@include theme-aware('color', 'color-text');
+	text-decoration-line: underline;
+	text-decoration-style: dotted;
+    }
 
-a:hover, a:focus {
-}
+    a:hover, a:focus {
+    }
 
-code {
-    font-family: "Fira Code";
-    font-size: 1.1rem;
-}
+    code {
+	font-family: "Fira Code";
+	font-size: 1.1rem;
+	overflow-x: auto;
+    }
 
-//Images
+    //Images
 
-figure > img {
-    display: block !important;
-    margin: 1rem auto;
-    max-width: 100%;
-    cursor: pointer;
-}
+    figure > img {
+	display: block !important;
+	margin: 1rem auto;
+	max-width: 100%;
+	cursor: pointer;
+    }
 
-figure > figcaption {
-    text-align: center;
-}
-
-
-//Tables
-
-table {
-    margin: 1em auto;
-    border-top: 2px solid;
-    border-bottom: 2px solid;
-    border-collapse: collapse;
-}
-
-thead {
-    border-bottom: 2px solid;
-}
-
-table td + td, table th + th {
-    border-left: 1px solid var(--color-dark-onyx);
-}
-
-table tr {
-    border-top: 1px solid var(--color-onyx);
-}
-
-td,th {
-    padding: 0.3em 0.6em;
-    vertical-align: middle;
-}
-
-caption.t-bottom {
-    margin-top: 1rem;
-}
+    figure > figcaption {
+	text-align: center;
+    }
 
 
-// Boxes
+    //Tables
 
-div.line-block {
-    font-size: 1.1rem;
-}
+    table {
+	margin: 1em auto;
+	border-top: 2px solid;
+	border-bottom: 2px solid;
+	border-collapse: collapse;
+    }
 
-pre {
-    overflow-x: scroll;
-}
+    thead {
+	border-bottom: 2px solid;
+    }
 
-.verse, .note, .warning {
-    margin: 1rem 0 1rem 1rem;
-    padding: 0 1rem;
-    color: inherit;
-}
+    table td + td, table th + th {
+	border-left: 1px solid var(--color-dark-onyx);
+    }
 
-.note {
-    border-left: 0.2rem solid grey;
-}
+    table tr {
+	border-top: 1px solid var(--color-onyx);
+    }
 
-.warning {
-    border-left: 0.2rem solid red;
-}
+    td,th {
+	padding: 0.3em 0.6em;
+	vertical-align: middle;
+    }
+
+    caption.t-bottom {
+	margin-top: 1rem;
+    }
 
 
-// Org-mode specifics
+    // Boxes
 
-span.done, span.todo {
-    font-size: 1.1rem;
-    color: white;
-    padding: .1em 0.3em;
-    border-radius: 3px;
-    background-clip: padding-box;
-    line-height: 1;
-}
+    div.line-block {
+	font-size: 1.1rem;
+    }
 
-span.done {
-    background-color: green;
-}
+    div.sourceCode, pre {
+	overflow-x: auto;
+    }
 
-span.todo {
-    background-color: red;
-}
+    .verse, .note, .warning {
+	margin: 1rem 0 1rem 1rem;
+	padding: 0 1rem;
+	color: inherit;
+    }
+
+    .note {
+	border-left: 0.2rem solid grey;
+    }
+
+    .warning {
+	border-left: 0.2rem solid red;
+    }
+
+
+    // Org-mode specifics
+
+    span.done, span.todo {
+	font-size: 1.1rem;
+	color: white;
+	padding: .1em 0.3em;
+	border-radius: 3px;
+	background-clip: padding-box;
+	line-height: 1;
+    }
+
+    span.done {
+	background-color: green;
+    }
+
+    span.todo {
+	background-color: red;
+    }
 
 }
