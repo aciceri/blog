@@ -13,11 +13,10 @@ header {
 	    @include theme-aware('color', 'color-header-text');
 	}
     
-	nav a:hover {
+	a:hover {
 	    text-decoration: underline dotted;
 	}
-
-	nav a.current {
+	a.current {
 	    text-decoration: underline dotted;
 	}
     }
@@ -28,7 +27,7 @@ footer {
     display: inline-block;
     width: 100%;
     padding: 1rem 0;
-    margin-top: auto;
+    margin-top: 2rem;
     
     .left {
 	float:left;

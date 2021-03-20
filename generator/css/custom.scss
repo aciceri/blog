@@ -52,8 +52,6 @@ body {
 #main-wrapper {
   @include theme-aware('background-color', 'color-background');
   width: 100%;
-  min-height: 100%;
-  height: 100vh;
   display: flex;
   flex-direction:column; 
 }

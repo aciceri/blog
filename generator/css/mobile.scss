@@ -1,16 +1,24 @@
 @media only screen and (max-width: 768px) {
 
     header, main {
-	padding: 0 1rem;
+	padding: 0 1.1rem;
     }
 
     header nav a{
-	font-size: 1rem;
+	font-size: 1.1rem;
 	margin-right: 0.5rem;
+    }
+
+    main {
+	p, pre, li, figcaption {
+	    font-size: 1.1rem !important;
+	}
+	
     }
 
     footer {
 	display: block;
+	font-size: 1rem;
 	
 	.left {
 	    float: none;

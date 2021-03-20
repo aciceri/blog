@@ -14,6 +14,14 @@ main {
 	line-height: 1.5rem;
     }
 
+    h1 {
+	margin-bottom: 0.4rem;
+    }
+    
+    section.header {
+	margin-bottom: 3rem;
+    }
+    
     a, a:visited {
 	@include theme-aware('color', 'color-text');
 	text-decoration-line: underline;
@@ -40,6 +48,7 @@ main {
 
     figure > figcaption {
 	text-align: center;
+	font-size: 1.3rem;
     }
 
 
@@ -50,6 +59,7 @@ main {
 	border-top: 2px solid;
 	border-bottom: 2px solid;
 	border-collapse: collapse;
+	font-size: 1.3rem;
     }
 
     thead {
@@ -77,10 +87,10 @@ main {
     // Boxes
 
     div.line-block {
-	font-size: 1.1rem;
+	font-size: 1.3rem;
     }
 
-    div.sourceCode, pre {
+    div.sourceCode {
 	overflow-x: auto;
     }
 
