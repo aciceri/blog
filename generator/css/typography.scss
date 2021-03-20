@@ -90,8 +90,11 @@ main {
 	font-size: 1.3rem;
     }
 
-    div.sourceCode {
+    div.sourceCode, pre.example, pre {
 	overflow-x: auto;
+    }
+    pre.sourceCode {
+	overflow: visible;
     }
 
     .verse, .note, .warning {

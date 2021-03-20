@@ -10,8 +10,23 @@
     }
 
     main {
+	width: calc(100% - 2.2rem) !important;
+	p {
+	    line-height: 1.3rem !important;
+	}
 	p, pre, li, figcaption {
 	    font-size: 1.1rem !important;
+	}
+	code {
+	    font-size: 1rem !important;
+	}
+	span.math {
+	    font-size: 1rem;
+	}
+	table {
+	display: block;
+    overflow-x: auto;
+    white-space: nowrap;
 	}
 	
     }

@@ -54,12 +54,15 @@ body {
   width: 100%;
   display: flex;
   flex-direction:column; 
+  position: absolute;
+  min-height: 100%;
 }
 
 main {
-  max-width: $site-width;
+    width: $site-width;
   margin: 0 auto;
   @include theme-aware('color', 'color-text');
+  flex-grow: 1;
 }
 
 header {
