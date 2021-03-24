@@ -1,26 +1,26 @@
 // Baskerville
 
 @font-face {
-  font-family: 'Libre Baskerville';
+  font-family: 'Latin Modern';
   font-style: normal;
   font-weight: 400;
  // src: url('../baskerville/TypoPRO-LibreBaskerville-Regular.woff') format('woff');
-  src: url('../latin-modern/Serif/cmunrm.woff') format('woff');
+  src: url('../thirdparty/latin-modern/Serif/cmunrm.woff') format('woff');
   
 }
 
 @font-face {
-  font-family: 'Libre Baskerville';
+  font-family: 'Latin Modern';
   font-style: italic;
   font-weight: 400;
-  src: url('../latin-modern/Serif/cmunti.woff') format('woff');
+  src: url('../thirdparty/latin-modern/Serif/cmunti.woff') format('woff');
 }
 
 @font-face {
-  font-family: 'Libre Baskerville';
+  font-family: 'Latin Modern';
   font-style: normal;
   font-weight: 700;
-  src: url('../latin-modern/Serif/cmunbx.woff') format('woff');
+  src: url('../thirdparty/latin-modern/Serif/cmunbx.woff') format('woff');
 }
 
 
@@ -30,5 +30,5 @@
   font-family: 'Fira Code';
   font-style: normal;
   font-weight: 400;
-  src: url(../firacode/FiraCode-Regular.woff2) format('woff2');
+  src: url(../thirdparty/firacode/FiraCode-Regular.woff2) format('woff2');
 }

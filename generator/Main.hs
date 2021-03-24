@@ -117,7 +117,7 @@ main = do
                 posts <- recentFirst =<< loadAll "posts/**.org"
                 let ctx = postContext tags
                 let indexCtx =
-                        listField "posts" ctx (return $ take 2 posts)
+                        listField "posts" ctx (return $ take 5 posts)
                             <> constField "home" "true"
                             <> constField "title" "Home"
                             <> constField "language" "en"
@@ -147,19 +147,19 @@ main = do
       route $ stripRoute "generator/"
       compile $ copyFileCompiler
 
-    match ("generator/katex/**" .&&. complement "**.md") $ do
+    match ("generator/thirdparty/katex/**" .&&. complement "**.md") $ do
       route $ stripRoute "generator/"
       compile $ copyFileCompiler
 
-    match "generator/hyphenopoly/**" $ do
+    match "generator/thirdparty/hyphenopoly/**" $ do
       route $ stripRoute "generator/"
       compile $ copyFileCompiler
 
-    match "generator/firacode/**.woff2" $ do
+    match "generator/thirdparty/firacode/**.woff2" $ do
       route $ stripRoute "generator/"
       compile $ copyFileCompiler
 
-    match "generator/latin-modern/**.woff" $ do
+    match "generator/thirdparty/latin-modern/**.woff" $ do
       route $ stripRoute "generator/"
       compile $ copyFileCompiler
 
@@ -168,7 +168,7 @@ main = do
       compile $ copyFileCompiler
 
     match "assets/images/**.jpg" $ version "large" $ do
-      route $ suffixRoute "original" `composeRoutes` stripRoute "assets/"
+      route $ prefixRoute "original" `composeRoutes` stripRoute "assets/"
       compile $ copyFileCompiler
   
     match "assets/images/**.jpg" $ version "small" $ do
@@ -216,15 +216,15 @@ baseContext = headVersionField "git-head-commit" Commit
                  <> constField "root" root
                  <> defaultContext
 
-suffixRoute :: String -> Routes
-suffixRoute suffix = customRoute makeSuffixRoute
+prefixRoute :: String -> Routes
+prefixRoute prefix = customRoute makePrefixRoute
   where
-    makeSuffixRoute ident = parentDir </> suffixed  where
+    makePrefixRoute ident = parentDir </> prefixed  where
         p = toFilePath ident
         parentDir = takeDirectory p
         baseName = takeBaseName p
         ext = takeExtension p
-        suffixed = baseName ++ "~" ++ suffix ++ ext
+        prefixed = prefix ++ "-" ++ baseName ++ ext
 
 stripRoute :: String -> Routes
 stripRoute txt = gsubRoute txt (const "")

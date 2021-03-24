@@ -3,7 +3,4 @@ result
 result-doc
 out/
 generator/dist-newstyle
-generator/latin-modern
-generator/katex
-generator/firacode
-generator/hyphenopoly
+generator/thirdparty

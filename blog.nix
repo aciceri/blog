@@ -36,7 +36,8 @@
       paths = [ generator-with-thirdparty git ];
 
       script = ''
-        ln -sfn ${thirdpartyFarm}/* generator/
+        mkdir -p generator/thirdparty/
+        ln -sfn ${thirdpartyFarm}/* generator/thirdparty/
         generator rebuild
       '';
     };
@@ -61,7 +62,8 @@
         export NIX_GHC_DOCDIR="${haskell-env}/share/doc/ghc/html"
         export NIX_GHC_LIBDIR=$( $NIX_GHC --print-libdir )
 
-        ln -sfn ${thirdpartyFarm}/* generator/
+        mkdir -p generator/thirdparty/
+        ln -sfn ${thirdpartyFarm}/* generator/thirdparty/
       '';
 
     };

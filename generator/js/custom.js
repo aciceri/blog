@@ -54,7 +54,7 @@ function manageLightBox() {
 	img.setAttribute('data-original', 'false');
 	img.onclick = function () {
 	    if (img.getAttribute('data-original') == 'false') { 
-		img.src = img.src.split('.')[0] + '~original.jpg';
+		img.src = '/images/original-' + img.src.split('/').slice(-1)[0]
 		img.setAttribute('data-original', 'true');
 	    }
 	    modal.style.display = 'block';
