@@ -166,7 +166,7 @@ narrow to contain.
 Nonostante preferirei evitare di appoggiarmi troppo a servizi esterni di cui non approvo le
 politiche ho predisposto una macro per includere video a [[https://youtube.com][Youtube]].
 
-{yt:7yh9i0PAjck}
+{youtube:7yh9i0PAjck}
 
 * Aciinema
 
@@ -175,7 +175,7 @@ raggiungere scopi analoghi. Mi piace meno l'idea di dovermi affidare anche a lor
 miei cast, pertanto ho presisposto una macro per includere i cast hostandoli direttamente in questo
 spazio.
 
-{{{asciinema(demo)}}}
+{asciinema:neofetch}
 
 * Proviamo Fira Code
 

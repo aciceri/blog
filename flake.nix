@@ -21,9 +21,13 @@
       url = "https://github.com/mnater/Hyphenopoly/archive/v4.10.0.tar.gz";
       flake = false;
     };
+    asciinema-src = {
+      url = "github:aciceri/asciinema-player";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, nur, katex-src, firacode-src, hyphenopoly-src, latin-modern-src }:
+  outputs = { self, nixpkgs, flake-utils, nur, katex-src, firacode-src, hyphenopoly-src, latin-modern-src, asciinema-src }:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
@@ -46,6 +50,10 @@
             {
               name = "hyphenopoly";
               path = "${hyphenopoly-src}";
+            }
+            {
+              name = "asciinema";
+              path = "${asciinema-src}/dist";
             }
           ];
         };

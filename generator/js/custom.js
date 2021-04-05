@@ -13,7 +13,7 @@ var Hyphenopoly = {
 document.addEventListener('DOMContentLoaded', (event) => {
     manageDarkMode();
     manageLightBox();
-    manageHyphenopoly();
+    manageKatex();
 })
 
 function manageDarkMode() {
@@ -64,5 +64,14 @@ function manageLightBox() {
     }
 }
 
-function manageHyphenopoly() {
+function manageKatex() {
+    renderMathInElement(document.body, {
+	macros: {
+	    "\\R": "\\mathbb{R}",
+	    "\\N": "\\mathbb{N}",
+	    "\\epsilon": "\\varepsilon",
+	    "\\ceil": "\\lceil #1 \\rceil",
+	    "\\floor": "\\lfloor #1 \\rfloor"
+	}
+    });
 }

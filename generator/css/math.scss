@@ -3,7 +3,7 @@ footref::after {
     content: "]";
 }
 
-.footref::before {
+.footref:first-child::before {
     content: "[";
 }
 
@@ -11,29 +11,46 @@ span.math {
     font-size: 1.1rem;
 }
 
-div.theorem > p::before {
-    content: "Theorem: ";
+div.theorem {
+    p:first-child::before {
+    content: "Theorem ";
     font-weight: bold;
+    }
 }
 
-div.lemma > p::before {
-    content: "Lemma: ";
+div.lemma {
+    p:first-child::before {
+    content: "Lemma ";
     font-weight: bold;
+    }
 }
 
-div.proposition > p::before {
-    content: "Proposition: ";
+div.proposition {
+    p:first-child::before {
+    content: "Proposition ";
     font-weight: bold;
+    }
 }
 
-div.definition > p::before {
-    content: "Definition: ";
+div.observation {
+    p:first-child::before {
+    content: "Observation ";
     font-weight: bold;
+    }
 }
 
-div.proof > p::before {
-    content: "Proof: ";
+div.definition {
+    p:first-child::before {
+    content: "Definition ";
     font-weight: bold;
+    }
+}
+
+div.proof {
+    p:first-child::before {
+    content: "Proof ";
+    font-weight: bold;
+    }
 }
 
 div.proof::after {

@@ -83,6 +83,8 @@ main = do
       compile $ customCompiler
         >>= saveSnapshot "posts-content"
         >>= applyFilter embedYoutube
+        >>= applyFilter embedVideo
+        >>= applyFilter embedAsciinema
         >>= loadAndApplyTemplate "generator/templates/post.html" (postContext tags)
         >>= loadAndApplyTemplate "generator/templates/default.html" (postContext tags)
         >>= relativizeUrls
@@ -147,19 +149,7 @@ main = do
       route $ stripRoute "generator/"
       compile $ copyFileCompiler
 
-    match ("generator/thirdparty/katex/**" .&&. complement "**.md") $ do
-      route $ stripRoute "generator/"
-      compile $ copyFileCompiler
-
-    match "generator/thirdparty/hyphenopoly/**" $ do
-      route $ stripRoute "generator/"
-      compile $ copyFileCompiler
-
-    match "generator/thirdparty/firacode/**.woff2" $ do
-      route $ stripRoute "generator/"
-      compile $ copyFileCompiler
-
-    match "generator/thirdparty/latin-modern/**.woff" $ do
+    match ("generator/thirdparty/**" .&&. complement "**.md") $ do
       route $ stripRoute "generator/"
       compile $ copyFileCompiler
 
@@ -178,6 +168,14 @@ main = do
         >>= compressJpgCompiler 90
 
     match ("assets/images/**" .&&. complement "**.jpg") $ do
+      route $ stripRoute "assets/"
+      compile $ copyFileCompiler
+
+    match ("assets/casts/**.cast") $ do
+      route $ stripRoute "assets/"
+      compile $ copyFileCompiler
+
+    match ("assets/videos/**") $ do
       route $ stripRoute "assets/"
       compile $ copyFileCompiler
 
@@ -258,21 +256,44 @@ applyFilter transformator str = return $ (fmap $ transformator) str
 embedYoutube text =
   let
     macro = do
-      string "{yt:"
+      string "{youtube:"
       id <- many alphaNumChar
       char '}'
       return id :: Parsec Void String String
     embed id = "<div class='youtube-wrapper'><iframe allowfullscreen='true' src='https://www.youtube.com/embed/" ++ id ++ "'></iframe></div>"
   in streamEdit macro embed text
 
+embedVideo text =
+  let
+    macro = do
+      string "{video:"
+      filename <- do
+        name <- many (alphaNumChar <|> char '-')
+        char '.'
+        extension <- many alphaNumChar
+        return $ name ++ "." ++ extension
+      char '}'
+      return filename :: Parsec Void String String
+    embed filename = "<video controls src='/videos/" ++ filename ++ "'>Sorry, this browser doesn't support embedded videos</video>"
+  in streamEdit macro embed text
+
+embedAsciinema text =
+  let
+    macro = do
+      string "{asciinema:"
+      name <- many (alphaNumChar <|> char '-')
+      char '}'
+      return name :: Parsec Void String String
+    embed name = "<asciinema-player preload src='/casts/" ++ name ++ ".cast'></asciinema-player>"
+  in streamEdit macro embed text
 
 feedConfiguration :: FeedConfiguration
 feedConfiguration = FeedConfiguration
-    { feedTitle       = "My blog"
-    , feedDescription = "Cool description"
+    { feedTitle       = "Andrea Ciceri's blog"
+    , feedDescription = "So many different things"
     , feedAuthorName  = "Andrea Ciceri"
     , feedAuthorEmail = "andrea.ciceri@autistici.org"
-    , feedRoot        = "https://blog.ccr.ydns.eu"
+    , feedRoot        = "https://blog.aciceri.dev"
     }
 
 feedContext :: Context String

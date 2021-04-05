@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "asciinema-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1617629420,
+        "narHash": "sha256-Q/2cshnygKqyQ4jENtp1blDrK/LI+HrwsckFMb4rx94=",
+        "owner": "aciceri",
+        "repo": "asciinema-player",
+        "rev": "a680c4d331711e0fbca6f8ef6fd86e4251fa8ae9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aciceri",
+        "repo": "asciinema-player",
+        "type": "github"
+      }
+    },
     "firacode-src": {
       "flake": false,
       "locked": {
@@ -103,6 +119,7 @@
     },
     "root": {
       "inputs": {
+        "asciinema-src": "asciinema-src",
         "firacode-src": "firacode-src",
         "flake-utils": "flake-utils",
         "hyphenopoly-src": "hyphenopoly-src",
