@@ -29,7 +29,15 @@ a:hover, a:focus {
 
 code {
     font-family: "Fira Code";
-    font-size: 1.1rem;
+    font-size: 0.9rem;
+}
+
+pre {
+    overflow: auto;
+}
+
+pre.sourceCode {
+    overflow: initial !important;
 }
 
 //Images
@@ -91,12 +99,9 @@ caption.t-bottom {
 // Boxes
 
 div.line-block {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
 }
 
-pre {
-    overflow-x: scroll;
-}
 
 .verse, .note, .warning {
     margin: 1rem 0 1rem 1rem;

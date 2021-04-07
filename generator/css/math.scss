@@ -11,6 +11,19 @@ span.math {
     font-size: 1.1rem;
 }
 
+span.katex {
+    overflow: auto;
+}
+
+span.katex::-webkit-scrollbar {
+  display: none;
+}
+
+span.katex {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 div.theorem {
     p:first-child::before {
     content: "Theorem ";

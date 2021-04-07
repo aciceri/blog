@@ -28,7 +28,7 @@ lot of features, e.g.
 Obviously I used the good old NCurses library, luckily Guile provides an
 official wrapper that is well documented.
 
-{yt:7FWsP1iKPCY}
+{youtube:7FWsP1iKPCY}
 
 I know I shouldn’t upload code so bad but I really enjoyed writing it and I’m
 afraid of losing it in the future, so...

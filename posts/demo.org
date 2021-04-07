@@ -39,7 +39,7 @@ Questa è una nota, che bella...
 #+end_note
 
 #+begin_warning
-Stai attento, questo è +non+ è un avvertimento!
+Stai attento, questo +non+ è un avvertimento!
 #+end_warning
 
 Ed ecco una citazione.
@@ -121,14 +121,9 @@ Includere immagini è semplice (didascalia opzionale):
 
 * Video
 
-Ecco l'eversione della sfera, ovvero come risvoltarla.
+Ecco l'eversione della sfera[fn:eversione-sfera], ovvero come risvoltarla.
 
-{{{video(test)}}}
-
-* Audio
-And then I noticed that She was a Gargoyle dei Nanowar:
-
-{{{audio(nanowar-and-then-i-noticed-that-she-was-a-gargoyle)}}}
+{video:sphere-eversion.mp4}
 
 * Matematica
 
@@ -222,3 +217,5 @@ runAmbT (AmbT a) = runContT (evalStateT a []) return
 runAmb :: Amb r r -> r
 runAmb = runIdentity . runAmbT
 #+end_src
+
+[fn:eversione-sfera] https://www.youtube.com/watch?v=iynrV-3I9CY
