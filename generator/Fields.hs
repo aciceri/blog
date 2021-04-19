@@ -14,40 +14,40 @@ module Fields (
 , allTagsField
 ) where
 
-import           Control.Applicative            ( empty )
-import qualified Data.Text                      as T
-import qualified Data.Text.Lazy                 as TL
-import           Data.Char                      ( isSpace )
-import           Data.Default                   ( Default )
-import           Data.List                      ( dropWhileEnd
-                                                , groupBy
-                                                , isPrefixOf )
-import           Data.Maybe                     ( fromJust )
-import           Data.String                    ( IsString, fromString )
+import           Control.Applicative           (empty)
+import           Data.Char                     (isSpace)
+import           Data.Default                  (Default)
+import           Data.List                     (dropWhileEnd, groupBy,
+                                                isPrefixOf)
+import           Data.Maybe                    (fromJust)
+import           Data.String                   (IsString, fromString)
+import qualified Data.Text                     as T
+import qualified Data.Text.Lazy                as TL
 
 
 import           Data.Time.Calendar
-import           Data.Time.Clock                (UTCTime (..))
-import           Data.Time.Locale.Compat        (defaultTimeLocale)
+import           Data.Time.Clock               (UTCTime (..))
+import           Data.Time.Locale.Compat       (defaultTimeLocale)
 
 import           Hakyll
-import           System.Exit                    ( ExitCode(..) )
+import           System.Exit                   (ExitCode (..))
 import           System.Process
-import           Text.Blaze.Internal            ( MarkupM( .. ), attribute, (!), getText, StaticString (..) )
-import           Text.Blaze.Html                ( Html, Attribute,  )
-import           Text.Blaze.XHtml5              ( ul, li, toHtml )
-import           Text.Blaze.XHtml5.Attributes   ( class_ , alt)
-import           Text.Blaze.Html.Renderer.Text  ( renderHtml )
+import           Text.Blaze.Html               (Attribute, Html)
+import           Text.Blaze.Html.Renderer.Text (renderHtml)
+import           Text.Blaze.Internal           (MarkupM (..), StaticString (..),
+                                                attribute, getText, (!))
+import           Text.Blaze.XHtml5             (li, toHtml, ul)
+import           Text.Blaze.XHtml5.Attributes  (alt, class_)
 
-import           Text.Pandoc                    hiding (trace)
-import           Text.Pandoc.Options            ( WriterOptions (..) )
-import           Text.Pandoc.Readers            ( readHtml )
-import           Text.Pandoc.Writers            ( writeHtml5 )
-import           Text.Pandoc.Writers.Shared     ( toTableOfContents )
-import Data.Either (fromRight)
+import           Data.Either                   (fromRight)
+import           Text.Pandoc                   hiding (trace)
+import           Text.Pandoc.Options           (WriterOptions (..))
+import           Text.Pandoc.Readers           (readHtml)
+import           Text.Pandoc.Writers           (writeHtml5)
+import           Text.Pandoc.Writers.Shared    (toTableOfContents)
 
-import Debug.Trace
-import Data.Typeable
+import           Data.Typeable
+import           Debug.Trace
 -- Peek Field
 --------------------------------------------------------------------------------
 
@@ -69,9 +69,9 @@ data GitVersionContent = Hash | Commit | Full
 
 instance Show GitVersionContent where
     show content = case content of
-        Hash -> "%h"
+        Hash   -> "%h"
         Commit -> "%h: %s"
-        Full -> "%h: %s (%ai)"
+        Full   -> "%h: %s (%ai)"
 
 -- Query information of a given file tracked with git
 getGitVersion :: GitVersionContent -- Kind of information
@@ -154,7 +154,7 @@ tocField name depth tocExtra snapshot = field name $ \item -> do
 
         pandoc@(Pandoc _ blocks) = case (runPure $ readHtml defaultHakyllReaderOptions (T.pack $ itemBody body))
                  of
-                    Left err    -> error $ "Could not parse"
+                    Left err     -> error $ "Could not parse"
                     Right pandoc -> pandoc
 
         toc = toTableOfContents writerOptions blocks

@@ -1,36 +1,27 @@
-{-# LANGUAGE OverloadedStrings, GADTs #-}
+{-# LANGUAGE GADTs             #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Main (main) where
-import Fields
-import System.FilePath.Posix ( takeFileName
-                             , takeDirectory
-                             , takeBaseName
-                             , takeExtension
-                             , (</>)
-                             )
-import System.Environment ( lookupEnv )
-import Hakyll
-import Hakyll
-import Hakyll.Web.Sass
-import Text.Sass.Options ( SassOptions(..)
-                         , defaultSassOptions
-                         , SassOutputStyle(..)
-                         )
-import Hakyll.Images ( loadImage
-                     , compressJpgCompiler
-                     , ensureFitCompiler
-                     )
-import Text.Pandoc.Options
-import Data.Void
-import Replace.Megaparsec
-import Text.Megaparsec hiding (match)
-import Text.Megaparsec.Char
-import Text.Megaparsec.Char.Lexer
-import           Data.List                      ( isPrefixOf
-                                                , isSuffixOf
-                                                )
-import Data.Maybe
-  
+import           Data.List                  (isPrefixOf, isSuffixOf)
+import           Data.Maybe
+import           Data.Void
+import           Fields
+import           Hakyll
+import           Hakyll.Images              (compressJpgCompiler,
+                                             ensureFitCompiler, loadImage)
+import           Hakyll.Web.Sass
+import           Replace.Megaparsec
+import           System.Environment         (lookupEnv)
+import           System.FilePath.Posix      (takeBaseName, takeDirectory,
+                                             takeExtension, takeFileName, (</>))
+import           Text.Megaparsec            hiding (match)
+import           Text.Megaparsec.Char
+import           Text.Megaparsec.Char.Lexer
+import           Text.Pandoc.Options
+import           Text.Sass.Options          (SassOptions (..),
+                                             SassOutputStyle (..),
+                                             defaultSassOptions)
+
 config :: Configuration
 config = defaultConfiguration
     { destinationDirectory = "./out",
@@ -74,10 +65,10 @@ main = do
                     >>= relativizeUrls
                     >>= cleanIndexUrls
 
-    
+
     match "generator/templates/*" $
       compile templateBodyCompiler
-  
+
     match "posts/**.org" $ do
       route $ postRoute
       compile $ customCompiler
@@ -112,7 +103,7 @@ main = do
                 >>= loadAndApplyTemplate "generator/templates/default.html" archiveCtx
                 >>= relativizeUrls
                 >>= cleanIndexUrls
-                
+
     match "pages/home.org" $ do
             route $ constRoute "index.html"
             compile $ do
@@ -160,7 +151,7 @@ main = do
     match "assets/images/**.jpg" $ version "large" $ do
       route $ prefixRoute "original" `composeRoutes` stripRoute "assets/"
       compile $ copyFileCompiler
-  
+
     match "assets/images/**.jpg" $ version "small" $ do
       route $ stripRoute "assets/"
       compile $ loadImage
@@ -186,7 +177,7 @@ main = do
     create ["atom/atom.xml"] $ do
       route idRoute
       compile (feedCompiler renderAtom)
-  
+
 domain :: String
 domain = "blog.ccr.ydns.eu"
 
