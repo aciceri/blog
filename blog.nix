@@ -14,8 +14,8 @@
     );
 
     thirdpartyFarm = linkFarm "thirdparty" thirdparty;
-    
-    generator = (haskellPackagesFixed.callCabal2nix "Site" (./generator) {}).overrideAttrs (
+
+    generator = (haskellPackagesFixed.callCabal2nix "Blog" (./generator) {}).overrideAttrs (
       old: {
         nativeBuildInputs = old.nativeBuildInputs or [] ++ [ makeWrapper ];
         installPhase = old.installPhase + "\n" + ''
@@ -77,4 +77,3 @@
     };
 
   }
-

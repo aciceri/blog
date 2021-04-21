@@ -53,7 +53,7 @@ space, without using a CDN.
 All the sources, both for the posts and the code, are inside the same [[https://github.com/aciceri/blog][Github
 repository]].
 The building, testing and deploying are managed by [[https://nixos.org/nix/][Nix]], using a [[https://nixos.wiki/wiki/Flakes][Flake]], locally on my machine
-when I'm writing new posts and publically by a GitHub workflow] when I push the commit to
+when I'm writing new posts and publically by a GitHub workflow when I push the commit to
 the repository.
 This elegant approach provides solid and replicable builds and a revision
 control system.

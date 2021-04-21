@@ -1,4 +1,3 @@
-{-# LANGUAGE GADTs             #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Main (main) where
@@ -32,7 +31,7 @@ config = defaultConfiguration
 sassOptions :: Maybe FilePath -> SassOptions
 sassOptions distPath = defaultSassOptions
     { sassSourceMapEmbed = True
-    --, sassOutputStyle    = SassStyleCompressed
+    , sassOutputStyle    = SassStyleCompressed
     , sassIncludePaths   = fmap (: []) distPath
     }
 
@@ -179,7 +178,7 @@ main = do
       compile (feedCompiler renderAtom)
 
 domain :: String
-domain = "blog.ccr.ydns.eu"
+domain = "blog.aciceri.dev"
 
 root :: String
 root = "https://" ++ domain
@@ -281,7 +280,7 @@ embedAsciinema text =
 feedConfiguration :: FeedConfiguration
 feedConfiguration = FeedConfiguration
     { feedTitle       = "Andrea Ciceri's blog"
-    , feedDescription = "So many different things"
+    , feedDescription = "Personal blog with a bit of everything"
     , feedAuthorName  = "Andrea Ciceri"
     , feedAuthorEmail = "andrea.ciceri@autistici.org"
     , feedRoot        = "https://blog.aciceri.dev"
