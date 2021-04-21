@@ -31,7 +31,7 @@ config = defaultConfiguration
 sassOptions :: Maybe FilePath -> SassOptions
 sassOptions distPath = defaultSassOptions
     { sassSourceMapEmbed = True
-    , sassOutputStyle    = SassStyleCompressed
+    , sassOutputStyle    = SassStyleCompact
     , sassIncludePaths   = fmap (: []) distPath
     }
 
