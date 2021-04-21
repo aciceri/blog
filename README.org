@@ -1,4 +1,7 @@
-[[https://builtwithnix.org/badge.svg]]
+#+html: <img src="https://img.shields.io/github/checks-status/aciceri/blog/release?style=for-the-badge" />
+#+html: <img src="https://img.shields.io/hsts/preload/blog.aciceri.dev?style=for-the-badge" />
+#+html: <img src="https://img.shields.io/website?style=for-the-badge&url=https%3A%2F%2Fblog.aciceri.dev" />
+#+html: <img src="https://builtwithnix.org/badge.svg" />
 
 * My blog
   
