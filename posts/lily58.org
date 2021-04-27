@@ -68,7 +68,7 @@ however in the end I used other pads I already had because they were higher.
 #+caption: Screws
 [[file:/images/lily58/screws.jpg]]
 
-*** The PCBs
+*** The PCBs and the diodes
 
 The two PCBs are identicals and they work differently depending on the side you
 sold components on, an ingenious and cost-effective design.
@@ -79,9 +79,103 @@ sold components on, an ingenious and cost-effective design.
 #+caption: The other side
 [[file:/images/lily58/pcb2.jpg]]
 
+*** A lot of diodes
+
+#+caption: Diodes
+[[file:/images/lily58/diodes.jpg]]
+
+*** Microcontrollers
+
+Two Arduino Pro Micro are needed, I got them on AliExpress because they were
+cheaper. One of them gave me problems, after I soldered it I realized the
+flashing didn't work.
+
+#+caption: The Pro Micro pinout
+[[file:/images/lily58/promicro.jpg]]
+
+I'm a noob and this was a good lesson, next time I'll flash both the
+microcontrollers before soldering them, however I don't know if the Pro Micro
+was already broken or I damaged it during the soldering.
+
+*** Display
+
+The Lily58 supports two SSD1306 displays, since +I broke one of them+ one of
+them is useless because it only shows a static logo I used only one.
+
+#+caption: The SSD1306
+[[file:/images/lily58/lcd.jpg]]
+
+Considering the negligible cost (about 1 dollar from AliExpress) I think I'll
+reuse this display in future projects.
+
+*** Switches and caps
+
+For this keyboard it's important to pay attention to profile of the keycaps
+because of the exotic layout.
+My choice fell on blank keycaps with the XDA profile (all the caps are the same)
+so this wasn't a problem.
+
+#+caption: The SSD1306
+[[file:/images/lily58/caps-and-switches.jpg]]
+
+For the switches I chose the blue MX Gateron, I alredy tried them and I really
+liked the clicky feedback.
+Moreover they were quite cheap on AliExpress.
+
 *** A sleepy watchdog
 
 My trusty watchdog oversaw and certified the entire procedure.
 
 #+caption: A good boy
 [[file:/images/lily58/marley.jpg]]
+
+
+** Assembling
+
+I followed [[https://kata0510.github.io/Lily58-Document/Lily58_BG.html][this guide]], even if I don't speak japanese I was able to understand
+thanks to the numerous images.
+
+#+caption: The schematic
+[[file:/images/lily58/schematic.png]]
+
+The soldering was quite easy, I thought it would be more difficult, maybe the
+merit is of the PCB of excellent build quality.
+
+#+caption: Soldering the diodes
+[[file:/images/lily58/soldering1.jpg]]
+
+#+caption: The matrix of diodes
+[[file:/images/lily58/soldering2.jpg]]
+
+** Software
+
+The [[https://github.com/qmk/qmk_firmware/tree/master/keyboards/lily58][official firmware]] uses [[https://qmk.fm/][QMK]], since I consider useless the standard display
+usage (showing che current keyboard layer (a QMK thing to associate different
+keys to the same switch) and the latest typed characters) I [[https://github.com/aciceri/lily58][forked it]] to add
+support for custom text messages using the HID protocol.
+
+#+caption: Flashing the firmware 
+[[file:/images/lily58/flashing.jpg]]
+
+Then I created a simple utility to that sends messages to the keyboard, the
+idea was to integrate this utility with Emacs to show things like:
+
+- the minibuffer
+- the kill ring
+- generic information about the system, like the temperature or the
+  CPU/Memory/Disk/Network usage
+- currently playing music (I use Mopidy so it's easy with Emacs)
+
+At the end I was able to to show a message from Emacs but I never implemented
+all the rest.
+
+** Final result
+
+#+caption: Front
+[[file:/images/lily58/result1.jpg]]
+
+#+caption: Back
+[[file:/images/lily58/result2.jpg]]
+
+
+That's all for now.
