@@ -147,15 +147,17 @@ main = do
       route $ idRoute
       compile $ copyFileCompiler
 
-    match "assets/images/**.jpg" $ version "large" $ do
-      route $ prefixRoute "original" `composeRoutes` stripRoute "assets/"
+    match "assets/images/**.jpg" $ version "original" $ do
+      route $ stripRoute "assets/"
       compile $ copyFileCompiler
 
+    {-
     match "assets/images/**.jpg" $ version "small" $ do
-      route $ stripRoute "assets/"
+      route $ prefixRoute "small" `composeRoutes` stripRoute "assets/"
       compile $ loadImage
         >>= ensureFitCompiler 768 600
         >>= compressJpgCompiler 90
+    -}
 
     match ("assets/images/**" .&&. complement "**.jpg") $ do
       route $ stripRoute "assets/"
