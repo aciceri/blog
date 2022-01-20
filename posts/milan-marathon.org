@@ -1,0 +1,119 @@
+---
+title: Verso la mia prima maratona 
+tags: sport, running
+date: 2022-01-15
+language: it
+---
+
+#+begin_note
+This post written in italian gives an account of the 12 weeks of preparation for
+my first marathon.
+I'm writing it during the preparation annotating my thoughts, maybe in the
+future I'll review everything in english.
+#+end_note
+
+Ho deciso di partecipare alla [[https://www.milanomarathon.it/][Milano marathon]] come prima maratona.
+Inizio ad allenarmi ufficialmente il 9 Gennaio 2022 per la gara che sarà il 3
+Aprile, dunque ho esattamente 12 settimane di tempo.
+
+#+caption: Il percorso
+[[file:/images/milan-marathon-path.jpg]]
+
+Parto dalla mezza maratona come distanza, anche se devo ammettere che nel mese
+di Dicembre credo di non averne mai corse mi considero abbastanza  tranquillo su questa distanza.
+
+* Allenamenti
+
+Ho intenzione di fare almeno 3 uscite a settimana, l'unico giorno fisso è il
+giovedì in cui ho le ripetute (o comunque allenamenti specifici) in pista con
+l'associazione con cui corro da circa un anno.
+
+Sicuramente una delle altre uscite deve essere il lungo, che non può che essere
+nel weekend (gli ultimi lunghi saranno davvero lunghi!).
+
+#+CAPTION: Successione dei lunghi
+| Weekend        | Distanza (km) |
+| <l>            |      <c>      |
+|----------------+---------------|
+| 8/9 Gennaio    |      21       |
+| 15/16 Gennaio  |      18       |
+| 22/23 Gennaio  |      24       |
+| 29/30 Gennaio  |      12       |
+| 5/6 Febbraio   |      27       |
+| 12/13 Febbraio |      20       |
+| 19/20 Febbraio |      30       |
+| 26/27 Febbraio |      12       |
+| 5/6 Marzo      |      33       |
+| 12/13 Marzo    |      24       |
+| 19/20 Marzo    |      36       |
+| 26/27 Marzo    |      12       |
+| 3 Aprile       |   *Maratona*    |
+
+
+L'ultima uscita obbligata sarà il martedì, dove pensavo al Fartlek o magari
+ad un po' di salite (purtroppo abito in pianura, l'unica è cercarsi dei ponti).
+
+A queste tre uscite fisse potrei aggiungerne una quarta quando ho tempo e sono
+in vena, alternativamente tempo (ed orario) permettendo potrei defaticare sulla
+bici da corsa. Questo dovrebbe portarmi il vantaggio di allenare la resistenza
+senza affaticare troppo le ginocchia, articolazione cui infortunio mi obbligò a
+stare fermo per parecchio tempo quasi due anni fa.
+
+Inoltre non smetterò di effettuare altri 3 allenamenti settimanali a corpo
+libero per la forza. Li menziono perché tra gli esercizi ce ne sono alcuni per
+il core, comunque influenti le per la corsa.
+
+** Settimana 0
+
+Non fa parte delle 12 settimane di allenamento, considero solo la corsa di
+Sabato 9 Gennaio, ovvero una mezza di azzeramento per verificare la mia forma
+prima di partire con le 12 settimane.
+
+Ho configurato lo sportwatch per farmi mantenere un passo compreso tra i 5:20 e
+i 5:30 min/km ma non sono riuscito a tenerli e alla fine sono andato leggermente
+più forte, ovvero circa 5:10 min/km.
+Tenere un passo simile il giorno della gara sarebbe un risultato più che soddisfacente.
+
+Ho avvertito una leggera pressione alle ginocchia verso i 18km, ma aumentando
+leggermente la cadenza dei passi devo essere riuscito a cambiare postura e il
+fastidio è andato subito via, ho concluso serenamente quasi 22km.
+
+** Settimana 1
+
+#+CAPTION: Distanza totale: 37km
+| Giorno       | Distanza | Passo medio | Note            |
+|--------------+----------+-------------+-----------------|
+| Martedì 11/1 | 8km      |        4:21 | Tutto a cannone |
+| Giovedì 13/1 | 11km     |        4:35 | Ripetute        |
+| Sabato  15/1 | 18km     |        5:20 | Lungo           |
+
+Martedì faceva più freddo del solito e sono partito più veloce, poi visto che mi
+sentivo ispirato ho provato a mantenere il passo. L'idea era di vedere quanto ci
+mettevo a fare 10km (torna sempre utile come test da fare ogni tanto) ma sono
+arrivato agli 8km abbastanza stanco, per farne altri 2 avrei sicuramente dovuto
+diminuire leggermente il passo.
+
+Giovedì alla grande, sono andato parecchio veloce nelle ripetute.
+
+Sabato mi sentivo un po' stanco, probabilmente a causa delle poche ore di sonno,
+inoltre sono stato obbligato ad andare col buio. Comunque tollerabilissimo.
+
+
+** Settimana 2
+
+#+CAPTION: Distanza totale: ?km
+| Giorno       | Distanza | Passo medio | Note      |
+|--------------+----------+-------------+-----------|
+| Lunedì 17/1  | 5km      | 5:33        | Cazzeggio |
+| Martedì 18/1 | 12km     | 4:45        | Andante |
+| Giovedì 20/1 | ?        | ?           | Ripetute |
+| ?            | 24km     | ?           | Lungo     |
+
+Lunedì mi sono ritrovato con un a mezz'ora di tempo morto prima di cenare e mi
+sono detto: perché sprecarlo? Così sono uscito.
+
+Martedì ho ritentato un approccio simile a martedì scorso, l´ho presa con più
+calma (ma comunque in maniera abbastanza aggressiva) ponendomi come obiettivo i
+12km. Non ho finito particolarmente stanco, potevo fare ancora un po' di km
+mantenendo il passo.
+
