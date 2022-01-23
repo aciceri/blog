@@ -102,18 +102,42 @@ inoltre sono stato obbligato ad andare col buio. Comunque tollerabilissimo.
 ** Settimana 2
 
 #+CAPTION: Distanza totale: ?km
-| Giorno       | Distanza | Passo medio | Note      |
-|--------------+----------+-------------+-----------|
-| Lunedì 17/1  | 5km      | 5:33        | Cazzeggio |
-| Martedì 18/1 | 12km     | 4:45        | Andante |
-| Giovedì 20/1 | ?        | ?           | Ripetute |
-| ?            | 24km     | ?           | Lungo     |
+| Giorno       | Distanza | Passo medio | Note             |
+|--------------+----------+-------------+------------------|
+| Lunedì 17/1  | 5km      |        5:33 | Cazzeggio        |
+| Martedì 18/1 | 12km     |        4:45 | Andante          |
+| Giovedì 20/1 | 13km     |        4:40 | Ripetute         |
+| Sabato 22/1  | 24km     |        5:28 | Lungo lungo lago |
 
 Lunedì mi sono ritrovato con un a mezz'ora di tempo morto prima di cenare e mi
 sono detto: perché sprecarlo? Così sono uscito.
 
-Martedì ho ritentato un approccio simile a martedì scorso, l´ho presa con più
+Martedì ho ritentato un approccio simile a martedì scorso, l'ho presa con più
 calma (ma comunque in maniera abbastanza aggressiva) ponendomi come obiettivo i
 12km. Non ho finito particolarmente stanco, potevo fare ancora un po' di km
 mantenendo il passo.
+
+Giovedì ripetute belle veloci, ho cercato di dare il massimo. Come sempre 6 km
+sono necessari solo per andare e tornare alla pista.
+
+Sabato ho avuto il lungo da 24km, siccome mi trovavo al lago ho corso lì
+pensando ingenuamente che fare il lungo lago mi avrebbe mantenuto in piano.
+Invece la strada che ho seguito spesso si allontanava dalle sponde obbligandomi
+a fare parecchi su e giù, ovviamente non mi riferisco a dislivelli enormi, però
+dopo un po' di km, soprattutto per chi come me non corre da mesi in montagna, si
+fanno sentire.
+Spettacolare l'arrivo a Como, facendo il lungo lago e arrivando quasi alla
+fontana (che purtroppo era spento).
+Fortunato caso invece che da dove mi trovavo a Como (e ritorno) distasse
+esattamente quello di cui avevo bisogno quel weekend.
+Ho avvertito una leggera pressione alle ginocchia (leggermente di più il
+sinistro) ma ho proseguito senza né fermarmi né rallentare. Suppongo fosse
+dovuto anche alle continue discese sull'asfalto.
+Ad ogni modo il giorno dopo tutto regolare, anzi...
+
+Questa settimana ha avuto anche un interessante extra: gita alla cima di un
+monte lì vicino. Presa con calma fermandosi in rifugio a mangiare, quindi
+comunque una scampagnata. Ma sicuramente non una passeggiata visto il dislivello
+per salire è stato superiore ai 1000 metri (in circa 5km, di cui l'ultimo quasi
+in piano, quindi con pendenza notevole).
 
