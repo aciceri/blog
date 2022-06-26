@@ -21,4 +21,8 @@ jobs:
 
     - name: Build
       if: success()
-      run: nix build
+      run: nix build -L
+
+    - name: Push Flakes inputs on Cachix
+      if: success()
+      run: nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)' | cachix push aciceri-blog

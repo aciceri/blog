@@ -26,13 +26,9 @@ jobs:
         name: aciceri-blog
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
         
-    - name: Push Flakes inputs on Cachix
-      if: success()
-      run: nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)' | cachix push aciceri-blog
-      
     - name: Build
       if: success()
-      run: nix build
+      run: nix build -L
       
     - name: Push on Pinata
       id: ipfs
