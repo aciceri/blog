@@ -1,5 +1,5 @@
 cabal-version:      3.0
-name:               Blog
+name:               blog
 
 -- The package version.  See the Haskell package versioning policy (PVP)
 -- for standards guiding when and how versions should be incremented.
@@ -10,7 +10,7 @@ name:               Blog
 -- version:          0.1.1.0
 
 version:            0.1.0.0
-license:            MIT
+license:            GPL-3.0-or-later
 license-file:       LICENSE
 maintainer:         andrea.ciceri@autistici.org
 author:             Andrea Ciceri
@@ -26,18 +26,18 @@ executable generator
         GADTs
 
     build-depends:
-        base ^>=4.13,
+        base ^>=4.14,
         data-default ^>=0.7,
         filepath ^>=1.4,
         process ^>=1.6,
         time ^>=1.9,
         time-locale-compat ^>=0.1,
-        hakyll ^>= 4.13.4.1 ,
-        hakyll-images ^>=0.4,
+        hakyll ^>= 4.15 ,
+        hakyll-images ^>=1.2,
         text ^>=1.2,
         hakyll-sass ^>=0.2,
         hsass ^>=0.8,
-        pandoc ^>=2.11,
+        pandoc ^>=2.18,
         pandoc-types ^>=1.22,
         blaze-html ^>=0.9,
         blaze-markup ^>=0.8,

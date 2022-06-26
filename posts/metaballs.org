@@ -1,9 +1,7 @@
----
-title: Metaballs and marching cubes
-tags: javascript, threejs, webgl, metaballs
-date: 2018-12-19
-language: en
----
+#+title: Metaballs and marching cubes
+#+tags: javascript, threejs, webgl, metaballs
+#+date: 2018-12-19
+#+language: en
 
 In the last days I started playing with three.js[fn:1],
 basically it's a *JavaScript* library that manages animated 3d objects and

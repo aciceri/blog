@@ -22,4 +22,4 @@ jobs:
 
     - name: Build
       if: success()
-      run: nix run .#compile
+      run: nix build

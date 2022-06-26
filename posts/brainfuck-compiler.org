@@ -1,9 +1,7 @@
----
-title: From Brainfuck to Python bytecode 
-tags: python, compiler, brainfuck, bytecode
-date: 2019-08-27
-language: en
----
+#+title: From Brainfuck to Python bytecode 
+#+tags: python, compiler, brainfuck, bytecode
+#+date: 2019-08-27
+#+language: en-us
 
 #+begin_note
 When I wrote this post (and the script) the last Python version was

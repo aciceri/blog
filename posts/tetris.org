@@ -1,9 +1,7 @@
----
-title: Vintage tetris written in Guile Scheme
-tags: scheme, tetris, guile, ncurses
-date: 2017-08-12
-language: en
----
+#+title: Vintage tetris written in Guile Scheme
+#+tags: scheme, tetris, guile, ncurses
+#+date: 2017-08-12
+#+language: en
 
 This isn’t really recent but it worths to be mentionated on this site, about one
 month ago I started reading the [[https://mitpress.mit.edu/sicp/][Wizard book]] and I became obsessed with this

@@ -1,4 +1,3 @@
-
 Welcome to my blog, let $\Sigma$ be the set of the Unicode symbols, then this
 site is a finite subset $\mathbb{B} \subset \Sigma$. 
 Assuming that your browser can parse and interpret $\mathbb{B}$, and hoping that

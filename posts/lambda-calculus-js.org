@@ -1,9 +1,7 @@
----
-title: Lambda calculus in JavaScript
-tags: javascript, lambda-calculus, functional
-date: 2019-03-21
-language: en
----
+#+title: Lambda calculus in JavaScript
+#+tags: javascript, lambda-calculus, functional
+#+date: 2019-03-21
+#+language: en
 
 This sunday I enjoyed creating some simple functions using only the
 [[https://en.wikipedia.org/wiki/Lambda_calculus][lambda calculus]], I chose to use Javascript because of the simple

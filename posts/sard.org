@@ -1,9 +1,7 @@
----
-title: Il teorema di Sard
-tags: math
-date: 2020-05-21
-language: it
----
+#+title: Il teorema di Sard
+#+tags: math
+#+date: 2020-05-21
+#+language: it
 
 #+begin_note
 Questo post nasce pochi giorni dopo un seminario che ho dovuto tenere in

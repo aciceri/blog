@@ -1,9 +1,7 @@
----
-title: My first assembled mechanical keyboard
-tags: mechanical, keyboard
-date: 2021-04-22
-language: en
----
+#+title: My first assembled mechanical keyboard
+#+tags: mechanical, keyboard
+#+date: 2021-04-22
+#+language: en
 
 To be honest I built this keyboard the last summer, I took pictures with the
 idea of documenting the process in a post but I never felt like it, until now,

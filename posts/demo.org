@@ -1,11 +1,10 @@
----
-title: Demo post
-tags: demo, org, org-mode, carousel
-date: 2021-02-02
-language: it
----
- 
+#+title: Demo post
+#+tags: demo, org, org-mode, carousel
+#+date: 2021-02-02
+#+language: it
+
 Si può inserire il testo in *grassetto*, /corsivo/ e */grassetto e corsivo/*, inoltre il testo può
+
 essere testo ~inline~ o =verbatim=, _sottolineato_, +barrato+ e a ped_{ice} o api^{ice}. 
 
 ** Le liste sono testo

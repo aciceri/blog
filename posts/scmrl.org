@@ -1,9 +1,7 @@
----
-title: SCRML (SCheMeRogueLike)
-tags: scheme, roguelike
-date: 2017-09-11
-language: en
----
+#+title: SCRML (SCheMeRogueLike)
+#+tags: scheme, roguelike
+#+date: 2017-09-11
+#+language: en
 
 Welcome to SCMRL (SCheMeRogueLike, yes I’ve to choose a more imaginative name),
 in this page I will collect the information about this my project.
