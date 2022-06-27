@@ -57,6 +57,7 @@ jobs:
       with:
         target_branch: gh-pages
         build_dir: ./result
+        follow_symlinks: true
         fqdn: blog.aciceri.dev
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
