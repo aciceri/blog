@@ -26,20 +26,20 @@ executable generator
         GADTs
 
     build-depends:
-        base ^>=4.14,
+        base ^>=4.16,
         data-default ^>=0.7,
         filepath ^>=1.4,
         process ^>=1.6,
-        time ^>=1.9,
+        time ^>=1.11,
         time-locale-compat ^>=0.1,
         hakyll ^>= 4.15 ,
         hakyll-images ^>=1.2,
-        text ^>=1.2,
+        text ^>=2.0,
         hakyll-sass ^>=0.2,
         hsass ^>=0.8,
-        pandoc ^>=2.18,
+        pandoc ^>=2.19,
         pandoc-types ^>=1.22,
         blaze-html ^>=0.9,
         blaze-markup ^>=0.8,
-        megaparsec ^>=8.0.0,
-        replace-megaparsec ^>=1.4.2.0
+        megaparsec ^>=9.2,
+        replace-megaparsec ^>=1.4
