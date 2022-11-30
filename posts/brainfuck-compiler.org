@@ -16,7 +16,7 @@ Python bytecode. I’m going to assume you already can "program" in
 Brainfuck, otherwise I advise you to read the [[https://esolangs.org/wiki/Brainfuck][dedicated page on
 Esolang]], in my opinion the best place to learn about the language. I’m
 also assuming that you have a minimal knowledge about [[https://en.wikipedia.org/wiki/Stack_machine][stack machines]],
-personally I only used them as a theorical objects during some
+personally I only used them as a theoretical objects during some
 proofs. I learned to use them as a real software only during the
 creation of this transpiler.
 
@@ -149,7 +149,7 @@ if args.show:
 
 with open(args.outputfile, 'wb+') as out:
     # printing the first 16 bytes in the file
-    out.write(MAGIC_NUMBER)  # this depends on the the Python version
+    out.write(MAGIC_NUMBER)  # this depends on the Python version
     out.write(bytes([0] * 12))  # because of the pyc file format
     marshal.dump(code, out)
 
