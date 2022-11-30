@@ -33,7 +33,7 @@ jobs:
     - name: Push on Pinata
       id: ipfs
       if: success()
-      uses: aquiladev/ipfs-action@v0.1.5
+      uses: aquiladev/ipfs-action@v0.2.1
       with:
         path: ./result
         service: pinata
