@@ -7,7 +7,7 @@
       "https://aciceri-blog.cachix.org"
     ];
     extra-trusted-public-keys = [
-      "cache.iog.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+      "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
       "aciceri-blog.cachix.org-1:RsBUsFem/Lr0ItecDFfhmXvxvs3WRqVlCQlxNqRXgWw="
     ];
     allow-import-from-derivation = "true";

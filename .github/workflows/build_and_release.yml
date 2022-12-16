@@ -15,11 +15,6 @@ jobs:
     - name: Install Nix
       if: success()
       uses: cachix/install-nix-action@v17
-      with:
-        extra_nix_config: |
-          experimental-features = nix-command flakes
-          trusted-public-keys = cache.iog.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= aciceri-blog.cachix.org-1:RsBUsFem/Lr0ItecDFfhmXvxvs3WRqVlCQlxNqRXgWw=
-          substituters = https://cache.iog.io https://cache.nixos.org/ https://aciceri-blog.cachix.org
 
     - uses: cachix/cachix-action@v10
       with:
