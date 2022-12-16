@@ -3,46 +3,46 @@
 
   nixConfig = {
     extra-substituters = [
-      "https://hydra.iohk.io"
+      "https://cache.iog.io"
       "https://aciceri-blog.cachix.org"
     ];
     extra-trusted-public-keys = [
-      "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+      "cache.iog.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
       "aciceri-blog.cachix.org-1:RsBUsFem/Lr0ItecDFfhmXvxvs3WRqVlCQlxNqRXgWw="
     ];
     allow-import-from-derivation = "true";
   };
 
   inputs = {
-    flake-utils.url = github:numtide/flake-utils;
+    flake-utils.url = "github:numtide/flake-utils";
 
-    haskellNix.url = github:input-output-hk/haskell.nix;
+    haskellNix.url = "github:input-output-hk/haskell.nix";
 
     nixpkgs.follows = "haskellNix/nixpkgs-unstable";
 
     katex = {
-      url = https://github.com/KaTeX/KaTeX/releases/download/v0.16.0/katex.tar.gz;
+      url = "https://github.com/KaTeX/KaTeX/releases/download/v0.16.0/katex.tar.gz";
       flake = false;
     };
 
     latin-modern = {
-      url = github:aaaakshat/cm-web-fonts;
+      url = "github:aaaakshat/cm-web-fonts";
       flake = false;
     };
 
     fira-code = {
-      url = https://github.com/tonsky/FiraCode/releases/download/6.2/Fira_Code_v6.2.zip;
+      url = "https://github.com/tonsky/FiraCode/releases/download/6.2/Fira_Code_v6.2.zip";
       type = "file";
       flake = false;
     };
 
     hyphenopoly = {
-      url = https://github.com/mnater/Hyphenopoly/archive/refs/tags/v4.12.0.zip;
+      url = "https://github.com/mnater/Hyphenopoly/archive/refs/tags/v4.12.0.zip";
       flake = false;
     };
 
     asciinema = {
-      url = https://registry.npmjs.org/asciinema-player/-/asciinema-player-3.0.1.tgz;
+      url = "https://registry.npmjs.org/asciinema-player/-/asciinema-player-3.0.1.tgz";
       flake = false;
     };
   };
