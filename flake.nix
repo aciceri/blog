@@ -93,7 +93,7 @@
               path = "${latin-modern}/font";
             }
             {
-              name = "fira-code";
+              name = "firacode";
               path = "${fira-code-unzipped}/woff2";
             }
             {
