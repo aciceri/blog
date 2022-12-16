@@ -23,7 +23,7 @@ jobs:
         
     - name: Build
       if: success()
-      run: nix build -L
+      run: nix build --accept-flake-config -L
       
     - name: Push on Pinata
       id: ipfs
