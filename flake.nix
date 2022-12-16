@@ -61,7 +61,7 @@
           (final: _: {
             blogGeneratorProject = final.haskell-nix.project' {
               src = ./generator;
-              compiler-nix-name = "ghc924";
+              compiler-nix-name = "ghc925";
               shell.tools = {
                 cabal = {};
                 haskell-language-server = {};
