@@ -24,7 +24,18 @@ jobs:
     - name: Build
       if: success()
       run: nix build --accept-flake-config -L
-      
+
+    - name: Deploy on Github Pages
+      if: success()
+      uses: crazy-max/ghaction-github-pages@v2
+      with:
+        target_branch: gh-pages
+        build_dir: ./result
+        follow_symlinks: true
+        fqdn: blog.aciceri.dev
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Push on Pinata
       id: ipfs
       if: success()
@@ -45,14 +56,3 @@ jobs:
       uses: textileio/cloudflare-update-dnslink@0fe7b7a1ffc865db3a4da9773f0f987447ad5848
       with:
         cid: ${{ steps.ipfs.outputs.hash }}
-
-    - name: Deploy on Github Pages
-      if: success()
-      uses: crazy-max/ghaction-github-pages@v2
-      with:
-        target_branch: gh-pages
-        build_dir: ./result
-        follow_symlinks: true
-        fqdn: blog.aciceri.dev
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
