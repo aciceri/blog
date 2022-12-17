@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="it">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Il teorema di Sard - Andrea Ciceri's blog</title> 
+
+	<!-- KaTeX -->
+        <link rel="stylesheet" href="../../thirdparty/katex/katex.min.css">
+        <script defer src="../../thirdparty/katex/katex.min.js"></script>
+        <script defer src="../../thirdparty/katex/contrib/auto-render.min.js"></script>
+
+	<!-- asciinema -->
+	<link rel="stylesheet" type="text/css" href="../../thirdparty/asciinema/asciinema-player.css" />
+
+        <!-- Custom -->
+        <link rel="stylesheet" href="../../css/custom.css" />
+        <script src="../../js/custom.js"></script>
+
+	<!-- Hyphenopoly -->
+        <script src="../../thirdparty/hyphenopoly/Hyphenopoly_Loader.js"></script>
+	
+    </head>
+    <body class="theme-light">
+      <script src="../../thirdparty/asciinema/asciinema-player.js"></script>
+      <div id="main-wrapper">
+        <header>
+            <nav>
+                <a href="../../">Home</a>
+                <a href="../../contacts/">Contacts</a>
+                <a href="../../archive">Archive</a>
+                <a href="../../rss/rss.xml">RSS</a>
+                <a href="../../atom/atom.xml">Atom</a>
+            </nav>
+        </header>
+
+        <main>
+            <h1>Il teorema di Sard</h1>
+            <article>
+    <section class="header">
+        Posted on 2020-05-21
+	
+	with tags
+        
+        <a href="../../tags/math/index.html">math</a>
+        
+    </section>
+    <section>
+        <div class="note">
+<p>Questo post nasce pochi giorni dopo un seminario che ho dovuto tenere in
+Universitá, infatti, dopo aver approfondito l’argomento che sto per esporre, mi
+spiaceva lasciare tali concetti “al vento” e mi sembrava sensato trascriverli
+nero su bianco da qualche parte.
+L’idea iniziale era di scrivere un bel documento in <span class="math inline">\(\LaTeX\)</span> di cui farne un pdf
+da perdere in qualche remota cartella del pc, ma alla fine mi sono detto: perché
+non qui sul blog?</p>
+</div>
+<p>L’obiettivo di queste note é di fornire una semplice e concisa esposizione del
+teorema di Sard, noto risultato di geometria differenziale.
+La trattazione é carica di osservazioni e frequenti definizioni, in modo da
+essere digeribile anche ai non addetti ai lavori.</p>
+<div class="definition">
+<p>Siano <span class="math inline">\((a_1, \dots, a_n), (b_1, \dots, b_n) \in \R^n\)</span> tali che <span class="math inline">\(a_i &lt; b_i\)</span>,
+chiamiamo <em>rettangolo solido n-dimensionale</em> l’insieme
+<span class="math display">\[
+S(a, b)=\{(x_1, \dots, x_n) \in \mathbb{R}^n : a_i \lt x_i \lt b_i\}
+\]</span></p>
+</div>
+<div class="definition">
+<p>Chiamiamo <em>volume n-dimensionale</em> di un rettangolo solido n-dimensionale <span class="math inline">\(S(a,
+b)\)</span> la quantitá reale positiva
+<span class="math display">\[
+Vol(S(a, b)) = \prod_{i=1}^n (b_i - a_i)
+\]</span></p>
+</div>
+<div class="definition">
+<p>Diciamo che <span class="math inline">\(A \subset \R^n\)</span> ha <em>misura nulla</em> se <span class="math inline">\(\forall \epsilon \gt 0\)</span>
+esiste un ricoprimento <span class="math inline">\(\{S_i\}_{i \in \N}\)</span> di <span class="math inline">\(A\)</span> (ovvero <span class="math inline">\(\bigcup_{i \in \N}
+S_i \supset A\)</span>) formato da rettangoli solidi <span class="math inline">\(S_i\)</span> tale che
+<span class="math display">\[
+\sum_{i \in \mathbb{N}} Vol(S_i) \lt \epsilon
+\]</span></p>
+</div>
+<p>Osserviamo innanzitutto che, nella definizione di insieme a misura nulla,
+considerare cubi n-dimensionali (cioé rettangoli dove <span class="math inline">\(b_i - a_i = b_j - a_j
+\forall i, j\)</span>) invece che rettangoli é del tutto equivalente.
+D’altronde é del tutto equivalente anche considerare le palle euclidee o in
+generale le altre bolle indotte da norme equivalenti (nel senso che generano la
+stessa topologia).</p>
+<p>Inoltre, si segnala come tale nozione sia equivalente all’avere misura di
+Lebesgue nulla, ovvero <span class="math inline">\(A\)</span> ha misura nulla se e solo se <span class="math inline">\(m_n(A) = 0\)</span> dove <span class="math inline">\(m_n\)</span>
+é la misura di Lebesgue n-dimensionale.
+La dimostrazione di tale equivalenza, nonostante non di difficile
+raggiungimento, non é necessaria per i nostri obiettivi e pertanto verrá omessa.</p>
+<p>Iniziamo con le due seguenti banali osservazioni:</p>
+<div class="observation">
+<p>Se <span class="math inline">\(m \lt n\)</span> allora <span class="math inline">\(\R^m\)</span> ha misura nulla in <span class="math inline">\(\R^n\)</span></p>
+</div>
+<div class="proof">
+<p>Basta ricoprire <span class="math inline">\(\R^m\)</span> con una famiglia numerabile di cubi, tali cubi giacciono
+su un iano di <span class="math inline">\(\R^n\)</span> e quindi ognuno di essi puó essere schiacciato in una
+direzione ortogonale a questo pano.
+In questo modo l’unione dei rettangoli continua a contenere tutto <span class="math inline">\(\R^m\)</span> e il
+volume di ogni rettangolo é piccolo a piacere, questo implica che anche la
+somma di tutti i volumi é piccola a piacere.</p>
+</div>
+<div class="observation">
+<p><span class="math inline">\(\bigcup_{i \in \N} A_i\)</span> ha misura nulla se ogni <span class="math inline">\(A_i\)</span> ha misura nulla.</p>
+</div>
+<div class="proof">
+<p>Unioni di famiglie numerabili sono ancora numerabili per l’assioma della scelta.</p>
+</div>
+<p>Vediamo ora una prorietá fondamentale che ci permettá in seguito di estendere la
+definizione di insiemi a misura nulla.</p>
+<div class="proposition">
+<p>Sia <span class="math inline">\(F: U \to \R^n\)</span> una mappa liscia, con <span class="math inline">\(U \subset \R^n\)</span> aperto. Se <span class="math inline">\(A \subset
+U\)</span> ha misura nulla allora anche l’immagine <span class="math inline">\(F(A)\)</span> ha misura nulla.</p>
+</div>
+<div class="proof">
+<p>Iniziamo osservando che <span class="math inline">\(U\)</span> é ricopribile da una famiglia numerabile di palle
+chiuse per cui la restrizione di <span class="math inline">\(F\)</span> ad ognuna di queste palle é ancora liscia,
+ricordiamo che una mappa é liscia su un insieme generico (non aperto) se essa é
+estendibile ad una mappa liscia definita su un aperto contenente tale insieme.
+Sia <span class="math inline">\(\bar{B}\)</span> una di queste palle, siccome <span class="math inline">\(\bar{B}\)</span> é compatto e <span class="math inline">\(F \in
+\mathscr{C}^1(\bar{B})\)</span> allora <span class="math inline">\(\exists c \gt 0\)</span> tale che <span class="math inline">\(\forall x, y \in
+\bar{B}\)</span></p>
+<p><span class="math display">\[
+\Vert F(x) - F(y) \Vert \le c \Vert x-y \Vert
+\]</span></p>
+<p>Fissiamo <span class="math inline">\(\delta \gt 0\)</span>, visto che <span class="math inline">\(A \cap \bar{B}\)</span> ha misura nulla possiamo
+considerare un suo ricoprimento numerabile <span class="math inline">\(\{ B_k \}_{k \in \N}\)</span> di palle tale
+che</p>
+<p><span class="math display">\[
+\sum_{k \in \N} Vol({B_k}) \lt \delta
+\]</span></p>
+<p>Per la diseguaglianza di prima sappiamo che <span class="math inline">\(F(B_k \cap \bar{B})\)</span> é contenuto in
+una palla di raggio al piú <span class="math inline">\(c\)</span> volte il raggio di <span class="math inline">\(B_k\)</span>. Dunque <span class="math inline">\(F(A \cap B_k)\)</span>
+é ricoperto da una famiglia numerabile <span class="math inline">\(\{ \tilde{B_k} \}_{k \in \N}\)</span> di palle
+di volume complessivo inferiore a</p>
+<p><span class="math display">\[
+\sum_{k \in \N} Vol({\tilde{B_k}}) \lt c^n \delta
+\]</span></p>
+<p>Per arbitrarietá di <span class="math inline">\(\delta\)</span> segue che <span class="math inline">\(F(A \cap \bar{B})\)</span> ha misura nulla, e
+dunque per quanto osservato all’inizio che anche <span class="math inline">\(F(A)\)</span> ha misura nulla, cioé la
+tesi.</p>
+</div>
+<p>Ció implica che l’avere dimensione nulla é invariante per diffeomorfismi, siamo
+quindi ora pronti ad estendere la definizione di insiemi a misura nulla alle
+varietá differenziabili, prima di fare ció enunciamo e dimostriamo una versione
+piú debole del teorema di Sard.
+Per capire in che modo questo teorema é implicato dalla versione generale
+occorrerá attendere ancora un poco.</p>
+<div class="theorem">
+<p>(<strong>Mini-Sard</strong>)
+Sia <span class="math inline">\(F: U \sub \R^m \to \R^n\)</span> una mappa liscia,
+con <span class="math inline">\(U\)</span> aperto e <span class="math inline">\(m &lt; n\)</span>.
+Allora l’immagine <span class="math inline">\(F(\R^m)\)</span> ha misura nulla in <span class="math inline">\(\R^n\)</span>.</p>
+</div>
+<div class="proof">
+<p>Sia <span class="math inline">\(\pi: \R^n \to \R^m\)</span> la proiezione sulle
+prime <span class="math inline">\(m\)</span> componenti, tale mappa é liscia. Consideriamo ora
+l’aperto <span class="math inline">\(\tilde{U} = \pi^{-1}(U) \sub \R^n\)</span> e <span class="math inline">\(\tilde{F}
+= F \circ \pi: \R^n \to \R^n\)</span>, che é ancora liscia. A questo punto é
+sufficiente osservare che <span class="math inline">\(F(U)\)</span> non é nient’altro che
+l’immagine di <span class="math inline">\(\tilde{U} \cap \R^m\)</span> attraverso
+<span class="math inline">\(\tilde{F}\)</span>, che, per la proposizione precedente, ha misura
+nulla siccome é l’immagine di un insieme a misura nulla (é tutto
+contenuto in un iperpiano!) attraverso una funzione liscia.</p>
+</div>
+<p>Come preannunciato, estendiamo la definizione di insieme a misura
+nulla sulle varietá differenziali.</p>
+<div class="definition">
+<p>(Insiemi a misura nulla su varietá differenziabili)
+Sia <span class="math inline">\(M\)</span> una varietá differenziale, diciamo che <span class="math inline">\(A \sub M\)</span> ha misura nulla se
+<span class="math inline">\(\varphi(A_i \cap U_i)\)</span> ha misura nulla in <span class="math inline">\(\R^{dim(M)}\)</span> per ogni carta <span class="math inline">\((U,
+\varphi)\)</span> dell’atlante di <span class="math inline">\(M\)</span>.</p>
+</div>
+<p>Si osserva che, a causa della <span class="math inline">\(\mathscr{C}^\infty\)</span>-compatibilitá delle
+carte dell’atlante, per affermare che un sottoinsieme della varietá ha
+misura nulla é sufficiente trovare una collezione numerabile di carte
+che ricoprano l’insieme candidato e che soddisfino l’enunciato della
+definizione. In particolare se l’insieme é tutto contenuto in una
+carta, per mostrare che ha misura nulla basta verificare che
+l’immagine attraverso la carta ha misura nulla.</p>
+<p>Passiamo ora a definire un altro concetto che sará fondamentale per
+enunciare il Teorema di Sard.</p>
+<div class="definition">
+<p>(Punti critici e valori critici)
+Sia <span class="math inline">\(F: M \to N\)</span> una mappa liscia tra varietá differenziali, diciamo che <span class="math inline">\(p \in M\)</span> é
+un <strong>punto critico</strong> se la mappa differenziale indotta <span class="math inline">\(dF_p: T_P \to T_{F(p)}N\)</span> non é
+suriettiva.
+In tal caso <span class="math inline">\(F(p)\)</span> si dice <strong>valore critico</strong>.</p>
+<p>Denotiamo con <span class="math inline">\(Crit(F)\)</span> l’insieme dei punti critici di <span class="math inline">\(F\)</span>.</p>
+</div>
+<div class="definition">
+<p>(Punti regolari e valori regolari)
+Sia <span class="math inline">\(F: M \to N\)</span> una mappa liscia tra varietá differenziali, diciamo che <span class="math inline">\(p \in M\)</span> é
+un <strong>punto regolare</strong> se non é critico, ovvero se <span class="math inline">\(dF_p: T_p \to T_{F(p)}N\)</span> é suriettiva
+(ovvero locamente <span class="math inline">\(F\)</span> é una sommersione).
+Se <span class="math inline">\(p'\)</span> é un punto regolare per ogni punto sulla fibra <span class="math inline">\(F^{-1}(F(p))\)</span> allora
+<span class="math inline">\(F(p)\)</span> si dice <strong>valore regolare</strong>.</p>
+</div>
+<p>Osserviamo come affinché un valore sia critico é sufficiente che esso
+sia l’immagine di un solo punto critico, mentre affinché sia regolare
+occorre che tutti i punti della sua controimmagine siano regolari.</p>
+<p>La seguente osservazione ci sará utile durante la dimostrazione del
+teorema di Sard.</p>
+<div class="observation">
+<p><span class="math inline">\(Crit(F)\)</span> é un chiuso di <span class="math inline">\(M\)</span></p>
+</div>
+<div class="proof">
+<p><span class="math inline">\(Crit(F)=h^{-1}(0)\)</span> dove <span class="math inline">\(h: M \to \R\)</span> é la mappa liscia tale che</p>
+<p><span class="math display">\[h(p)=det(J(F)\bigr|_p \cdot (J(F)\bigr|_p)^t)\]</span></p>
+<p>cioé la mappa che manda i punti della varietá nel determinante del prodotto della Jacobiana con
+la sua trasposta.</p>
+</div>
+<p>Prima di presentare il teorema di Sard occorre ancora dare una
+definizione ed enunciare il teorema di Fubini, di cui peró ometteremo
+la dimostrazione <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Tale risultato sará fondamentale nella
+dimostrazione del teorema di Sard.</p>
+<div class="definition">
+<p>(Sezione verticale)
+Sia <span class="math inline">\(\R^n = \R^k \times \R^l\)</span> e <span class="math inline">\(a \in \R^k\)</span>, chiamiamo <strong>sezione verticale</strong> l’insieme
+<span class="math inline">\(V_a = \{ a \} \times \R^l\)</span>.</p>
+</div>
+<p>Sempre adottando le notazioni della definizione, diremo che un insieme
+<span class="math inline">\(A \sub \R^n\)</span> ha sezione verticale nulla se la proiezione (sulle ultime
+l componenti) di <span class="math inline">\(V_a \cap A in \R^l\)</span> ha misura nulla.</p>
+<div class="theorem">
+<p>(Teorema di Ruffini)
+Sia <span class="math inline">\(A \sub \R^n = \R^k \times \R^l\)</span>, se tutte le sezioni verticali <span class="math inline">\(V_a\)</span> hanno
+misura nulla (quindi <span class="math inline">\(\forall a \in \R^k\)</span>) allora <span class="math inline">\(A\)</span>
+ha misura nulla in <span class="math inline">\(\R^n\)</span>.</p>
+</div>
+<p>Enunciamo finalmente il teorema di Sard:</p>
+<div class="theorem">
+<p>(Teorema di Sard)
+Sia <span class="math inline">\(F: M \to N\)</span> una mappa liscia tra varietá differenziabili, allora l’insieme dei valori
+critici <span class="math inline">\(F(Crit(F))\)</span> ha misura nulla in <span class="math inline">\(N\)</span>.</p>
+</div>
+<p>Siccome per le varietá differenziabili vale il secondo assioma di
+numerabilitá ogni insieme é ricopribile con una collezione numerabile
+di carte, pertanto nell’enunciato del teorema é sufficiente chiedere
+che il dominio di F sia un singolo aperto <span class="math inline">\(U \sub \R^m\)</span>, dove <span class="math inline">\(m =
+dim(M)\)</span>. Inoltre, per lo stesso motivo, anche l’immagine <span class="math inline">\(F(U)\)</span> é
+ricopribile con una collezione numerabile di carte, pertanto anche qui
+si puó supporre senza perdita di generalitá che la carta sia una sola,
+ovvero che l’immagine <span class="math inline">\(F(U)\)</span> stia in <span class="math inline">\(\R^n\)</span>, dove <span class="math inline">\(n = dim(N)\)</span>.</p>
+<p>Quanto appena scritto é sufficiente a giustificare la seguente
+formulazione equivalente del teorema di Sard.</p>
+<div class="theorem">
+<p>(Teorema di Sard, formulazione equivalente)
+Sia <span class="math inline">\(F: U \sub \R^m \to \R^n\)</span> una mappa liscia, con <span class="math inline">\(U\)</span> aperto. Allora l’insieme dei
+valori critici <span class="math inline">\(F(Crit(F))\)</span> ha misura nulla in <span class="math inline">\(\R^n\)</span>.</p>
+</div>
+<div class="proof">
+<p>Se <span class="math inline">\(m \lt n\)</span> l’enunciato diventa una semplice conseguenza del Teorema Mini-Sard, supponiamo
+dunque <span class="math inline">\(m \geq n\)</span> e procediamo per induzione su <span class="math inline">\(m\)</span>.</p>
+<p>Se <span class="math inline">\(m = 0\)</span> allora l’immagine dei punti critici deve essere contenuta in un punto, e
+pertanto non puó che avere misura nulla. Supponiamo quindi ora il teorema valido per <span class="math inline">\(m-1\)</span>
+e dimostriamolo per <span class="math inline">\(m\)</span>.</p>
+<p>Chiamiamo ora per brevitá <span class="math inline">\(C = Crit(F)\)</span> e <span class="math inline">\(C_i = \{ p \in U : \frac{\partial^k
+F}{\partial \dots} \bigr|_p = 0, \forall k \leq i \}\)</span>, ovvero l’insieme dei punti di <span class="math inline">\(U\)</span> in
+cui tutte le derivate di ordine inferiore a <span class="math inline">\(i\)</span> si annullano.</p>
+<p>Osserviamo subito come <span class="math inline">\(C\)</span> e i <span class="math inline">\(C_i\)</span> sono chiusi (dimostrazione simile
+all’osservazione iniziale sulla chiusura di <span class="math inline">\(C\)</span>), inoltre ha luogo la seguente catena di
+inclusioni:</p>
+<p><span class="math display">\[C \supset C_1 \supset C_2 \supset \dots\]</span></p>
+<p>Assumiamo ora i tre seguenti lemmi, rimandandone temporaneamente la dimostrazione, che ricordiamo
+avverrá per induzione su <span class="math inline">\(m\)</span>.</p>
+<ul>
+<li><strong>Lemma a</strong> <span class="math inline">\(F(C \setminus C_1)\)</span> ha misura nulla in <span class="math inline">\(\R^n\)</span></li>
+<li><strong>Lemma b</strong> <span class="math inline">\(F(C_i \setminus C_{i+1})\)</span> ha misura nulla in <span class="math inline">\(\R^n\)</span></li>
+<li><strong>Lemma c</strong> <span class="math inline">\(F(C_k)\)</span> ha misura nulla in <span class="math inline">\(\R^n\)</span> se <span class="math inline">\(k \gt \frac{m}{n} - 1\)</span></li>
+</ul>
+<p>Per concludere il teorema ora é sufficiente osservare che</p>
+<p><span class="math display">\[F(C) = F(C \setminus C_1) \cup \bigcup_{i=1}^{\floor{\frac{m}{n}-1}}
+F(C_i) \setminus F(C_{i+1}) \cup F(C_{\ceil{\frac{m}{n}-1}})\]</span></p>
+<p>Ovvero che l’insieme dei valori critici é unione finita di insiemi che sono a misura nulla per i
+tre lemmi, e pertanto anch’esso ha misura nulla.</p>
+</div>
+<p>Seguono le dimostrazioni dei tre lemmi, ricordiamo che ci troviamo
+sotto ipotesi induttive, pertanto potremo assumere il teorema di Sard
+valido per <span class="math inline">\(m-1\)</span>.</p>
+<div class="lemma">
+<p>(a)
+<span class="math inline">\(F(C \setminus C_1)\)</span> ha misura nulla in <span class="math inline">\(\R^n\)</span></p>
+</div>
+<div class="proof">
+<p>Osserviamo come sia sufficiente mostrare che per ogni punto in <span class="math inline">\(C \setminus C_1\)</span> esiste un
+intorno <span class="math inline">\(V\)</span> per cui <span class="math inline">\(f(C \cap V)\)</span> ha misura nulla. Infatti siccome <span class="math inline">\(U\)</span> é un
+aperto di <span class="math inline">\(\R^m\)</span>, vale il secondo assioma di numerabilitá, e quindi é possibile ricoprire
+<span class="math inline">\(C \setminus C_1\)</span> di intorni la cui immagine ha misura nulla.</p>
+<p>Consideriamo quindi <span class="math inline">\(\tilde{x} \in C \setminus C_1\)</span>, visto che <span class="math inline">\(\tilde{x} \not\in
+C_1\)</span> possiamo assumere senza perdita di generalitá che <span class="math inline">\(\frac{\partial f}{\partial x_1}\)</span>
+sia non nulla in <span class="math inline">\(\tilde{x}\)</span>, a questo punto definiamo una mappa <span class="math inline">\(h: U \to \R^m\)</span> tale
+che</p>
+<p><span class="math display">\[h(x_1, \dots, x_m) = (f_1(x), x_2, \dots, x_m)\]</span></p>
+<p>Questa mappa ha rango massimo in <span class="math inline">\(\tilde{x}\)</span> e quindi é un diffeomorfismo locale per un
+qualche intorno aperto di <span class="math inline">\(\tilde{x}\)</span>, continuiamo a chiamare <span class="math inline">\(h: V \sub U \to V'
+\sub \R^m\)</span> il diffeomorfismo ottenuto dalla restrizione.</p>
+<p>Definiamo ora la mappa composta <span class="math inline">\(g = f \circ h^{-1} : V' \to \R^n\)</span> e chiamiamo <span class="math inline">\(C' =
+Crit(g)\)</span>, osserviamo subito che <span class="math inline">\(C' = h(C \cap V)\)</span>; ma allora <span class="math inline">\(g(C') = g(h(C \cap V))
+= f(h(h^{-1}(C \cap V))) = f(C \cap V)\)</span> e quindi per mostrare la tesi basta mostrare che
+<span class="math inline">\(g(C')\)</span> ha misura nulla.</p>
+<p>Osservando che <span class="math inline">\(g_1 = f_1 \circ h_1^{-1} = id\)</span> si vede che <span class="math inline">\(g\)</span> é la funzione identitá
+sulla prima coordinata, questo permette di definire per ogni <span class="math inline">\(t\)</span> la mappa <span class="math inline">\(g^t: ({t}
+\times \R^{m-1} \to {t} \times \R^{n-1})\)</span> dove</p>
+<p><span class="math display">\[g^t(x_2, x_3, \dots, x_m) = (g_2(t, x_2, \dots, x_m), \dots, g_m(t, x_2, \dots, x_m))\]</span></p>
+<p>I punti critici di questa mappa coincidono coi punti critici della sezione verticale di
+<span class="math inline">\(C'\)</span>, ovvero <span class="math inline">\(C' \cap V_t = \{ t \} \times Crit(g^t)\)</span>. Questo implica che
+<span class="math inline">\(g(C') \cap V_t = \{ t \} \times g^t(C)\)</span>, ovvero che le varie sezioni verticali dei valori
+critici di <span class="math inline">\(g\)</span> coincidono con i valori critici di <span class="math inline">\(g^t\)</span>, che peró hanno misura nulla
+per ipotesi induttiva!</p>
+<p>Questo basterebbe a concludere grazie al teorema di Fubini, se solo non fosse che mentre
+<span class="math inline">\(C'\)</span> é un chiuso non é detto che anche <span class="math inline">\(g(C')\)</span> sia un chiuso (serve che lo sia
+affinché sia possibile applicare il teorema di Fubini). Questo problema é facilmente superabile
+osservando che <span class="math inline">\(C'\)</span> é unione numerabile di compatti (é un chiuso di <span class="math inline">\(U\)</span>) e
+quindi anche l’immagine <span class="math inline">\(g(C')\)</span> é unione numerabile di compatti, pertanto non assumere
+<span class="math inline">\(C'\)</span> chiuso non é lmitante.</p>
+</div>
+<div class="lemma">
+<p>(b)
+<span class="math inline">\(F(C_i \setminus C_{i+1})\)</span> ha misura nulla in <span class="math inline">\(\R^n\)</span></p>
+</div>
+<div class="proof">
+<p>La dimostrazione é simile a quella del lemma precedente, infatti dimostreremo che
+<span class="math inline">\(\forall x \in C_i \setminus C_{i+1}\)</span> troviamo un intorno <span class="math inline">\(V\)</span> di <span class="math inline">\(x\)</span> tale che
+<span class="math inline">\(f(C_i \cap V)\)</span> ha misura nulla, per le stesse motivizaioni del lemma precedente questo é
+sufficiente a concludere la dimostrazione.</p>
+<p>Sia <span class="math inline">\(\tilde{x} \in C_i \setminus C_{i+1}\)</span>, siccome <span class="math inline">\(\tilde{x} \not \in C_{i+1}\)</span>
+significa che possiamo trovare una derivata <span class="math inline">\(k+1\)</span>-esima di <span class="math inline">\(f\)</span> non nulla in
+<span class="math inline">\(\tilde{x}\)</span>.
+Senza perdita di generalitá assumiamo quindi che esista una derivata <span class="math inline">\(k\)</span>-esima <span class="math inline">\(\rho:
+U \to \R^n\)</span> tale che <span class="math inline">\(\frac{\partial \rho_1}{\partial x_1}\)</span> sia non nulla in
+<span class="math inline">\(\tilde{x}\)</span>.</p>
+<p>Definiamo a questo punto una mappa <span class="math inline">\(h: U \to \R^m\)</span> tale che</p>
+<p><span class="math display">\[h(x_1, \dots, x_m) = (\rho_1(x_1, \dots, x_m), \dots, x_m)\]</span></p>
+<p>Come nella dimostrazione del lemma precedente, siccome tale mappa ha rango massimo in
+<span class="math inline">\(\tilde{x}\)</span>, esistono <span class="math inline">\(x \in V \sub U \sub \R^m\)</span> e <span class="math inline">\(V' \sub \R^n\)</span> aperti
+diffeomorfi attraverso la restrizione di <span class="math inline">\(h\)</span>, che continueremo a chiamare <span class="math inline">\(h\)</span>.
+Per costruzione <span class="math inline">\(h(C_k \cap V)\)</span> é contenuto nell’iperpiano <span class="math inline">\(\{ 0 \} \times \R^{m-1}\)</span>,
+e quindi <span class="math inline">\(g = f \circ h^{-1}\)</span> ha i punti critici di tipo <span class="math inline">\(C_k\)</span> in tale iperpiano.</p>
+<p>Definiamo <span class="math inline">\(\tilde{g}\)</span> come la restrizione di <span class="math inline">\(g\)</span> data da <span class="math inline">\(\tilde{g}: (\{ 0 \}
+\times \R^{m-1}) \cap V' \to \R^n\)</span>, per induzione vediamo che i suoi valori critici hanno misura
+nulla, ma i suoi punti critici coincidono coi punti critici di tipo <span class="math inline">\(C_k\)</span> di <span class="math inline">\(g\)</span>, e
+quindi l’immagini di tali punti, ovvero <span class="math inline">\(f(C_k \cap V)\)</span>, ha misura nulla.</p>
+</div>
+<div class="lemma">
+<p>(c)
+<span class="math inline">\(F(C_k)\)</span> ha misura nulla in <span class="math inline">\(\R^n\)</span> se <span class="math inline">\(k \gt \frac{m}{n} - 1\)</span></p>
+</div>
+<div class="proof">
+<p>Siccome <span class="math inline">\(C_k\)</span> é ricopribile da una collezione numerabile di cubi contenuti in <span class="math inline">\(U\)</span> di
+lato <span class="math inline">\(\delta\)</span>, preso uno di questi cubi, diciamo <span class="math inline">\(S \sub U\)</span>, é sufficiente mostrare
+che <span class="math inline">\(f(C_k \cap S)\)</span> ha misura nulla per <span class="math inline">\(k\)</span> sufficientemente grande.</p>
+<p>Sia <span class="math inline">\(x \in C_k \cap S\)</span> e <span class="math inline">\(x+h \in S\)</span>, scrivendo lo sviluppo in serie di Taylor di
+<span class="math inline">\(f\)</span> di ordine <span class="math inline">\(k\)</span> e ricordandoci della compattezza di <span class="math inline">\(S\)</span> e della definizione
+di <span class="math inline">\(C_k\)</span> otteniamo:</p>
+<p><span class="math display">\[f(x, h) = f(x) + R(x, h)\]</span></p>
+<p>dove vale la seguente maggiorazione per il resto <span class="math inline">\(R\)</span></p>
+<p><span class="math display">\[R(x, h) \lt a ||h||^{k+1}\]</span></p>
+<p><span class="math inline">\(a \in \R\)</span> é costante e dipende solo da <span class="math inline">\(f\)</span> e <span class="math inline">\(S\)</span>.
+A questo punto possiamo suddividere il cubo <span class="math inline">\(S\)</span> in <span class="math inline">\(r^m\)</span> cubi di lato
+<span class="math inline">\(\frac{\delta}{r}\)</span>, sia <span class="math inline">\(\tilde{S}\)</span> uno di questi cubi e sia <span class="math inline">\(x \in \tilde{S}
+\cap C_k\)</span>, osserviamo come ogni punto di <span class="math inline">\(\tilde{S}\)</span> sia della forma <span class="math inline">\(x+h\)</span> dove</p>
+<p><span class="math display">\[||h|| \lt \sqrt{m} \cdot \frac{\delta}{r} = diam(\tilde{S})\]</span></p>
+<p>Dalle diseguaglianze di prima otteniamo</p>
+<p><span class="math display">\[||f(x,h) - f(x)|| = ||R(x,h)|| \lt a ||h||^{k+1} \lt a ( \sqrt{m} \frac{\delta}{r} )^{k+1}\]</span></p>
+<p>Che significa che un <span class="math inline">\(diam(f(\tilde{S})) \lt a ( \sqrt{m} \frac{\delta}{r} )^{k+1}\)</span> e che
+quindi <span class="math inline">\(f(\tilde{S})\)</span> é contenuto in un cubo di lato <span class="math inline">\(\frac{b}{r^{k+1}}\)</span> dove <span class="math inline">\(b
+= 2a (\sqrt{m} \delta)^{k+1}\)</span>.</p>
+<p>Questo ragionamento non dipende da una particolare scelta del cubo <span class="math inline">\(\tilde{S}\)</span> e puó essere
+effettuato per ogni cubo della suddivisione, dunque <span class="math inline">\(f(C_k \cap S)\)</span> é ricopribile da una
+famiglia di <span class="math inline">\(r^m\)</span> cubi, ognuno di lato <span class="math inline">\(\frac{b}{r^{k+1}}\)</span>.
+Ma allora la somma dei volumi é minore di</p>
+<p><span class="math display">\[r^m (\frac{b}{r^{k+1}})^n = b^n r^{m - (k+1)n} \xrightarrow[r \rightarrow \infty]{} 0\]</span></p>
+<p>Che é equivalente ad affermare che <span class="math inline">\(\forall \epsilon \gt 0\)</span> troviamo un <span class="math inline">\(r_0\)</span>
+sufficientemente grande per cui <span class="math inline">\(\forall r \gt r_0\)</span> la somma dei volumi dei cubi che
+ricoprono <span class="math inline">\(f(C_k \cap S)\)</span> é inferiore di <span class="math inline">\(\epsilon\)</span>, ovvero che <span class="math inline">\(f(C_k \cap S)\)</span>
+ha misura nulla.</p>
+</div>
+<p>La dimostrazione di questo lemma termina la dimostrazione del teorema
+di Sard, seguono gli enunciati di alcuni notevoli risultati
+interpretabili come corollari.</p>
+<div class="observation">
+<p>Il gruppo di omotopia <span class="math inline">\(\pi_q(S^n)\)</span> é banale se <span class="math inline">\(q \lt n\)</span></p>
+</div>
+<div class="proof">
+<p>(idea <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>)
+Basta il teorema Mini-Sard, che usato in un certo modo permette di non considerare un punto da
+<span class="math inline">\(S^n\)</span> e retrarre (in modo <span class="math inline">\(\mathscr{C}^{\infty}\)</span>) tramite una proiezione
+stereografica ad un aperto di <span class="math inline">\(\R^n\)</span>.</p>
+</div>
+<div class="theorem">
+<p>(Teorema del punto fisso di Brouwer <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>)
+Sia <span class="math inline">\(f: D^n \to D^n\)</span> continua, dove <span class="math inline">\(D^n\)</span> é il disco <span class="math inline">\(n\)</span>-dimensionale. Allora
+<span class="math inline">\(f\)</span> ammette un punto fisso cioé <span class="math inline">\(\exists x_0 \in D^n\)</span>
+tale che <span class="math inline">\(f(x_0)=x_0\)</span>.</p>
+</div>
+<div class="theorem">
+<p>(Teorema di Whitney <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>)
+Sia <span class="math inline">\(M\)</span> una varietá differenziabile <span class="math inline">\(n\)</span>-dimensionale, allora essa puó essere
+realizzata come sottovarietá chiusa di <span class="math inline">\(\R^{2n+1}\)</span> o come sottovarietá immersa di
+<span class="math inline">\(\R^{2n}\)</span>.</p>
+<p>Equivalentemente esiste un embedding proprio di <span class="math inline">\(M\)</span> in <span class="math inline">\(\R^{2n+1}\)</span> e una immersione
+di <span class="math inline">\(\R^{2n}\)</span>.</p>
+</div>
+<p>Per esporre il prossimo risultato (fondamentale nella teoria di Morse)
+occorre dare alcune definizioni.</p>
+<div class="definition">
+<p>(punto critico non degenere)
+Sia <span class="math inline">\(f: \R^k \to \R\)</span> una funzione liscia, diciamo che <span class="math inline">\(p \in \R^k\)</span> é un <strong>punto
+critico non degenere</strong> se é un punto critico (cioé la mappa differenziale indotta ivi si annulla)
+e se l’Hessiana nel punto é non singolare, ovvero</p>
+<p><span class="math display">\[det(H(f)\bigr|_p) = det(\Big(\frac{\partial^2 f}{\partial x_i
+\partial x_j}\Big)_{i, j}) \not = 0\]</span></p>
+</div>
+<div class="definition">
+<p>(funzione di Morse)
+Sia <span class="math inline">\(f: \R^k \to \R\)</span> una funzione liscia, diciamo é una <strong>funzione di Morse</strong> se tutti i suoi
+punti non degeneri.</p>
+</div>
+<p>Si puó mostrare <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> (lemma di Morse) che le funzioni di Morse hanno la
+proprietá di essere localmente descrivibili come polinomi di secondo
+grado, ovvero che esiste sempre un cambio di coordinate per cui</p>
+<p><span class="math display">\[f(x_1, \dots, x_k) = f(p) + \bold{x} \cdot H(f)\bigr|_p \cdot \bold{x}^t\]</span></p>
+<p>Diagonalizzando la matrice si riesce addirittura a riscrivere la
+precedente relazione come</p>
+<p><span class="math display">\[f(x_1, \dots, x_k) = f(p) + \sum_{i = 1}^k \epsilon_i x_i^2\]</span></p>
+<p>dove <span class="math inline">\(\epsilon_i = \pm 1\)</span>.</p>
+<p>Il teorema di Sard ci permette di affermare <a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> che queste (belle)
+funzioni di Morse sono quasi tutte le funzioni liscie, in termini piú
+precisi</p>
+<div class="theorem">
+<p>Sia <span class="math inline">\(f: M \to \R\)</span> una funzione liscia definita su una varietá differenziabile
+<span class="math inline">\(k\)</span>-dimensionale <span class="math inline">\(M\)</span>, tramite le sue carte possiamo definire sempre <span class="math inline">\(M\)</span> la
+funzione liscia</p>
+<p><span class="math display">\[f_a(x_1, \dots, x_k) = f(x_1, \dots, x_k) + \sum_{i=1}^k a_i x_i\]</span></p>
+<p>Allora il sottoinsieme di <span class="math inline">\(\R^k\)</span> degli <span class="math inline">\(a \in \R^k\)</span> tali che <span class="math inline">\(f_a\)</span> non é
+funzione di Morse ha misura nulla.</p>
+</div>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><ol type="A">
+<li>Guillemin, A. Pollack - Differential Topology (p. 204)</li>
+</ol>
+<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></li>
+<li id="fn2" role="doc-endnote"><ol type="A">
+<li>W. Tu, R. Bott - Differential Forms in Algebraic Topology (pp. 214, 215)</li>
+</ol>
+<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></li>
+<li id="fn3" role="doc-endnote"><ol type="A">
+<li>W. Hirsch - A proof of the non-retractability of a cell onto its boundary</li>
+</ol>
+<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></li>
+<li id="fn4" role="doc-endnote"><ol type="A">
+<li>Abate, F. Tovena - Geometria Differenziale (pp. 109-115)</li>
+</ol>
+<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></li>
+<li id="fn5" role="doc-endnote"><ol type="A">
+<li>Guillemin, A. Pollack - Differential Topology (p. 42)</li>
+</ol>
+<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></li>
+<li id="fn6" role="doc-endnote"><ol type="A">
+<li>Guillemin, A. Pollack - Differential Topology (p. 43)</li>
+</ol>
+<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></li>
+</ol>
+</section>
+    </section>
+</article>
+
+        </main>
+
+        <footer>
+	  <div class="left">
+	  Built with &hearts; using 
+          <a href="https://www.gnu.org/software/emacs/">Emacs</a>,
+          <a href="https://nixos.org/">Nix</a> and
+          <a href="https://jaspervdj.be/hakyll">Hakyll</a>
+	  <br>
+	  Distributed on
+          <a href="https://pages.github.com/">GitHub</a>,
+          <a href="https://ipfs.io/">IPFS</a> and
+          <a href="https://www.torproject.org/">Tor</a>
+	  </div>
+	  <div class="right">
+	   Commit <a href="https://github.com/aciceri/test/tree/release"></a>
+	   <br>
+	   <a id="theme-switcher">Switch theme</a>
+	  </div>
+        </footer>
+      </div>
+    </body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Ocean Sprint: Nix under palm trees - Andrea Ciceri's blog</title> 
+
+	<!-- KaTeX -->
+        <link rel="stylesheet" href="../../thirdparty/katex/katex.min.css">
+        <script defer src="../../thirdparty/katex/katex.min.js"></script>
+        <script defer src="../../thirdparty/katex/contrib/auto-render.min.js"></script>
+
+	<!-- asciinema -->
+	<link rel="stylesheet" type="text/css" href="../../thirdparty/asciinema/asciinema-player.css" />
+
+        <!-- Custom -->
+        <link rel="stylesheet" href="../../css/custom.css" />
+        <script src="../../js/custom.js"></script>
+
+	<!-- Hyphenopoly -->
+        <script src="../../thirdparty/hyphenopoly/Hyphenopoly_Loader.js"></script>
+	
+    </head>
+    <body class="theme-light">
+      <script src="../../thirdparty/asciinema/asciinema-player.js"></script>
+      <div id="main-wrapper">
+        <header>
+            <nav>
+                <a href="../../">Home</a>
+                <a href="../../contacts/">Contacts</a>
+                <a href="../../archive">Archive</a>
+                <a href="../../rss/rss.xml">RSS</a>
+                <a href="../../atom/atom.xml">Atom</a>
+            </nav>
+        </header>
+
+        <main>
+            <h1>Ocean Sprint: Nix under palm trees</h1>
+            <article>
+    <section class="header">
+        Posted on 2022-11-30
+	
+	with tags
+        
+        <a href="../../tags/nix/index.html">nix</a>,
+        
+        <a href="../../tags/ocean-sprint/index.html">ocean-sprint</a>,
+        
+        <a href="../../tags/sprint/index.html">sprint</a>,
+        
+        <a href="../../tags/hackathon/index.html">hackathon</a>,
+        
+        <a href="../../tags/nixos/index.html">nixos</a>
+        
+    </section>
+    <section>
+        <p>I’ve just attended my first sprint, that is a kind of long hackathon, in this
+case lasting 5 days and exclusively Nix themed.</p>
+<p>I had the occasion to meet a variety of people with different attitudes to
+problems and different backgrounds, this last thing was really interesting for
+me since I think that in the last months I’ve lived inside a bubble made of
+exclusively Haskellers.</p>
+<figure>
+<img src="../../images/ocean-sprint-volcano-nixers.jpg" alt="Some Nixers on the summit of a nearby volcano" />
+<figcaption aria-hidden="true">Some Nixers on the summit of a nearby volcano</figcaption>
+</figure>
+<p>Personally I’ve decided to devote most of my time on Nix internals since it’s
+something that could help with the creation of new “2nix” tools (in the last
+months I had many headaches due to tools like <a href="https://github.com/input-output-hk/haskell.nix">haskell.nix</a> and their extensive
+use of IFDs). My colleague <a href="https://github.com/brainrake">Márton</a> and me also had a call with <a href="https://github.com/Ericson2314">John Ericson</a> which
+let to <a href="https://github.com/NixOS/nix/pull/7339">this PR</a>.</p>
+<p>I’ve also spent a day digging into <span class="spurious-link" target="git@github.com:NixOS/hydra.git"><em>Hydra</em></span> trying to make it show the evaluation
+log during the evaluation itself and not only after that the evaluation
+terminated. In the end I wasn’t able to make it work (it was more difficult than
+I initially thought) but it was an useful experience and perhaps in the future
+I’ll continue these efforts.</p>
+<p>Other people worked on different projects like making secure boot work on NixOS,
+on nixifing a live coding environment, on <a href="https://github.com/OceanSprint/tesh">this</a> really interesting project about
+making shell snippets in markdown testable, on <a href="https://github.com/oxalica/nil">nil</a> (a really powerful LSP server
+for Nix written in Rust) or also <a href="https://github.com/hsjobeki/noogle">noogle</a>, a <a href="https://hoogle.haskell.org/">Hoogle</a> like engine for Nix.</p>
+    </section>
+</article>
+
+        </main>
+
+        <footer>
+	  <div class="left">
+	  Built with &hearts; using 
+          <a href="https://www.gnu.org/software/emacs/">Emacs</a>,
+          <a href="https://nixos.org/">Nix</a> and
+          <a href="https://jaspervdj.be/hakyll">Hakyll</a>
+	  <br>
+	  Distributed on
+          <a href="https://pages.github.com/">GitHub</a>,
+          <a href="https://ipfs.io/">IPFS</a> and
+          <a href="https://www.torproject.org/">Tor</a>
+	  </div>
+	  <div class="right">
+	   Commit <a href="https://github.com/aciceri/test/tree/release"></a>
+	   <br>
+	   <a id="theme-switcher">Switch theme</a>
+	  </div>
+        </footer>
+      </div>
+    </body>
+</html>

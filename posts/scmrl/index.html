@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>SCRML (SCheMeRogueLike) - Andrea Ciceri's blog</title> 
+
+	<!-- KaTeX -->
+        <link rel="stylesheet" href="../../thirdparty/katex/katex.min.css">
+        <script defer src="../../thirdparty/katex/katex.min.js"></script>
+        <script defer src="../../thirdparty/katex/contrib/auto-render.min.js"></script>
+
+	<!-- asciinema -->
+	<link rel="stylesheet" type="text/css" href="../../thirdparty/asciinema/asciinema-player.css" />
+
+        <!-- Custom -->
+        <link rel="stylesheet" href="../../css/custom.css" />
+        <script src="../../js/custom.js"></script>
+
+	<!-- Hyphenopoly -->
+        <script src="../../thirdparty/hyphenopoly/Hyphenopoly_Loader.js"></script>
+	
+    </head>
+    <body class="theme-light">
+      <script src="../../thirdparty/asciinema/asciinema-player.js"></script>
+      <div id="main-wrapper">
+        <header>
+            <nav>
+                <a href="../../">Home</a>
+                <a href="../../contacts/">Contacts</a>
+                <a href="../../archive">Archive</a>
+                <a href="../../rss/rss.xml">RSS</a>
+                <a href="../../atom/atom.xml">Atom</a>
+            </nav>
+        </header>
+
+        <main>
+            <h1>SCRML (SCheMeRogueLike)</h1>
+            <article>
+    <section class="header">
+        Posted on 2017-09-11
+	
+	with tags
+        
+        <a href="../../tags/scheme/index.html">scheme</a>,
+        
+        <a href="../../tags/roguelike/index.html">roguelike</a>
+        
+    </section>
+    <section>
+        <p>Welcome to SCMRL (SCheMeRogueLike, yes I’ve to choose a more imaginative name),
+in this page I will collect the information about this my project.</p>
+<p><strong>2017/09/11</strong> SCMRL is <a href="https://github.com/andrea96/scmrl">here on GitHub</a>. This is the first commit, I worked on it at
+the end of July and I decided to upload it only now. The game is not playable
+but I feared that it could be accidentally deleted so here it is.</p>
+<p><strong>May 2019</strong> After nearly 2 years of nothing I started working again on this
+project, I’m trying to create an object oriented interface (using <a href="http://wiki.call-cc.org/eggref/5/coops">coops</a>) for the
+already existing structures. I’m also making it compatible with <a href="http://wiki.call-cc.org/man/5/">Chicken 5</a>. I
+gave up about the idea of using the bugged <a href="http://wiki.call-cc.org/eggref/5/ncurses">nCurses</a> egg and chose to directly do
+the C calls to the library. At the moment I’m working on a new branch of the
+repository.</p>
+<p>Features implemented:</p>
+<ul>
+<li>Random dungeon generation inspired by <a href="http://journal.stuffwithstuff.com/2014/12/21/rooms-and-mazes/">this</a></li>
+<li>Field of vision based on <a href="http://www.roguebasin.com/index.php?title=Precise_Shadowcasting_in_JavaScript">this method</a></li>
+<li>Pathfinding via Dijkstra maps</li>
+</ul>
+<p>I hope, sooner or later, to reach a playable version.</p>
+    </section>
+</article>
+
+        </main>
+
+        <footer>
+	  <div class="left">
+	  Built with &hearts; using 
+          <a href="https://www.gnu.org/software/emacs/">Emacs</a>,
+          <a href="https://nixos.org/">Nix</a> and
+          <a href="https://jaspervdj.be/hakyll">Hakyll</a>
+	  <br>
+	  Distributed on
+          <a href="https://pages.github.com/">GitHub</a>,
+          <a href="https://ipfs.io/">IPFS</a> and
+          <a href="https://www.torproject.org/">Tor</a>
+	  </div>
+	  <div class="right">
+	   Commit <a href="https://github.com/aciceri/test/tree/release"></a>
+	   <br>
+	   <a id="theme-switcher">Switch theme</a>
+	  </div>
+        </footer>
+      </div>
+    </body>
+</html>
