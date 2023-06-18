@@ -54,7 +54,7 @@
     haskellNix,
     ...
   } @ inputs:
-    flake-utils.lib.eachDefaultSystem (
+    (flake-utils.lib.eachDefaultSystem (
       system: let
         overlays = [
           haskellNix.overlay
@@ -150,5 +150,7 @@
             };
           };
         }
-    );
+    )) // {
+      herculesCI.ciSystems = [ "x86_64-linux" ];
+    };
 }
