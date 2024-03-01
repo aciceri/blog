@@ -3,7 +3,7 @@ In the unfortunate case you have to contact me, please do it at
 ~andrea [dot] ciceri [at] autistici [dot] org~
 
 If you want, you can also try your luck and try to contact me on
-[[https://matrix.org][Matrix]] at ~aciceri:nixos.dev~ or on [[https://joinmastodon.org][Mastodon]] at ~zrsk@mastodon.bida.im~.
+[[https://matrix.org][Matrix]] at ~aciceri:nixos.dev~ or on [[https://joinmastodon.org][Mastodon]] at ~aciceri@emacs.ch~.
 
 
 You can sign your messages using my [[file:andreaciceri.asc][GPG key]]:
