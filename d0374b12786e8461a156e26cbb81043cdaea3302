@@ -16,6 +16,24 @@
       "message": "Non mi piace",
       "revId": "d0374b12786e8461a156e26cbb81043cdaea3302",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e88a1b4_d528b374",
+        "filename": "README.org",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1038044
+      },
+      "writtenOn": "2024-05-14T12:37:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "570b21bd_6d5b5242",
+      "revId": "d0374b12786e8461a156e26cbb81043cdaea3302",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }
