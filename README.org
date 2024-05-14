@@ -30,3 +30,5 @@ automatically generated from the [[https://github.com/aciceri/test/tree/release]
    nix run .#compile
    #+end_src
    This is what is used in the CI/CD pipeline.
+
+CU CU CU!
