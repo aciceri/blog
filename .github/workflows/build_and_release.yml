@@ -14,9 +14,9 @@ jobs:
     
     - name: Install Nix
       if: success()
-      uses: cachix/install-nix-action@v17
+      uses: cachix/install-nix-action@v30
 
-    - uses: cachix/cachix-action@v10
+    - uses: cachix/cachix-action@v15
       with:
         name: aciceri-blog
         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
@@ -25,26 +25,26 @@ jobs:
       if: success()
       run: nix build --accept-flake-config -L
       
-    - name: Push on Pinata
-      id: ipfs
-      if: success()
-      uses: aquiladev/ipfs-action@v0.3.1
-      with:
-        path: ./result
-        service: pinata
-        pinataKey: ${{ secrets.API_KEY }}
-        pinataSecret: ${{ secrets.API_SECRET }}
+    # - name: Push on Pinata
+    #   id: ipfs
+    #   if: success()
+    #   uses: aquiladev/ipfs-action@v0.3.1
+    #   with:
+    #     path: ./result
+    #     service: pinata
+    #     pinataKey: ${{ secrets.API_KEY }}
+    #     pinataSecret: ${{ secrets.API_SECRET }}
     
-    - name: Update DNS with new IPFS hash
-      if: success()
-      env:
-        CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
-        RECORD_DOMAIN: 'aciceri.dev'
-        RECORD_NAME: '_dnslink.blog'
-        CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
-      uses: textileio/cloudflare-update-dnslink@0fe7b7a1ffc865db3a4da9773f0f987447ad5848
-      with:
-        cid: ${{ steps.ipfs.outputs.hash }}
+    # - name: Update DNS with new IPFS hash
+    #   if: success()
+    #   env:
+    #     CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
+    #     RECORD_DOMAIN: 'aciceri.dev'
+    #     RECORD_NAME: '_dnslink.blog'
+    #     CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+    #   uses: textileio/cloudflare-update-dnslink@0.3.1
+    #   with:
+    #     cid: ${{ steps.ipfs.outputs.hash }}
         
     - name: Deploy on Github Pages
       if: success()
