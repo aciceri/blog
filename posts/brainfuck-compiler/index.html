@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en-us">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>From Brainfuck to Python bytecode - Andrea Ciceri's blog</title> 
+
+	<!-- KaTeX -->
+        <link rel="stylesheet" href="../../thirdparty/katex/katex.min.css">
+        <script defer src="../../thirdparty/katex/katex.min.js"></script>
+        <script defer src="../../thirdparty/katex/contrib/auto-render.min.js"></script>
+
+	<!-- asciinema -->
+	<link rel="stylesheet" type="text/css" href="../../thirdparty/asciinema/asciinema-player.css" />
+
+        <!-- Custom -->
+        <link rel="stylesheet" href="../../css/custom.css" />
+        <script src="../../js/custom.js"></script>
+
+	<!-- Hyphenopoly -->
+        <script src="../../thirdparty/hyphenopoly/Hyphenopoly_Loader.js"></script>
+	
+    </head>
+    <body class="theme-light">
+      <script src="../../thirdparty/asciinema/asciinema-player.js"></script>
+      <div id="main-wrapper">
+        <header>
+            <nav>
+                <a href="../../">Home</a>
+                <a href="../../contacts/">Contacts</a>
+                <a href="../../archive">Archive</a>
+                <a href="../../rss/rss.xml">RSS</a>
+                <a href="../../atom/atom.xml">Atom</a>
+            </nav>
+        </header>
+
+        <main>
+            <h1>From Brainfuck to Python bytecode</h1>
+            <article>
+    <section class="header">
+        Posted on 2019-08-27
+	
+	with tags
+        
+        <a href="../../tags/python/index.html">python</a>,
+        
+        <a href="../../tags/compiler/index.html">compiler</a>,
+        
+        <a href="../../tags/brainfuck/index.html">brainfuck</a>,
+        
+        <a href="../../tags/bytecode/index.html">bytecode</a>
+        
+    </section>
+    <section>
+        <div class="note">
+<p>When I wrote this post (and the script) the last Python version was
+3.7, due of its low-level nature, the program no longer works with
+newer versions. However it should be simple to update it (starting
+from, for example, changing the magic number) or even better, using
+<a href="https://pypi.org/project/bytecode/">this library</a>.</p>
+</div>
+<p>About one month ago I wrote <a href="https://gist.github.com/aciceri/913aa9667d89af8e2ab45e99e557c2aa">this</a> simple transpiler from <a href="https://en.wikipedia.org/wiki/Brainfuck">Brainfuck</a> to
+Python bytecode. I’m going to assume you already can “program” in
+Brainfuck, otherwise I advise you to read the <a href="https://esolangs.org/wiki/Brainfuck">dedicated page on Esolang</a>, in my opinion the best place to learn about the language. I’m
+also assuming that you have a minimal knowledge about <a href="https://en.wikipedia.org/wiki/Stack_machine">stack machines</a>,
+personally I only used them as a theoretical objects during some
+proofs. I learned to use them as a real software only during the
+creation of this transpiler.</p>
+<p>Understanding how to do all of this was not easy because the Python
+virtual machine is a moving target, I worked with Python 3.7 and I
+think my program should work with Python 3.6+. The best places to
+understand how the things work under the hood is the official <a href="https://docs.python.org/3.7/library/dis.html">dis module documentation</a> and <a href="https://github.com/python/cpython/blob/master/Python/ceval.c">this</a> source directly from the Python source
+code. I recommend to take a look at the first link and to use the
+second one only for consultation.</p>
+<p>I suggest to keep an eye on the source of the program while reading
+this post.</p>
+<p>In the first part of the program there are some imports and the
+initialization of the <a href="https://docs.python.org/3.7/library/argparse.html">cli parser</a>, the interesting part starts with the
+parse function.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse(src):  <span class="co"># parse the brainfuck source</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    stack <span class="op">=</span> []  <span class="co"># to remember if inside a [...]</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    endAt <span class="op">=</span> {}   <span class="co"># correspondence between brackes [...]</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, char <span class="kw">in</span> <span class="bu">enumerate</span>(src):</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> char <span class="op">==</span> <span class="st">'['</span>:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            stack.append(i)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> char <span class="op">==</span> <span class="st">']'</span>:</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            endAt[stack.pop()] <span class="op">=</span> i</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> recParse(start<span class="op">=</span><span class="dv">0</span>, end<span class="op">=</span><span class="bu">len</span>(src)<span class="op">-</span><span class="dv">1</span>):  <span class="co"># recursive parser</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        ast <span class="op">=</span> []</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> start</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> i <span class="op">&lt;</span> end:</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            char <span class="op">=</span> src[i]</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> char <span class="op">==</span> <span class="st">'+'</span>:</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> ast <span class="op">!=</span> [] <span class="kw">and</span> <span class="bu">isinstance</span>(ast[<span class="op">-</span><span class="dv">1</span>], <span class="bu">int</span>):</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>                    ast[<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> (ast[<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> <span class="dv">256</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>                    ast.append(<span class="dv">1</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> char <span class="op">==</span> <span class="st">'-'</span>:</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> ast <span class="op">!=</span> [] <span class="kw">and</span> <span class="bu">isinstance</span>(ast[<span class="op">-</span><span class="dv">1</span>], <span class="bu">int</span>):</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>                    ast[<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> (ast[<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> <span class="dv">1</span>) <span class="op">%</span> <span class="dv">256</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>                    ast.append(<span class="dv">255</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> char <span class="kw">in</span> (<span class="st">'&gt;'</span>, <span class="st">'&lt;'</span>, <span class="st">'.'</span>, <span class="st">','</span>):</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>                ast.append(char)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> char <span class="op">==</span> <span class="st">'['</span>:</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>                ast.append(<span class="st">'['</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>                ast.append(recParse(i<span class="op">+</span><span class="dv">1</span>, endAt[i]))</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>                ast.append(<span class="st">']'</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>                i <span class="op">=</span> endAt[i]</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>            i <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ast  <span class="co"># return the abstract syntax tree</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> recParse()</span></code></pre></div>
+<p>That function creates the abstract syntax tree, which is a bit
+overkill as word because it simply returns a list of lists where the
+elements can be <code>[</code>, <code>]</code>, <code>,</code>, <code>.</code>, <code>&lt;</code>, <code>&gt;</code> or an integer <span class="math inline">\(\in [0,
+256)\)</span>. This procedure ignores any character that isn’t one of
+the standard 8 brainfuck commands and automatically simplify the
+successions of <code>+</code> and <code>-</code> in a number modulo 256. It would be
+possible to simplify also <code>&lt;</code> and <code>&gt;</code> but I was too lazy.</p>
+<p>The visit function simply depth visits the abstract syntax tree
+applying the visitor function for every element of the tree.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> visit(visitor, ast):  <span class="co"># depth visit the ast with the visitor function</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> child <span class="kw">in</span> ast:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">isinstance</span>(child, <span class="bu">list</span>):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>            visit(visitor, child)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            visitor(child)</span></code></pre></div>
+<p>Then it’s created a <code>bytearray</code> object called <code>instructions</code> containing
+some instructions for the stack machine (every instruction is 2 bytes
+long), that part is mandatory for every programs that the compiler
+generates, basically it contains some imports.</p>
+<p>Instead the global variable <code>addresses</code> is a stack where the top element
+is the address (as index of <code>instructions</code>) of the last <code>[</code> met during
+the compilation.</p>
+<p>The real compilation occurs inside <code>visitor</code>, the function itself is
+basically a big switch statement where different things happen
+depending on the element of the abstract syntax tree. The only
+noteworthy branches are <code>[</code> and <code>]</code>, inside the first one is annotated
+the address at the top of <code>addresses</code> and then 6 <code>NOP</code> instructions are
+added to the program so that when the in the second branch <code>]</code> is met,
+it’s possible to change the NOP instructions to manage the <code>JUMP</code>
+instruction.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ast <span class="op">=</span> parse(source)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>visit(visitor, ast)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>instructions.extend([  <span class="co"># the last instructions for every program</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    opmap[<span class="st">'LOAD_CONST'</span>], <span class="dv">0</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    opmap[<span class="st">'RETURN_VALUE'</span>]</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>code <span class="op">=</span> CodeType(</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        <span class="dv">0</span>,  <span class="co"># argcount</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="dv">0</span>,  <span class="co"># kwonlyargcount</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="dv">3</span>,  <span class="co"># nlocals</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="dv">1000</span>,  <span class="co"># stacksize</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="dv">0</span>,  <span class="co"># flags</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">bytes</span>(instructions),  <span class="co"># codestring</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        (<span class="va">None</span>, <span class="op">*</span><span class="bu">range</span>(<span class="dv">257</span>), <span class="st">''</span>, (<span class="st">'end'</span>,), arraySize, (<span class="st">'stdin'</span>,)),  <span class="co"># consts</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'print'</span>, <span class="st">'input'</span>, <span class="st">'ord'</span>, <span class="st">'chr'</span>, <span class="st">'sys'</span>, <span class="st">'stdin'</span>, <span class="st">'read'</span>),  <span class="co"># names</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'array'</span>, <span class="st">'pointer'</span>, <span class="st">'stdin'</span>),  <span class="co"># varnames</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        args.outputfile,  <span class="co"># filename</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        args.outputfile,  <span class="co"># name</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        <span class="dv">0</span>,  <span class="co"># firstlineno</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        <span class="bu">bytes</span>(),  <span class="co"># lnotab</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        (),  <span class="co"># freevars</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        ()  <span class="co"># cellvars</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> args.show:</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(dis(code))  <span class="co"># show the bytecode in a readable format</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    exit(<span class="dv">0</span>)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(args.outputfile, <span class="st">'wb+'</span>) <span class="im">as</span> out:</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># printing the first 16 bytes in the file</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    out.write(MAGIC_NUMBER)  <span class="co"># this depends on the Python version</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    out.write(<span class="bu">bytes</span>([<span class="dv">0</span>] <span class="op">*</span> <span class="dv">12</span>))  <span class="co"># because of the pyc file format</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    marshal.dump(code, out)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>exit(<span class="dv">0</span>)</span></code></pre></div>
+<p>Here the parsing and the visiting (i.e. the <code>instructions</code> creation) are
+done, then two last instructions are added, they basically let the
+program return <code>None</code>. Then a <code>CodeType</code> “object” is created, it was not
+easy to find some documentations about this. At the end the <code>bytearray</code>
+is serialized and wrote to a file using the <a href="https://docs.python.org/3.7/library/marshal.html">marshal module</a>. This is
+how the <code>.pyc</code> files are structured inside.</p>
+<p>Let’s note that before writing the instructions in the file a magic
+number of 16 bytes is written, it depends on the Python version, so
+this transpiler should generate bytecode working only with the same
+Python version used for the interpiler execution.</p>
+<p>The complete source code of the program is here on <a href="https://gist.github.com/aciceri/913aa9667d89af8e2ab45e99e557c2aa">Gist</a>.</p>
+<p>Here you can see an usage example where I compile a Brainfuck program
+which prints an ascii version of a famous fractal.</p>
+<p><div id="cast-brainfuck"></div><script>AsciinemaPlayer.create('/casts/brainfuck.cast', document.getElementById('cast-brainfuck'));</script></p>
+<p>For this I have to thanks <a href="http://www.hevanet.com/cristofd/brainfuck/">Daniel Cristofani</a>, an insanely good
+Brainfuck developer who wrote programs such as the (maybe) shortest
+possible quine, a Brainfuck interpreter (a.k.a. <a href="https://en.wikipedia.org/wiki/Meta-circular_evaluator">Meta-circular evaluator</a>) and a Brainfuck to C transpiler.</p>
+<p>This project has a lot of possible improvements…</p>
+    </section>
+</article>
+
+        </main>
+
+        <footer>
+	  <div class="left">
+	  Built with &hearts; using 
+          <a href="https://www.gnu.org/software/emacs/">Emacs</a>,
+          <a href="https://nixos.org/">Nix</a> and
+          <a href="https://jaspervdj.be/hakyll">Hakyll</a>
+	  <br>
+	  Distributed on
+          <a href="https://pages.github.com/">GitHub</a>,
+          <a href="https://ipfs.io/">IPFS</a> and
+          <a href="https://www.torproject.org/">Tor</a>
+	  </div>
+	  <div class="right">
+	   Commit <a href="https://github.com/aciceri/test/tree/release"></a>
+	   <br>
+	   <a id="theme-switcher">Switch theme</a>
+	  </div>
+        </footer>
+      </div>
+    </body>
+</html>

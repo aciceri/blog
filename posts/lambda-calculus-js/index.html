@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Lambda calculus in JavaScript - Andrea Ciceri's blog</title> 
+
+	<!-- KaTeX -->
+        <link rel="stylesheet" href="../../thirdparty/katex/katex.min.css">
+        <script defer src="../../thirdparty/katex/katex.min.js"></script>
+        <script defer src="../../thirdparty/katex/contrib/auto-render.min.js"></script>
+
+	<!-- asciinema -->
+	<link rel="stylesheet" type="text/css" href="../../thirdparty/asciinema/asciinema-player.css" />
+
+        <!-- Custom -->
+        <link rel="stylesheet" href="../../css/custom.css" />
+        <script src="../../js/custom.js"></script>
+
+	<!-- Hyphenopoly -->
+        <script src="../../thirdparty/hyphenopoly/Hyphenopoly_Loader.js"></script>
+	
+    </head>
+    <body class="theme-light">
+      <script src="../../thirdparty/asciinema/asciinema-player.js"></script>
+      <div id="main-wrapper">
+        <header>
+            <nav>
+                <a href="../../">Home</a>
+                <a href="../../contacts/">Contacts</a>
+                <a href="../../archive">Archive</a>
+                <a href="../../rss/rss.xml">RSS</a>
+                <a href="../../atom/atom.xml">Atom</a>
+            </nav>
+        </header>
+
+        <main>
+            <h1>Lambda calculus in JavaScript</h1>
+            <article>
+    <section class="header">
+        Posted on 2019-03-21
+	
+	with tags
+        
+        <a href="../../tags/javascript/index.html">javascript</a>,
+        
+        <a href="../../tags/lambda-calculus/index.html">lambda-calculus</a>,
+        
+        <a href="../../tags/functional/index.html">functional</a>
+        
+    </section>
+    <section>
+        <p>This sunday I enjoyed creating some simple functions using only the
+<a href="https://en.wikipedia.org/wiki/Lambda_calculus">lambda calculus</a>, I chose to use Javascript because of the simple
+syntax for the lambda functions. In substance in javscript it’s simple
+to translate something like <span class="math inline">\(\lambda x . x\)</span> into <code>(x) =&gt; x</code>.</p>
+<p>I started defining the boolean values true and false:</p>
+<p><span class="math display">\[
+T = \lambda x . \lambda y . x \qquad F = \lambda x . \lambda y . y
+\]</span></p>
+<div class="sourceCode" id="cb1" data-org-language="js"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> T <span class="op">=</span> (x) <span class="kw">=&gt;</span> ((y) <span class="kw">=&gt;</span> x)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> F <span class="op">=</span> (x) <span class="kw">=&gt;</span> ((y) <span class="kw">=&gt;</span> y)</span></code></pre></div>
+<p>This explicit parenthesization is not necessary but I preferred to
+exaggerate rather than making the code even more obfuscated.
+I’m going to follow this choice in the whole source. The purpose of
+this definition is clarified by the <em>if-then-else</em> statement:</p>
+<p><span class="math display">\[
+\lambda cond . \lambda a . \lambda b . cond \; a \; b
+\]</span></p>
+<div class="sourceCode" id="cb2" data-org-language="js"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> ifThenElse <span class="op">=</span> (cond) <span class="kw">=&gt;</span> ((a) <span class="kw">=&gt;</span> ((b) <span class="kw">=&gt;</span> <span class="fu">cond</span>(a)(b)))</span></code></pre></div>
+<p>The lists are created consing nodes recursively, a <em>node</em> is a <em>pair</em>
+(i.e. a <em>cons</em> of two “things”) where:</p>
+<ul>
+<li>if the first element of the pair is <em>T</em> then the node is <em>nil</em> (the
+empty list), at this point what is the second element of the pair is
+not relevant</li>
+<li>if the first element of the pair is <em>F</em> then the node is not <em>nil</em>
+and the content of the node is in its second element.</li>
+</ul>
+<p>Using a lisp-like syntax what I’m saying is that the list <code>[1, 2, 3]</code>
+is something like <code>(cons (node 1) (cons (node 2) (cons (node 3)
+nil)))</code> where <code>(node a)</code> is <code>(cons F a)</code>. In code:</p>
+<div class="sourceCode" id="cb3" data-org-language="js"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> cons <span class="op">=</span> (a) <span class="kw">=&gt;</span> ((b) <span class="kw">=&gt;</span> ((c) <span class="kw">=&gt;</span> <span class="fu">c</span>(a)(b)))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> car <span class="op">=</span> (l) <span class="kw">=&gt;</span> <span class="fu">l</span>(T)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> cdr <span class="op">=</span> (l) <span class="kw">=&gt;</span> <span class="fu">l</span>(F)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> nil <span class="op">=</span> <span class="fu">cons</span>(T)(T)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> isNil <span class="op">=</span> car</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> node <span class="op">=</span> (x) <span class="kw">=&gt;</span> <span class="fu">cons</span>(F)(x)</span></code></pre></div>
+<p>And now something a little more interesting; the natural numbers! This
+construction remembers the inductive definition by Peano.</p>
+<p><span class="math display">\[
+\begin{aligned} 
+0 &amp;= \lambda f . \lambda x . x\\ 
+1 &amp;= \lambda f . \lambda x . f x\\ 
+2 &amp;= \lambda f . \lambda x . f(f x)\\ 
+\vdots \\
+n &amp;= \lambda f . \lambda x \; \underbrace{f(\dots f(f(}_{n} n)
+\end{aligned}
+\]</span></p>
+<p>A number <span class="math inline">\(n\)</span> is simply something that, when called passing a function
+<span class="math inline">\(f\)</span> return the composition <span class="math inline">\(\underbrace{f \circ f \circ \dots \circ
+f}_n\)</span>, with the convention that <span class="math inline">\(f^0 = id\)</span>.</p>
+<p><span class="math display">\[
+succ(n) = \lambda n . \lambda f .\lambda x . f(n(f)(x))
+\]</span></p>
+<p>Now should be obvious what the function <code>succ</code> does. Conversely how
+the arithmetic operators have been implemented may not appear such
+obvious.</p>
+<div class="sourceCode" id="cb4" data-org-language="js"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> isZero <span class="op">=</span> (n) <span class="kw">=&gt;</span> <span class="fu">n</span>((k) <span class="kw">=&gt;</span> F)(T)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> pred <span class="op">=</span> (n) <span class="kw">=&gt;</span> ((f) <span class="kw">=&gt;</span> ((x) <span class="kw">=&gt;</span> <span class="fu">n</span>((g) <span class="kw">=&gt;</span> ((h) <span class="kw">=&gt;</span> <span class="fu">h</span>(<span class="fu">g</span>(f))))((u) <span class="kw">=&gt;</span> x)((u) <span class="kw">=&gt;</span> u)))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> plus <span class="op">=</span> (m) <span class="kw">=&gt;</span> ((n) <span class="kw">=&gt;</span> ((f) <span class="kw">=&gt;</span> ((x) <span class="kw">=&gt;</span> <span class="fu">m</span>(f)(<span class="fu">n</span>(f)(x)))))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> prod <span class="op">=</span> (m) <span class="kw">=&gt;</span> ((n) <span class="kw">=&gt;</span> ((f) <span class="kw">=&gt;</span> ((x) <span class="kw">=&gt;</span> <span class="fu">m</span>(<span class="fu">n</span>(f))(x))))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> exp <span class="op">=</span> (m) <span class="kw">=&gt;</span> ((n) <span class="kw">=&gt;</span> ((f) <span class="kw">=&gt;</span> ((x) <span class="kw">=&gt;</span> <span class="fu">n</span>(m)(f)(x))))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> minus <span class="op">=</span> (m) <span class="kw">=&gt;</span> ((n) <span class="kw">=&gt;</span> <span class="fu">n</span>(pred)(m))</span></code></pre></div>
+<p>I suggest to equip yourself with paper and pen, I personally had some
+difficults untangling these lambdas.
+A really nice place where to learn how this functions work is <a href="https://en.wikipedia.org/wiki/Church_encoding">this page on wikipedia</a>.
+I urge you to notice that this isn’t the only possible implentation,
+even continuing to use the <em>Church numerals</em> (the representation used
+here for the numbers).
+However, as the names say, these functions implement the addition, the
+multiplication, the exponentiation and the subtraction. <code>isZero</code> is a
+boolean predicate which tells if a numeral is <span class="math inline">\(0\)</span> and <code>pred</code> returns
+the predecent.
+I enfatize how implementing the subtraction without <code>pred</code> wouldn’t
+have benn easy.</p>
+<p>The next logic operators and the comparator of numbers are easy to
+understand, it’s sufficient the remember what a boolean value and a
+number really are.</p>
+<div class="sourceCode" id="cb5" data-org-language="js"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> not <span class="op">=</span> (a) <span class="kw">=&gt;</span> <span class="fu">ifThenElse</span>(a)(F)(T)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> and <span class="op">=</span> (a) <span class="kw">=&gt;</span> ((b) <span class="kw">=&gt;</span> <span class="fu">a</span>(b)(a))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> or <span class="op">=</span> (a) <span class="kw">=&gt;</span> ((b) <span class="kw">=&gt;</span> <span class="fu">a</span>(a)(b))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> xor <span class="op">=</span> (a) <span class="kw">=&gt;</span> ((b) <span class="kw">=&gt;</span> <span class="fu">a</span>(<span class="fu">not</span>(b))(b))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> leq <span class="op">=</span> (m <span class="kw">=&gt;</span> ((n) <span class="kw">=&gt;</span> <span class="fu">isZero</span>(<span class="fu">minus</span>(m)(n))))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> eq <span class="op">=</span> (m <span class="kw">=&gt;</span> ((n) <span class="kw">=&gt;</span> <span class="fu">and</span>(<span class="fu">leq</span>(m)(n))(<span class="fu">leq</span>(n)(m))))</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> lt <span class="op">=</span> (m <span class="kw">=&gt;</span> ((n) <span class="kw">=&gt;</span> <span class="fu">and</span>(<span class="fu">leq</span>(m)(n))(<span class="fu">not</span>(<span class="fu">eq</span>(m)(n)))))</span></code></pre></div>
+<p>Last but not least the the factorial function! Implemented without the
+infamous <a href="https://en.wikipedia.org/wiki/Fixed-point_combinator#Fixed_point_combinators_in_lambda_calculus">Y combinator</a>, that should merit a whole post only for
+itself. (maybe in the future)</p>
+<div class="sourceCode" id="cb6" data-org-language="js"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> fac <span class="op">=</span> (n) <span class="kw">=&gt;</span> <span class="fu">n</span>(c <span class="kw">=&gt;</span> ((q) <span class="kw">=&gt;</span> <span class="fu">q</span>(<span class="fu">succ</span>(<span class="fu">c</span>(T)))(<span class="fu">prod</span>(<span class="fu">c</span>(T))(<span class="fu">c</span>(F)))))((q) <span class="kw">=&gt;</span> one)(F)</span></code></pre></div>
+<p>And now feel free to play with this code directly in this page, for
+example you can try to calcolate the factorial of <span class="math inline">\(7\)</span> whith
+<code>lambdaToInt(fac(intToLambda(7)))</code>, not bad if you consider how the
+function has been defined.
+I suggest to use the functions <code>boolToLambda</code>, <code>lambdaToBool</code>,
+<code>intToLambda</code>, <code>lambdaToInt</code>, <code>listToLambda</code> and <code>lambdaToList</code> to
+create and get boolean values, integers and lists. How do they works
+is auto-explanatory, however you can find the whole source at the end
+of this page.</p>
+<div id="term_demo"></div>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/jquery.terminal.js"></script>
+<link href="../../css/jquery.terminal.css" rel="stylesheet" />
+
+<script>
+const T = (x) => ((y) => x)
+const F = (x) => ((y) => y)
+const ifThenElse = (cond) => ((a) => ((b) => cond(a)(b)))
+
+const cons = (a) => ((b) => ((c) => c(a)(b)))
+const car = (l) => l(T)
+const cdr = (l) => l(F)
+const nil = cons(T)(T)
+const isNil = car
+const node = (x) => cons(F)(x)
+
+const zero = (f) => ((x) => x)
+const one = (f) => ((x) => f(x))
+const two = (f) => ((x) => f(f(x)))
+const succ = (n) => ((f) => ((x) => f(n(f)(x))))
+const three = succ(two)
+const four = succ(three)
+const five = succ(four) //etc...
+
+const isZero = (n) => n((k) => F)(T)
+const pred = (n) => ((f) => ((x) => n((g) => ((h) => h(g(f))))((u) => x)((u) => u)))
+
+const plus = (m) => ((n) => ((f) => ((x) => m(f)(n(f)(x)))))
+const prod = (m) => ((n) => ((f) => ((x) => m(n(f))(x))))
+const exp = (m) => ((n) => ((f) => ((x) => n(m)(f)(x))))
+const minus = (m) => ((n) => n(pred)(m))
+
+const not = (a) => ifThenElse(a)(F)(T)
+const and = (a) => ((b) => a(b)(a))
+const or = (a) => ((b) => a(a)(b))
+const xor = (a) => ((b) => a(not(b))(b))
+
+const leq = (m => ((n) => isZero(minus(m)(n))))
+const eq = (m => ((n) => and(leq(m)(n))(leq(n)(m))))
+const lt = (m => ((n) => and(leq(m)(n))(not(eq(m)(n)))))
+
+const fac = (n) => n(c => ((q) => q(succ(c(T)))(prod(c(T))(c(F)))))((q) => one)(F)
+
+//These functions simply help to see and create integers, booleans and lists
+function lambdaToBool(b) {
+  return ifThenElse(b)(true)(false);
+}
+
+function boolToLambda(b) {
+  return b ? T : F;
+}
+
+function lambdaToInt(n) {
+  return n((x) => x + 1)(0);
+}
+
+function intToLambda(n) {
+  if(n === 0) return zero;
+  else return plus(one)(n == 1 ? zero : intToLambda(n-1)); 
+}
+
+function listToLambda(l) {
+  var nl = nil;
+  for(var e of l.reverse())
+    nl = cons(node(e))(nl)
+  return nl;
+}
+
+function lambdaToList(l) {
+  var a = [];
+  while(lambdaToBool(not(isNil(car(cdr(l)))))) {
+    a.push(cdr(car(l)))
+    l = cdr(l)
+  }
+  return a;
+}
+
+        $('#term_demo').terminal(function(command) {
+            if (command !== '') {
+                try {
+                    var result = window.eval(command);
+                    if (result !== undefined) {
+                        this.echo(new String(result));
+                    }
+                } catch(e) {
+                    this.error(new String(e));
+                }
+            } else {
+               this.echo('');
+            }
+        }, {
+            greetings: 'Javascript Interpreter',
+            name: 'js_demo',
+            height: 400,
+            prompt: '>>> '
+        });
+</script>
+
+<p>The complete source:</p>
+<div class="sourceCode" id="cb7" data-org-language="js" data-startFrom><pre class="sourceCode numberSource javascript numberLines"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">const</span> T <span class="op">=</span> (x) <span class="kw">=&gt;</span> ((y) <span class="kw">=&gt;</span> x)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">const</span> F <span class="op">=</span> (x) <span class="kw">=&gt;</span> ((y) <span class="kw">=&gt;</span> y)</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">const</span> ifThenElse <span class="op">=</span> (cond) <span class="kw">=&gt;</span> ((a) <span class="kw">=&gt;</span> ((b) <span class="kw">=&gt;</span> <span class="fu">cond</span>(a)(b)))</span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="kw">const</span> cons <span class="op">=</span> (a) <span class="kw">=&gt;</span> ((b) <span class="kw">=&gt;</span> ((c) <span class="kw">=&gt;</span> <span class="fu">c</span>(a)(b)))</span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">const</span> car <span class="op">=</span> (l) <span class="kw">=&gt;</span> <span class="fu">l</span>(T)</span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="kw">const</span> cdr <span class="op">=</span> (l) <span class="kw">=&gt;</span> <span class="fu">l</span>(F)</span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="kw">const</span> nil <span class="op">=</span> <span class="fu">cons</span>(T)(T)</span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="kw">const</span> isNil <span class="op">=</span> car</span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="kw">const</span> node <span class="op">=</span> (x) <span class="kw">=&gt;</span> <span class="fu">cons</span>(F)(x)</span>
+<span id="cb7-11"><a href="#cb7-11"></a></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="kw">const</span> zero <span class="op">=</span> (f) <span class="kw">=&gt;</span> ((x) <span class="kw">=&gt;</span> x)</span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="kw">const</span> one <span class="op">=</span> (f) <span class="kw">=&gt;</span> ((x) <span class="kw">=&gt;</span> <span class="fu">f</span>(x))</span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="kw">const</span> two <span class="op">=</span> (f) <span class="kw">=&gt;</span> ((x) <span class="kw">=&gt;</span> <span class="fu">f</span>(<span class="fu">f</span>(x)))</span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="kw">const</span> succ <span class="op">=</span> (n) <span class="kw">=&gt;</span> ((f) <span class="kw">=&gt;</span> ((x) <span class="kw">=&gt;</span> <span class="fu">f</span>(<span class="fu">n</span>(f)(x))))</span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="kw">const</span> three <span class="op">=</span> <span class="fu">succ</span>(two)</span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="kw">const</span> four <span class="op">=</span> <span class="fu">succ</span>(three)</span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="kw">const</span> five <span class="op">=</span> <span class="fu">succ</span>(four) <span class="co">//etc...</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="kw">const</span> isZero <span class="op">=</span> (n) <span class="kw">=&gt;</span> <span class="fu">n</span>((k) <span class="kw">=&gt;</span> F)(T)</span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="kw">const</span> pred <span class="op">=</span> (n) <span class="kw">=&gt;</span> ((f) <span class="kw">=&gt;</span> ((x) <span class="kw">=&gt;</span> <span class="fu">n</span>((g) <span class="kw">=&gt;</span> ((h) <span class="kw">=&gt;</span> <span class="fu">h</span>(<span class="fu">g</span>(f))))((u) <span class="kw">=&gt;</span> x)((u) <span class="kw">=&gt;</span> u)))</span>
+<span id="cb7-22"><a href="#cb7-22"></a></span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="kw">const</span> plus <span class="op">=</span> (m) <span class="kw">=&gt;</span> ((n) <span class="kw">=&gt;</span> ((f) <span class="kw">=&gt;</span> ((x) <span class="kw">=&gt;</span> <span class="fu">m</span>(f)(<span class="fu">n</span>(f)(x)))))</span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="kw">const</span> prod <span class="op">=</span> (m) <span class="kw">=&gt;</span> ((n) <span class="kw">=&gt;</span> ((f) <span class="kw">=&gt;</span> ((x) <span class="kw">=&gt;</span> <span class="fu">m</span>(<span class="fu">n</span>(f))(x))))</span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="kw">const</span> exp <span class="op">=</span> (m) <span class="kw">=&gt;</span> ((n) <span class="kw">=&gt;</span> ((f) <span class="kw">=&gt;</span> ((x) <span class="kw">=&gt;</span> <span class="fu">n</span>(m)(f)(x))))</span>
+<span id="cb7-26"><a href="#cb7-26"></a><span class="kw">const</span> minus <span class="op">=</span> (m) <span class="kw">=&gt;</span> ((n) <span class="kw">=&gt;</span> <span class="fu">n</span>(pred)(m))</span>
+<span id="cb7-27"><a href="#cb7-27"></a></span>
+<span id="cb7-28"><a href="#cb7-28"></a><span class="kw">const</span> not <span class="op">=</span> (a) <span class="kw">=&gt;</span> <span class="fu">ifThenElse</span>(a)(F)(T)</span>
+<span id="cb7-29"><a href="#cb7-29"></a><span class="kw">const</span> and <span class="op">=</span> (a) <span class="kw">=&gt;</span> ((b) <span class="kw">=&gt;</span> <span class="fu">a</span>(b)(a))</span>
+<span id="cb7-30"><a href="#cb7-30"></a><span class="kw">const</span> or <span class="op">=</span> (a) <span class="kw">=&gt;</span> ((b) <span class="kw">=&gt;</span> <span class="fu">a</span>(a)(b))</span>
+<span id="cb7-31"><a href="#cb7-31"></a><span class="kw">const</span> xor <span class="op">=</span> (a) <span class="kw">=&gt;</span> ((b) <span class="kw">=&gt;</span> <span class="fu">a</span>(<span class="fu">not</span>(b))(b))</span>
+<span id="cb7-32"><a href="#cb7-32"></a></span>
+<span id="cb7-33"><a href="#cb7-33"></a><span class="kw">const</span> leq <span class="op">=</span> (m <span class="kw">=&gt;</span> ((n) <span class="kw">=&gt;</span> <span class="fu">isZero</span>(<span class="fu">minus</span>(m)(n))))</span>
+<span id="cb7-34"><a href="#cb7-34"></a><span class="kw">const</span> eq <span class="op">=</span> (m <span class="kw">=&gt;</span> ((n) <span class="kw">=&gt;</span> <span class="fu">and</span>(<span class="fu">leq</span>(m)(n))(<span class="fu">leq</span>(n)(m))))</span>
+<span id="cb7-35"><a href="#cb7-35"></a><span class="kw">const</span> lt <span class="op">=</span> (m <span class="kw">=&gt;</span> ((n) <span class="kw">=&gt;</span> <span class="fu">and</span>(<span class="fu">leq</span>(m)(n))(<span class="fu">not</span>(<span class="fu">eq</span>(m)(n)))))</span>
+<span id="cb7-36"><a href="#cb7-36"></a></span>
+<span id="cb7-37"><a href="#cb7-37"></a><span class="kw">const</span> fac <span class="op">=</span> (n) <span class="kw">=&gt;</span> <span class="fu">n</span>(c <span class="kw">=&gt;</span> ((q) <span class="kw">=&gt;</span> <span class="fu">q</span>(<span class="fu">succ</span>(<span class="fu">c</span>(T)))(<span class="fu">prod</span>(<span class="fu">c</span>(T))(<span class="fu">c</span>(F)))))((q) <span class="kw">=&gt;</span> one)(F)</span>
+<span id="cb7-38"><a href="#cb7-38"></a></span>
+<span id="cb7-39"><a href="#cb7-39"></a><span class="co">//These functions simply help to see and create integers, booleans and lists</span></span>
+<span id="cb7-40"><a href="#cb7-40"></a><span class="kw">function</span> <span class="fu">lambdaToBool</span>(b) {</span>
+<span id="cb7-41"><a href="#cb7-41"></a>  <span class="cf">return</span> <span class="fu">ifThenElse</span>(b)(<span class="kw">true</span>)(<span class="kw">false</span>)<span class="op">;</span></span>
+<span id="cb7-42"><a href="#cb7-42"></a>}</span>
+<span id="cb7-43"><a href="#cb7-43"></a></span>
+<span id="cb7-44"><a href="#cb7-44"></a><span class="kw">function</span> <span class="fu">boolToLambda</span>(b) {</span>
+<span id="cb7-45"><a href="#cb7-45"></a>  <span class="cf">return</span> b <span class="op">?</span> T <span class="op">:</span> F<span class="op">;</span></span>
+<span id="cb7-46"><a href="#cb7-46"></a>}</span>
+<span id="cb7-47"><a href="#cb7-47"></a></span>
+<span id="cb7-48"><a href="#cb7-48"></a><span class="kw">function</span> <span class="fu">lambdaToInt</span>(n) {</span>
+<span id="cb7-49"><a href="#cb7-49"></a>  <span class="cf">return</span> <span class="fu">n</span>((x) <span class="kw">=&gt;</span> x <span class="op">+</span> <span class="dv">1</span>)(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb7-50"><a href="#cb7-50"></a>}</span>
+<span id="cb7-51"><a href="#cb7-51"></a></span>
+<span id="cb7-52"><a href="#cb7-52"></a><span class="kw">function</span> <span class="fu">intToLambda</span>(n) {</span>
+<span id="cb7-53"><a href="#cb7-53"></a>  <span class="cf">if</span>(n <span class="op">===</span> <span class="dv">0</span>) <span class="cf">return</span> zero<span class="op">;</span></span>
+<span id="cb7-54"><a href="#cb7-54"></a>  <span class="cf">else</span> <span class="cf">return</span> <span class="fu">plus</span>(one)(n <span class="op">==</span> <span class="dv">1</span> <span class="op">?</span> zero <span class="op">:</span> <span class="fu">intToLambda</span>(n<span class="op">-</span><span class="dv">1</span>))<span class="op">;</span> </span>
+<span id="cb7-55"><a href="#cb7-55"></a>}</span>
+<span id="cb7-56"><a href="#cb7-56"></a></span>
+<span id="cb7-57"><a href="#cb7-57"></a><span class="kw">function</span> <span class="fu">listToLambda</span>(l) {</span>
+<span id="cb7-58"><a href="#cb7-58"></a>  <span class="kw">var</span> nl <span class="op">=</span> nil<span class="op">;</span></span>
+<span id="cb7-59"><a href="#cb7-59"></a>  <span class="cf">for</span>(<span class="kw">var</span> e <span class="kw">of</span> l<span class="op">.</span><span class="fu">reverse</span>())</span>
+<span id="cb7-60"><a href="#cb7-60"></a>    nl <span class="op">=</span> <span class="fu">cons</span>(<span class="fu">node</span>(e))(nl)</span>
+<span id="cb7-61"><a href="#cb7-61"></a>  <span class="cf">return</span> nl<span class="op">;</span></span>
+<span id="cb7-62"><a href="#cb7-62"></a>}</span>
+<span id="cb7-63"><a href="#cb7-63"></a></span>
+<span id="cb7-64"><a href="#cb7-64"></a><span class="kw">function</span> <span class="fu">lambdaToList</span>(l) {</span>
+<span id="cb7-65"><a href="#cb7-65"></a>  <span class="kw">var</span> a <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb7-66"><a href="#cb7-66"></a>  <span class="cf">while</span>(<span class="fu">lambdaToBool</span>(<span class="fu">not</span>(<span class="fu">isNil</span>(<span class="fu">car</span>(<span class="fu">cdr</span>(l)))))) {</span>
+<span id="cb7-67"><a href="#cb7-67"></a>    a<span class="op">.</span><span class="fu">push</span>(<span class="fu">cdr</span>(<span class="fu">car</span>(l)))</span>
+<span id="cb7-68"><a href="#cb7-68"></a>    l <span class="op">=</span> <span class="fu">cdr</span>(l)</span>
+<span id="cb7-69"><a href="#cb7-69"></a>  }</span>
+<span id="cb7-70"><a href="#cb7-70"></a>  <span class="cf">return</span> a<span class="op">;</span></span>
+<span id="cb7-71"><a href="#cb7-71"></a>}</span></code></pre></div>
+    </section>
+</article>
+
+        </main>
+
+        <footer>
+	  <div class="left">
+	  Built with &hearts; using 
+          <a href="https://www.gnu.org/software/emacs/">Emacs</a>,
+          <a href="https://nixos.org/">Nix</a> and
+          <a href="https://jaspervdj.be/hakyll">Hakyll</a>
+	  <br>
+	  Distributed on
+          <a href="https://pages.github.com/">GitHub</a>,
+          <a href="https://ipfs.io/">IPFS</a> and
+          <a href="https://www.torproject.org/">Tor</a>
+	  </div>
+	  <div class="right">
+	   Commit <a href="https://github.com/aciceri/test/tree/release"></a>
+	   <br>
+	   <a id="theme-switcher">Switch theme</a>
+	  </div>
+        </footer>
+      </div>
+    </body>
+</html>

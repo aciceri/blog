@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Home - Andrea Ciceri's blog</title> 
+
+	<!-- KaTeX -->
+        <link rel="stylesheet" href="./thirdparty/katex/katex.min.css">
+        <script defer src="./thirdparty/katex/katex.min.js"></script>
+        <script defer src="./thirdparty/katex/contrib/auto-render.min.js"></script>
+
+	<!-- asciinema -->
+	<link rel="stylesheet" type="text/css" href="./thirdparty/asciinema/asciinema-player.css" />
+
+        <!-- Custom -->
+        <link rel="stylesheet" href="./css/custom.css" />
+        <script src="./js/custom.js"></script>
+
+	<!-- Hyphenopoly -->
+        <script src="./thirdparty/hyphenopoly/Hyphenopoly_Loader.js"></script>
+	
+    </head>
+    <body class="theme-light">
+      <script src="./thirdparty/asciinema/asciinema-player.js"></script>
+      <div id="main-wrapper">
+        <header>
+            <nav>
+                <a class="current" href="./">Home</a>
+                <a href="./contacts/">Contacts</a>
+                <a href="./archive">Archive</a>
+                <a href="./rss/rss.xml">RSS</a>
+                <a href="./atom/atom.xml">Atom</a>
+            </nav>
+        </header>
+
+        <main>
+            <h1>Home</h1>
+            <p>Welcome to my blog, let <span class="math inline">\(\Sigma\)</span> be the set of the Unicode symbols, then this
+site is a finite subset <span class="math inline">\(\mathbb{B} \subset \Sigma\)</span>.
+Assuming that your browser can parse and interpret <span class="math inline">\(\mathbb{B}\)</span>, and hoping that
+you find it more interesting than a generic subset, I wish you a pleasant
+navigation.</p>
+<p>The content of this blog is heterogeneous and I think that a better introduction
+than this would be difficult, so let’s move on.</p>
+<figure>
+<img src="./images/me.jpg" style="width:60.0%" alt="Me, in all my glory" />
+<figcaption aria-hidden="true">Me, in all my glory</figcaption>
+</figure>
+<p>It’s also possible to reach this site in the <a href="https://www.torproject.org/">Tor network</a> at this easy to
+remember <a href="http://ty7du6aabrwttfuh6hgvt4aowvmrqxscdshsrcjc2dzftewjs6qvsxad.onion">onion link</a>, and in any case a snapshot with all the contents of the
+latest commit is always downloadable <a href="https://github.com/aciceri/test/archive/refs/heads/gh-pages.zip">here</a>.
+Since the website is meant to be self contained as much as possible the
+experience you would have viewing this site on your local web server should be
+almost the same.</p>
+<h2 id="who-i-am">Who I am</h2>
+<p>I’m a math student who likes programming problems, I think this is a good and
+concise definition compared to what this blog looks like.
+However I’m more than this, I also appreciate a variety of different things like
+cooking, <a href="https://www.nethack.org">really nerd videogames</a>, free software, music (light or classical, as a
+listener or <a href="../posts/midi-to-bach/">as a player</a>), sci-fi books, old and boring movies, etc…</p>
+<p>Moreover, I’m not an english native speaker, so I ask you to be clement if you
+find some errors, this site is also an opportunity to improve my language
+skills.</p>
+<h2 id="under-the-hood">Under the hood</h2>
+<p>These pages are written in <a href="https://www.gnu.org/software/emacs/">GNU Emacs</a> using the versatile <a href="https://orgmode.org/">org-mode</a>, the contents
+are generated using <a href="https://jaspervdj.be/hakyll/">Hakyll</a>, a customizable static site generator written in
+Haskell.
+The website is meant to be lightweight and HTML5/CSS3 compliant,
+however it should be perfecly readable also by older browser or even TUI browser
+like the <a href="https://www.gnu.org/software/emacs/manual/html_mono/eww.html">Emacs web browser</a> or <a href="https://lynx.browser.org/">Lynx</a>.
+Some additional features, like the dark mode or the dynamically added hyphens,
+may require the use of Javascript or cookies, but they are implemented in a
+unobtrusive way, so the website is viewable even without javascript or cookies.</p>
+<p>The design is minimal and completely realized by me, the fonts used
+are <a href="https://en.wikipedia.org/wiki/Computer_Modern#Latin_Modern">Latin Modern</a> and <a href="https://github.com/tonsky/FiraCode">Fira code</a>. Furthermore, all the resources
+like images, javascripts, stylesheets and fonts are hosted in the this
+space, without using a CDN.</p>
+<p>All the sources, both for the posts and the code, are inside the same <a href="https://github.com/aciceri/blog">Github repository</a>.
+The building, testing and deploying are managed by <a href="https://nixos.org/nix/">Nix</a>, using a <a href="https://nixos.wiki/wiki/Flakes">Flake</a>, locally on my machine
+when I’m writing new posts and publically by a GitHub workflow when I push the commit to
+the repository.
+This elegant approach provides solid and replicable builds and a revision
+control system.</p>
+<p>Also, all of this is hosted using <a href="https://pages.github.com/">GitHub Pages</a>, and replicated on the <a href="https://ipfs.io/">IPFS</a>
+network, pinned on <a href="https://pinata.cloud/">Pinata</a> and on my household node.
+The last IPFS content hash is automatically updated using <a href="https://dnslink.io/">DNSLink</a>, so, if your
+browser is correctly configured you should natively browse this website with
+IPFS.
+However you could also use a <a href="https://ipfs.github.io/public-gateway-checker/">public gateway</a> with something like
+<a href="https://gateway.ipfs.io/ipns/blog.aciceri.dev/">https://gateway.ipfs.io/ipns/blog.aciceri.dev/</a></p>
+
+<p>My last five posts are:</p>
+
+<ul>
+
+<li><a href="./posts/ocean-sprint/">Ocean Sprint: Nix under palm trees</a></li>
+
+<li><a href="./posts/lily58/">My first assembled mechanical keyboard</a></li>
+
+<li><a href="./posts/demo/">Demo post</a></li>
+
+<li><a href="./posts/people-united/">¡El pueblo unido jamás será vencido!</a></li>
+
+<li><a href="./posts/sard/">Il teorema di Sard</a></li>
+
+</ul>
+
+        </main>
+
+        <footer>
+	  <div class="left">
+	  Built with &hearts; using 
+          <a href="https://www.gnu.org/software/emacs/">Emacs</a>,
+          <a href="https://nixos.org/">Nix</a> and
+          <a href="https://jaspervdj.be/hakyll">Hakyll</a>
+	  <br>
+	  Distributed on
+          <a href="https://pages.github.com/">GitHub</a>,
+          <a href="https://ipfs.io/">IPFS</a> and
+          <a href="https://www.torproject.org/">Tor</a>
+	  </div>
+	  <div class="right">
+	   Commit <a href="https://github.com/aciceri/test/tree/release"></a>
+	   <br>
+	   <a id="theme-switcher">Switch theme</a>
+	  </div>
+        </footer>
+      </div>
+    </body>
+</html>
